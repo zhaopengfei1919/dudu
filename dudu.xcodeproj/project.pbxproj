@@ -17,6 +17,7 @@
 		184649EB21199EB600D0BD11 /* duduUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 184649EA21199EB600D0BD11 /* duduUITests.m */; };
 		18464A0B211A95FC00D0BD11 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A08211A95FC00D0BD11 /* BaseNavigationController.m */; };
 		18464A0C211A95FC00D0BD11 /* BaseTableBarControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A0A211A95FC00D0BD11 /* BaseTableBarControllerView.m */; };
+		18464A0F211A9B2100D0BD11 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A0E211A9B2100D0BD11 /* HomeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		18464A08211A95FC00D0BD11 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		18464A09211A95FC00D0BD11 /* BaseTableBarControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableBarControllerView.h; sourceTree = "<group>"; };
 		18464A0A211A95FC00D0BD11 /* BaseTableBarControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableBarControllerView.m; sourceTree = "<group>"; };
+		18464A0D211A9B2100D0BD11 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		18464A0E211A9B2100D0BD11 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +185,8 @@
 		184649FC211A937F00D0BD11 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				18464A0D211A9B2100D0BD11 /* HomeViewController.h */,
+				18464A0E211A9B2100D0BD11 /* HomeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -397,6 +402,7 @@
 				184649CB21199EB400D0BD11 /* ViewController.m in Sources */,
 				184649D621199EB500D0BD11 /* main.m in Sources */,
 				184649C821199EB400D0BD11 /* AppDelegate.m in Sources */,
+				18464A0F211A9B2100D0BD11 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
