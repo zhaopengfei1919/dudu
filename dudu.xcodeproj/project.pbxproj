@@ -15,6 +15,8 @@
 		184649D621199EB500D0BD11 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 184649D521199EB500D0BD11 /* main.m */; };
 		184649E021199EB600D0BD11 /* duduTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 184649DF21199EB600D0BD11 /* duduTests.m */; };
 		184649EB21199EB600D0BD11 /* duduUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 184649EA21199EB600D0BD11 /* duduUITests.m */; };
+		18464A0B211A95FC00D0BD11 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A08211A95FC00D0BD11 /* BaseNavigationController.m */; };
+		18464A0C211A95FC00D0BD11 /* BaseTableBarControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A0A211A95FC00D0BD11 /* BaseTableBarControllerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,10 @@
 		184649E621199EB600D0BD11 /* duduUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = duduUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		184649EA21199EB600D0BD11 /* duduUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = duduUITests.m; sourceTree = "<group>"; };
 		184649EC21199EB600D0BD11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18464A07211A95FC00D0BD11 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
+		18464A08211A95FC00D0BD11 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
+		18464A09211A95FC00D0BD11 /* BaseTableBarControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableBarControllerView.h; sourceTree = "<group>"; };
+		18464A0A211A95FC00D0BD11 /* BaseTableBarControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableBarControllerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,9 @@
 			children = (
 				184649C621199EB400D0BD11 /* AppDelegate.h */,
 				184649C721199EB400D0BD11 /* AppDelegate.m */,
+				184649FA211A8F8F00D0BD11 /* Third */,
+				184649F9211A8F8700D0BD11 /* Base */,
+				184649F8211A8F7600D0BD11 /* MainView */,
 				184649C921199EB400D0BD11 /* ViewController.h */,
 				184649CA21199EB400D0BD11 /* ViewController.m */,
 				184649CC21199EB400D0BD11 /* Main.storyboard */,
@@ -130,6 +139,127 @@
 				184649EC21199EB600D0BD11 /* Info.plist */,
 			);
 			path = duduUITests;
+			sourceTree = "<group>";
+		};
+		184649F8211A8F7600D0BD11 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				184649FB211A8FA100D0BD11 /* Home */,
+				184649FF211A938900D0BD11 /* ShoppingCart */,
+				18464A03211A938900D0BD11 /* Center */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		184649F9211A8F8700D0BD11 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				18464A07211A95FC00D0BD11 /* BaseNavigationController.h */,
+				18464A08211A95FC00D0BD11 /* BaseNavigationController.m */,
+				18464A09211A95FC00D0BD11 /* BaseTableBarControllerView.h */,
+				18464A0A211A95FC00D0BD11 /* BaseTableBarControllerView.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		184649FA211A8F8F00D0BD11 /* Third */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Third;
+			sourceTree = "<group>";
+		};
+		184649FB211A8FA100D0BD11 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				184649FC211A937F00D0BD11 /* Controller */,
+				184649FD211A938000D0BD11 /* Model */,
+				184649FE211A938000D0BD11 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		184649FC211A937F00D0BD11 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		184649FD211A938000D0BD11 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		184649FE211A938000D0BD11 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		184649FF211A938900D0BD11 /* ShoppingCart */ = {
+			isa = PBXGroup;
+			children = (
+				18464A00211A938900D0BD11 /* Controller */,
+				18464A01211A938900D0BD11 /* Model */,
+				18464A02211A938900D0BD11 /* View */,
+			);
+			path = ShoppingCart;
+			sourceTree = "<group>";
+		};
+		18464A00211A938900D0BD11 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		18464A01211A938900D0BD11 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		18464A02211A938900D0BD11 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		18464A03211A938900D0BD11 /* Center */ = {
+			isa = PBXGroup;
+			children = (
+				18464A04211A938900D0BD11 /* Controller */,
+				18464A05211A938900D0BD11 /* Model */,
+				18464A06211A938900D0BD11 /* View */,
+			);
+			path = Center;
+			sourceTree = "<group>";
+		};
+		18464A04211A938900D0BD11 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		18464A05211A938900D0BD11 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		18464A06211A938900D0BD11 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +392,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18464A0B211A95FC00D0BD11 /* BaseNavigationController.m in Sources */,
+				18464A0C211A95FC00D0BD11 /* BaseTableBarControllerView.m in Sources */,
 				184649CB21199EB400D0BD11 /* ViewController.m in Sources */,
 				184649D621199EB500D0BD11 /* main.m in Sources */,
 				184649C821199EB400D0BD11 /* AppDelegate.m in Sources */,
