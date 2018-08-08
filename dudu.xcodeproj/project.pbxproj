@@ -130,6 +130,7 @@
 		18464B79211A9E9500D0BD11 /* EGOImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464B05211A9E9400D0BD11 /* EGOImageButton.m */; };
 		18464B7A211A9E9500D0BD11 /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464B07211A9E9400D0BD11 /* EGOCache.m */; };
 		18464B7B211A9E9500D0BD11 /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464B0A211A9E9400D0BD11 /* EGOImageView.m */; };
+		18DE7CF1211AE3D9002E5CD0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 184649D421199EB500D0BD11 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1192,6 +1193,7 @@
 				18464B0E211A9E9500D0BD11 /* README.markdown in Resources */,
 				18464B75211A9E9500D0BD11 /* LICENSE in Resources */,
 				18464B11211A9E9500D0BD11 /* LICENSE in Resources */,
+				18DE7CF1211AE3D9002E5CD0 /* Info.plist in Resources */,
 				18464B3C211A9E9500D0BD11 /* LICENSE in Resources */,
 				18464B47211A9E9500D0BD11 /* README.md in Resources */,
 				184649D021199EB500D0BD11 /* Assets.xcassets in Resources */,
