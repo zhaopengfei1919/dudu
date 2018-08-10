@@ -20,18 +20,6 @@
 }
 
 // 只初始化一次
-+ (void)initialize{
-    UINavigationBar * navBar = [UINavigationBar appearance];
-    [navBar setTintColor:BackGray_Color];
-    navBar.barStyle = UIStatusBarStyleDefault ;
-    //    [navBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:Title_Font size:18],NSForegroundColorAttributeName:Black_Color}];
-    
-    [navBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:Black_Color, NSForegroundColorAttributeName, [UIFont fontWithName:Title_Font size:18.0f],NSFontAttributeName,nil]];
-    
-    
-    [navBar setBarTintColor:LightWhite_Color];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-}
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -45,17 +33,16 @@
  *  @param viewController 即将push进来的控制器
  */
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
-    if (self.viewControllers.count > 0) {
-        viewController.hidesBottomBarWhenPushed = YES;
-        viewController.navigationController.navigationBar.hidden = NO;
-        viewController.navigationController.navigationBar.backgroundColor = BackGray_Color;
-        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:UIImageName(@"back") style:UIBarButtonItemStyleDone target:self action:@selector(backLastViewController)];
-    }
+//    if (self.viewControllers.count > 0) {
+//        viewController.hidesBottomBarWhenPushed = YES;
+//        viewController.navigationController.navigationBar.hidden = NO;
+//        viewController.navigationController.navigationBar.backgroundColor = BackGray_Color;
+//        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:UIImageName(@"back") style:UIBarButtonItemStyleDone target:self action:@selector(backLastViewController)];
+//    }
     [super pushViewController:viewController animated:animated];
 }
 
 - (void)backLastViewController {
-    [MBProgressHUD hideActivityIndicator];
     [self popViewControllerAnimated:YES];
 }
 

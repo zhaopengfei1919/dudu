@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		184649C821199EB400D0BD11 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 184649C721199EB400D0BD11 /* AppDelegate.m */; };
+		184649C821199EB400D0BD11 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 184649C721199EB400D0BD11 /* AppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		184649CB21199EB400D0BD11 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184649CA21199EB400D0BD11 /* ViewController.m */; };
 		184649CE21199EB400D0BD11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184649CC21199EB400D0BD11 /* Main.storyboard */; };
 		184649D021199EB500D0BD11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184649CF21199EB500D0BD11 /* Assets.xcassets */; };
@@ -42,7 +42,7 @@
 		18464B21211A9E9500D0BD11 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A3C211A9E9400D0BD11 /* NSData+ImageContentType.m */; };
 		18464B22211A9E9500D0BD11 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A3D211A9E9400D0BD11 /* UIImageView+WebCache.m */; };
 		18464B23211A9E9500D0BD11 /* NSImage+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A3F211A9E9400D0BD11 /* NSImage+WebCache.m */; };
-		18464B24211A9E9500D0BD11 /* SDWebImageGIFCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A40211A9E9400D0BD11 /* SDWebImageGIFCoder.m */; };
+		18464B24211A9E9500D0BD11 /* SDWebImageGIFCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A40211A9E9400D0BD11 /* SDWebImageGIFCoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		18464B25211A9E9500D0BD11 /* SDImageCacheConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A42211A9E9400D0BD11 /* SDImageCacheConfig.m */; };
 		18464B26211A9E9500D0BD11 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A45211A9E9400D0BD11 /* UIView+WebCacheOperation.m */; };
 		18464B27211A9E9500D0BD11 /* UIView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A46211A9E9400D0BD11 /* UIView+WebCache.m */; };
@@ -65,7 +65,7 @@
 		18464B38211A9E9500D0BD11 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A6F211A9E9400D0BD11 /* AFURLRequestSerialization.m */; };
 		18464B39211A9E9500D0BD11 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A71211A9E9400D0BD11 /* AFNetworkReachabilityManager.m */; };
 		18464B3A211A9E9500D0BD11 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A72211A9E9400D0BD11 /* AFSecurityPolicy.m */; };
-		18464B3B211A9E9500D0BD11 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A75211A9E9400D0BD11 /* GCPlaceholderTextView.m */; };
+		18464B3B211A9E9500D0BD11 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A75211A9E9400D0BD11 /* GCPlaceholderTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		18464B3C211A9E9500D0BD11 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 18464A78211A9E9400D0BD11 /* LICENSE */; };
 		18464B3D211A9E9500D0BD11 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A7B211A9E9400D0BD11 /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		18464B3E211A9E9500D0BD11 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A84211A9E9400D0BD11 /* ViewController+MASAdditions.m */; };
@@ -81,7 +81,7 @@
 		18464B48211A9E9500D0BD11 /* NSDictionary+VASafeObjectForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A96211A9E9400D0BD11 /* NSDictionary+VASafeObjectForKey.m */; };
 		18464B49211A9E9500D0BD11 /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A97211A9E9400D0BD11 /* Filter.m */; };
 		18464B4A211A9E9500D0BD11 /* NSString+MD5Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A98211A9E9400D0BD11 /* NSString+MD5Category.m */; };
-		18464B4B211A9E9500D0BD11 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A99211A9E9400D0BD11 /* NSString+URLEncoding.m */; };
+		18464B4B211A9E9500D0BD11 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464A99211A9E9400D0BD11 /* NSString+URLEncoding.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		18464B4C211A9E9500D0BD11 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 18464A9E211A9E9400D0BD11 /* LICENSE */; };
 		18464B4D211A9E9500D0BD11 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464AA0211A9E9400D0BD11 /* UIScrollView+MJRefresh.m */; };
 		18464B4E211A9E9500D0BD11 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464AA1211A9E9400D0BD11 /* MJRefreshConst.m */; };
@@ -125,11 +125,6 @@
 		18464B74211A9E9500D0BD11 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464AFA211A9E9400D0BD11 /* MJFoundation.m */; };
 		18464B75211A9E9500D0BD11 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 18464AFB211A9E9400D0BD11 /* LICENSE */; };
 		18464B76211A9E9500D0BD11 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 18464AFC211A9E9400D0BD11 /* README.md */; };
-		18464B77211A9E9500D0BD11 /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464B00211A9E9400D0BD11 /* EGOImageLoadConnection.m */; };
-		18464B78211A9E9500D0BD11 /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464B02211A9E9400D0BD11 /* EGOImageLoader.m */; };
-		18464B79211A9E9500D0BD11 /* EGOImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464B05211A9E9400D0BD11 /* EGOImageButton.m */; };
-		18464B7A211A9E9500D0BD11 /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464B07211A9E9400D0BD11 /* EGOCache.m */; };
-		18464B7B211A9E9500D0BD11 /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464B0A211A9E9400D0BD11 /* EGOImageView.m */; };
 		18DE7CF1211AE3D9002E5CD0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 184649D421199EB500D0BD11 /* Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -382,16 +377,6 @@
 		18464AFA211A9E9400D0BD11 /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
 		18464AFB211A9E9400D0BD11 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		18464AFC211A9E9400D0BD11 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		18464AFF211A9E9400D0BD11 /* EGOImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageLoader.h; sourceTree = "<group>"; };
-		18464B00211A9E9400D0BD11 /* EGOImageLoadConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoadConnection.m; sourceTree = "<group>"; };
-		18464B01211A9E9400D0BD11 /* EGOImageLoadConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageLoadConnection.h; sourceTree = "<group>"; };
-		18464B02211A9E9400D0BD11 /* EGOImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoader.m; sourceTree = "<group>"; };
-		18464B04211A9E9400D0BD11 /* EGOImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageButton.h; sourceTree = "<group>"; };
-		18464B05211A9E9400D0BD11 /* EGOImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageButton.m; sourceTree = "<group>"; };
-		18464B07211A9E9400D0BD11 /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
-		18464B08211A9E9400D0BD11 /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
-		18464B0A211A9E9400D0BD11 /* EGOImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageView.m; sourceTree = "<group>"; };
-		18464B0B211A9E9400D0BD11 /* EGOImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -501,7 +486,6 @@
 			isa = PBXGroup;
 			children = (
 				18464A4E211A9E9400D0BD11 /* AFNetworking */,
-				18464AFD211A9E9400D0BD11 /* EGO */,
 				18464A94211A9E9400D0BD11 /* encord */,
 				18464A77211A9E9400D0BD11 /* Masonry */,
 				18464AE4211A9E9400D0BD11 /* MJExtension */,
@@ -1033,55 +1017,6 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
-		18464AFD211A9E9400D0BD11 /* EGO */ = {
-			isa = PBXGroup;
-			children = (
-				18464AFE211A9E9400D0BD11 /* EGOImageLoader */,
-				18464B03211A9E9400D0BD11 /* EGOImageButton */,
-				18464B06211A9E9400D0BD11 /* EGOCache */,
-				18464B09211A9E9400D0BD11 /* EGOImageView */,
-			);
-			path = EGO;
-			sourceTree = "<group>";
-		};
-		18464AFE211A9E9400D0BD11 /* EGOImageLoader */ = {
-			isa = PBXGroup;
-			children = (
-				18464AFF211A9E9400D0BD11 /* EGOImageLoader.h */,
-				18464B00211A9E9400D0BD11 /* EGOImageLoadConnection.m */,
-				18464B01211A9E9400D0BD11 /* EGOImageLoadConnection.h */,
-				18464B02211A9E9400D0BD11 /* EGOImageLoader.m */,
-			);
-			path = EGOImageLoader;
-			sourceTree = "<group>";
-		};
-		18464B03211A9E9400D0BD11 /* EGOImageButton */ = {
-			isa = PBXGroup;
-			children = (
-				18464B04211A9E9400D0BD11 /* EGOImageButton.h */,
-				18464B05211A9E9400D0BD11 /* EGOImageButton.m */,
-			);
-			path = EGOImageButton;
-			sourceTree = "<group>";
-		};
-		18464B06211A9E9400D0BD11 /* EGOCache */ = {
-			isa = PBXGroup;
-			children = (
-				18464B07211A9E9400D0BD11 /* EGOCache.m */,
-				18464B08211A9E9400D0BD11 /* EGOCache.h */,
-			);
-			path = EGOCache;
-			sourceTree = "<group>";
-		};
-		18464B09211A9E9400D0BD11 /* EGOImageView */ = {
-			isa = PBXGroup;
-			children = (
-				18464B0A211A9E9400D0BD11 /* EGOImageView.m */,
-				18464B0B211A9E9400D0BD11 /* EGOImageView.h */,
-			);
-			path = EGOImageView;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1262,7 +1197,6 @@
 				18464B57211A9E9500D0BD11 /* MJRefreshAutoGifFooter.m in Sources */,
 				18464B24211A9E9500D0BD11 /* SDWebImageGIFCoder.m in Sources */,
 				18464B3F211A9E9500D0BD11 /* MASCompositeConstraint.m in Sources */,
-				18464B79211A9E9500D0BD11 /* EGOImageButton.m in Sources */,
 				18464B1D211A9E9500D0BD11 /* SDWebImagePrefetcher.m in Sources */,
 				18464B54211A9E9500D0BD11 /* MJRefreshBackStateFooter.m in Sources */,
 				18464B31211A9E9500D0BD11 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
@@ -1274,7 +1208,6 @@
 				18464B6F211A9E9500D0BD11 /* MJExtensionConst.m in Sources */,
 				18464B29211A9E9500D0BD11 /* UIButton+WebCache.m in Sources */,
 				18464B72211A9E9500D0BD11 /* NSString+MJExtension.m in Sources */,
-				18464B7A211A9E9500D0BD11 /* EGOCache.m in Sources */,
 				18464A0C211A95FC00D0BD11 /* BaseTableBarControllerView.m in Sources */,
 				18464B74211A9E9500D0BD11 /* MJFoundation.m in Sources */,
 				18464B5B211A9E9500D0BD11 /* MJRefreshGifHeader.m in Sources */,
@@ -1312,8 +1245,6 @@
 				184649C821199EB400D0BD11 /* AppDelegate.m in Sources */,
 				18464B70211A9E9500D0BD11 /* NSObject+MJProperty.m in Sources */,
 				18464B73211A9E9500D0BD11 /* MJPropertyKey.m in Sources */,
-				18464B77211A9E9500D0BD11 /* EGOImageLoadConnection.m in Sources */,
-				18464B7B211A9E9500D0BD11 /* EGOImageView.m in Sources */,
 				18464B40211A9E9500D0BD11 /* MASConstraintMaker.m in Sources */,
 				18464B39211A9E9500D0BD11 /* AFNetworkReachabilityManager.m in Sources */,
 				18464B5E211A9E9500D0BD11 /* MJRefreshBackFooter.m in Sources */,
@@ -1324,7 +1255,6 @@
 				18464B32211A9E9500D0BD11 /* UIWebView+AFNetworking.m in Sources */,
 				18464B60211A9E9500D0BD11 /* MJRefreshComponent.m in Sources */,
 				18464B44211A9E9500D0BD11 /* MASConstraint.m in Sources */,
-				18464B78211A9E9500D0BD11 /* EGOImageLoader.m in Sources */,
 				18464B14211A9E9500D0BD11 /* UIImageView+HighlightedWebCache.m in Sources */,
 				18464B35211A9E9500D0BD11 /* AFURLResponseSerialization.m in Sources */,
 				18464B4E211A9E9500D0BD11 /* MJRefreshConst.m in Sources */,
@@ -1502,13 +1432,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KF7MXBQY9D;
 				INFOPLIST_FILE = dudu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dudu.zpf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1519,13 +1450,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KF7MXBQY9D;
 				INFOPLIST_FILE = dudu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dudu.zpf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

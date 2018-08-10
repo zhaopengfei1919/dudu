@@ -18,8 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    self.window.rootViewController = [[BaseTableBarControllerView alloc]init];
-    [self.window makeKeyWindow];
+//    self.window.rootViewController = [[BaseTableBarControllerView alloc]init];
+//    [self.window makeKeyWindow];
     return YES;
 }
 
