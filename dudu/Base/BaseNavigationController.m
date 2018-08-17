@@ -51,7 +51,7 @@
     backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -13, 0, 28);
     
     [backButton addTarget:self action:@selector(backLastViewController) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setImage:[UIImage imageNamed:@"back.png"] forState:0];
+    [backButton setImage:[UIImage imageNamed:@"返回"] forState:0];
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     viewController.navigationItem.leftBarButtonItem = backItem;

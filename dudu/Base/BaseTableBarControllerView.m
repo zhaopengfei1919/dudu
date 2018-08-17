@@ -8,6 +8,7 @@
 
 #import "BaseTableBarControllerView.h"
 #import "HomeViewController.h"
+#import "CategoryViewController.h"
 
 @interface BaseTableBarControllerView ()<UITabBarControllerDelegate>
 
@@ -21,25 +22,34 @@
     [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
     [UITabBar appearance].translucent = NO;//不透明
     
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGB(0x9d9d9d), NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
     
-    [[UITabBarItem appearance] setTitleTextAttributes:                                                         [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],NSForegroundColorAttributeName, nil]forState:UIControlStateSelected];
-//    [self addChildVc:[[HomeViewController alloc] init] title:@"首页" image:@"btn_home_nom" selectedImage:@"btn_home_select"];
+    [[UITabBarItem appearance] setTitleTextAttributes:                                                         [NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGB(0x20d994),NSForegroundColorAttributeName, nil]forState:UIControlStateSelected];
+    NSArray * images = @[@"首页未选中",@"分类未选中",@"购物车未选中",@"个人中心未选中"];
+    NSArray * imageselect = @[@"首页选中",@"分类选中",@"购物车选中",@"个人中心选中"];
+    
+    UITabBar *tabbar = self.tabBar;
+    NSArray *items = tabbar.items;
+    for (int i=0; i<4; i++) {
+        UITabBarItem *item = items[i];
+
+        item.image = [UIImage imageNamed:images[i]];
+        item.selectedImage = [[UIImage imageNamed:imageselect[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
 }
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
-    if (viewController.tabBarItem.tag == 3 || viewController.tabBarItem.tag == 4){
-        if (viewController.tabBarItem.tag == 3) {
-//            CKLoginVC *viewFlag = [[CKLoginVC alloc] init];
-//            UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:viewFlag];
-//            [self presentViewController:navi animated:YES completion:^{
-//            }];
-            return NO;
-        }else        {
-            return YES;
-        }
+    if ([viewController isKindOfClass:[CategoryViewController class]]){
+        UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        CategoryViewController * category = [sb instantiateViewControllerWithIdentifier:@"CategoryViewController"];
+        [self.navigationController pushViewController:category animated:YES];
+        return NO;
     } else    {
         return YES;
     }
+}
+-(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
+    // 判断本次点击的UITabBarItem是否和上次的一样
+    
 }
 
 @end

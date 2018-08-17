@@ -88,7 +88,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eYU-H7-mVz">
                                 <rect key="frame" x="0.0" y="20" width="375" height="500"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tmp-II-UxX">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo拷贝" translatesAutoresizingMaskIntoConstraints="NO" id="tmp-II-UxX">
                                         <rect key="frame" x="131" y="52" width="112" height="129"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="129" id="10w-HM-iyy"/>
@@ -361,15 +361,15 @@
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C7p-Ji-jaN">
-                                                        <rect key="frame" x="353" y="15.5" width="7" height="13"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="选择箭头" translatesAutoresizingMaskIntoConstraints="NO" id="C7p-Ji-jaN">
+                                                        <rect key="frame" x="347" y="15.5" width="13" height="13"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="13" id="2er-Vk-aGA"/>
-                                                            <constraint firstAttribute="width" constant="7" id="e57-iQ-coJ"/>
+                                                            <constraint firstAttribute="width" constant="13" id="e57-iQ-coJ"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxl-6r-qV8">
-                                                        <rect key="frame" x="145" y="15" width="203" height="15"/>
+                                                        <rect key="frame" x="145" y="15" width="197" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="E6t-ly-BWh"/>
                                                         </constraints>
@@ -442,15 +442,15 @@
                                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="订单-订单提交_03" translatesAutoresizingMaskIntoConstraints="NO" id="K5o-a6-nLb">
-                                                                <rect key="frame" x="353" y="13.5" width="7" height="13"/>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="选择箭头" translatesAutoresizingMaskIntoConstraints="NO" id="K5o-a6-nLb">
+                                                                <rect key="frame" x="347" y="13.5" width="13" height="13"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="13" id="bgn-h5-k1Q"/>
-                                                                    <constraint firstAttribute="width" constant="7" id="opr-7a-bEn"/>
+                                                                    <constraint firstAttribute="width" constant="13" id="opr-7a-bEn"/>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看所有订单" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB3-b7-ynj">
-                                                                <rect key="frame" x="253" y="14" width="90" height="12"/>
+                                                                <rect key="frame" x="247" y="14" width="90" height="12"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="90" id="XGc-WX-n45"/>
                                                                     <constraint firstAttribute="height" constant="12" id="g28-N8-GUo"/>
@@ -684,10 +684,10 @@
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SI0-xm-9pq">
-                                                        <rect key="frame" x="353" y="15.5" width="7" height="13"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="选择箭头" translatesAutoresizingMaskIntoConstraints="NO" id="SI0-xm-9pq">
+                                                        <rect key="frame" x="347" y="15.5" width="13" height="13"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="7" id="7rm-Xu-w8Q"/>
+                                                            <constraint firstAttribute="width" constant="13" id="7rm-Xu-w8Q"/>
                                                             <constraint firstAttribute="height" constant="13" id="STM-Qh-ttQ"/>
                                                         </constraints>
                                                     </imageView>
@@ -731,10 +731,10 @@
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yVa-h3-RRg">
-                                                        <rect key="frame" x="353" y="15.5" width="7" height="13"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="选择箭头" translatesAutoresizingMaskIntoConstraints="NO" id="yVa-h3-RRg">
+                                                        <rect key="frame" x="347" y="15.5" width="13" height="13"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="7" id="Ljn-ZT-6zS"/>
+                                                            <constraint firstAttribute="width" constant="13" id="Ljn-ZT-6zS"/>
                                                             <constraint firstAttribute="height" constant="13" id="oHI-7f-FLh"/>
                                                         </constraints>
                                                     </imageView>
@@ -778,10 +778,10 @@
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vb5-Vw-hVa">
-                                                        <rect key="frame" x="353" y="15.5" width="7" height="13"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="选择箭头" translatesAutoresizingMaskIntoConstraints="NO" id="vb5-Vw-hVa">
+                                                        <rect key="frame" x="347" y="15.5" width="13" height="13"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="7" id="J5y-wu-gOr"/>
+                                                            <constraint firstAttribute="width" constant="13" id="J5y-wu-gOr"/>
                                                             <constraint firstAttribute="height" constant="13" id="fnw-gr-2na"/>
                                                         </constraints>
                                                     </imageView>
@@ -826,10 +826,10 @@
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RHi-TN-VHD">
-                                                        <rect key="frame" x="353" y="15.5" width="7" height="13"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="选择箭头" translatesAutoresizingMaskIntoConstraints="NO" id="RHi-TN-VHD">
+                                                        <rect key="frame" x="347" y="15.5" width="13" height="13"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="7" id="gXP-59-zev"/>
+                                                            <constraint firstAttribute="width" constant="13" id="gXP-59-zev"/>
                                                             <constraint firstAttribute="height" constant="13" id="vL6-zO-ylG"/>
                                                         </constraints>
                                                     </imageView>
@@ -1055,7 +1055,7 @@
                                                     <constraint firstAttribute="height" constant="0.5" id="f9F-wM-bQc"/>
                                                 </constraints>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ArJ-Pd-PWs">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="扫描" translatesAutoresizingMaskIntoConstraints="NO" id="ArJ-Pd-PWs">
                                                 <rect key="frame" x="20" y="20.5" width="30" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="29" id="UKf-ER-zC4"/>
@@ -1165,7 +1165,7 @@
         <!--分类-->
         <scene sceneID="JFY-i7-UEk">
             <objects>
-                <viewController title="分类" id="Ms7-8M-Zx0" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoryViewController" title="分类" hidesBottomBarWhenPushed="YES" id="Ms7-8M-Zx0" customClass="CategoryViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RAr-Zv-vpB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1213,6 +1213,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="订单-订单提交_03" width="16" height="16"/>
+        <image name="logo拷贝" width="135" height="135"/>
+        <image name="扫描" width="34" height="34"/>
+        <image name="选择箭头" width="15" height="15"/>
     </resources>
 </document>
