@@ -8,6 +8,7 @@
 
 #import "BaseNavigationController.h"
 
-@interface HomeViewController : BaseNavigationController
+@interface HomeViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIButton *btn;
 
 @end

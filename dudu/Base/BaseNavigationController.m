@@ -8,7 +8,7 @@
 
 #import "BaseNavigationController.h"
 
-@interface BaseNavigationController ()
+@interface BaseNavigationController ()<UIGestureRecognizerDelegate>
 
 @end
 
@@ -16,6 +16,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.interactivePopGestureRecognizer.delegate =  self;
+    
+    self.navigationBar.translucent =NO;
+    self.edgesForExtendedLayout=UIRectEdgeNone;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+
+    [self.navigationBar setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      UIColorFromRGB(0xffffff),NSForegroundColorAttributeName,
+      [UIFont systemFontOfSize:18], NSFontAttributeName,
+      nil]];
     // Do any additional setup after loading the view.
 }
 
@@ -32,14 +44,19 @@
  *
  *  @param viewController 即将push进来的控制器
  */
-- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
-//    if (self.viewControllers.count > 0) {
-//        viewController.hidesBottomBarWhenPushed = YES;
-//        viewController.navigationController.navigationBar.hidden = NO;
-//        viewController.navigationController.navigationBar.backgroundColor = BackGray_Color;
-//        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:UIImageName(@"back") style:UIBarButtonItemStyleDone target:self action:@selector(backLastViewController)];
-//    }
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     [super pushViewController:viewController animated:animated];
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame = CGRectMake(0, 0, 50, 22);
+    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -13, 0, 28);
+    
+    [backButton addTarget:self action:@selector(backLastViewController) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setImage:[UIImage imageNamed:@"back.png"] forState:0];
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    viewController.navigationItem.leftBarButtonItem = backItem;
+    viewController.title = viewController.title;
+    
 }
 
 - (void)backLastViewController {

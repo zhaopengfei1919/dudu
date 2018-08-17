@@ -13,7 +13,7 @@
 
 #import "Masonry.h"
 
-#define UserID @"UserID"
+#define UserID @"token"
 #define UserInfo @"UserInfo"
 
 //-------------------获取设备大小-------------------------

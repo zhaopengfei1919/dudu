@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		1825B22521241EE000B0A4DE /* NetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B22421241EE000B0A4DE /* NetWorkManager.m */; };
 		1825B22B2124208500B0A4DE /* FYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B2282124208400B0A4DE /* FYUser.m */; };
+		1825B22E2125254200B0A4DE /* ShopCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B22D2125254200B0A4DE /* ShopCartViewController.m */; };
+		1825B23521257F0200B0A4DE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B23421257F0200B0A4DE /* LoginViewController.m */; };
+		1825B2382125872C00B0A4DE /* CenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B2372125872C00B0A4DE /* CenterViewController.m */; };
+		1825B23C21269E1500B0A4DE /* TuiKuangTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B23A21269E1500B0A4DE /* TuiKuangTableViewCell.m */; };
+		1825B23D21269E1500B0A4DE /* TuiKuangTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1825B23B21269E1500B0A4DE /* TuiKuangTableViewCell.xib */; };
+		1825B2412126A0FD00B0A4DE /* TuiKuanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B23F2126A0FD00B0A4DE /* TuiKuanTableViewCell.m */; };
+		1825B2422126A0FE00B0A4DE /* TuiKuanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1825B2402126A0FD00B0A4DE /* TuiKuanTableViewCell.xib */; };
+		1825B2462126A43000B0A4DE /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B2442126A43000B0A4DE /* OrderTableViewCell.m */; };
+		1825B2472126A43000B0A4DE /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1825B2452126A43000B0A4DE /* OrderTableViewCell.xib */; };
+		1825B24B2126AA0200B0A4DE /* CouponTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B2492126AA0200B0A4DE /* CouponTableViewCell.m */; };
+		1825B24C2126AA0200B0A4DE /* CouponTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1825B24A2126AA0200B0A4DE /* CouponTableViewCell.xib */; };
 		184649C821199EB400D0BD11 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 184649C721199EB400D0BD11 /* AppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		184649CB21199EB400D0BD11 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184649CA21199EB400D0BD11 /* ViewController.m */; };
 		184649CE21199EB400D0BD11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184649CC21199EB400D0BD11 /* Main.storyboard */; };
@@ -155,6 +166,24 @@
 		1825B2282124208400B0A4DE /* FYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYUser.m; sourceTree = "<group>"; };
 		1825B2292124208400B0A4DE /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		1825B22A2124208400B0A4DE /* FYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYUser.h; sourceTree = "<group>"; };
+		1825B22C2125254200B0A4DE /* ShopCartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopCartViewController.h; sourceTree = "<group>"; };
+		1825B22D2125254200B0A4DE /* ShopCartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopCartViewController.m; sourceTree = "<group>"; };
+		1825B23321257F0200B0A4DE /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		1825B23421257F0200B0A4DE /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		1825B2362125872C00B0A4DE /* CenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CenterViewController.h; sourceTree = "<group>"; };
+		1825B2372125872C00B0A4DE /* CenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CenterViewController.m; sourceTree = "<group>"; };
+		1825B23921269E1500B0A4DE /* TuiKuangTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TuiKuangTableViewCell.h; sourceTree = "<group>"; };
+		1825B23A21269E1500B0A4DE /* TuiKuangTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TuiKuangTableViewCell.m; sourceTree = "<group>"; };
+		1825B23B21269E1500B0A4DE /* TuiKuangTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TuiKuangTableViewCell.xib; sourceTree = "<group>"; };
+		1825B23E2126A0FD00B0A4DE /* TuiKuanTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TuiKuanTableViewCell.h; sourceTree = "<group>"; };
+		1825B23F2126A0FD00B0A4DE /* TuiKuanTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TuiKuanTableViewCell.m; sourceTree = "<group>"; };
+		1825B2402126A0FD00B0A4DE /* TuiKuanTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TuiKuanTableViewCell.xib; sourceTree = "<group>"; };
+		1825B2432126A43000B0A4DE /* OrderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
+		1825B2442126A43000B0A4DE /* OrderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
+		1825B2452126A43000B0A4DE /* OrderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
+		1825B2482126AA0200B0A4DE /* CouponTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CouponTableViewCell.h; sourceTree = "<group>"; };
+		1825B2492126AA0200B0A4DE /* CouponTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CouponTableViewCell.m; sourceTree = "<group>"; };
+		1825B24A2126AA0200B0A4DE /* CouponTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouponTableViewCell.xib; sourceTree = "<group>"; };
 		184649C321199EB400D0BD11 /* dudu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dudu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184649C621199EB400D0BD11 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		184649C721199EB400D0BD11 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -413,6 +442,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1825B22F21257E9900B0A4DE /* User */ = {
+			isa = PBXGroup;
+			children = (
+				1825B23021257EC100B0A4DE /* Controller */,
+				1825B23121257EC100B0A4DE /* Model */,
+				1825B23221257EC100B0A4DE /* View */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		1825B23021257EC100B0A4DE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1825B23321257F0200B0A4DE /* LoginViewController.h */,
+				1825B23421257F0200B0A4DE /* LoginViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1825B23121257EC100B0A4DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1825B23221257EC100B0A4DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		184649BA21199EB400D0BD11 = {
 			isa = PBXGroup;
 			children = (
@@ -477,6 +539,7 @@
 				184649FB211A8FA100D0BD11 /* Home */,
 				184649FF211A938900D0BD11 /* ShoppingCart */,
 				18464A03211A938900D0BD11 /* Center */,
+				1825B22F21257E9900B0A4DE /* User */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -561,6 +624,8 @@
 		18464A00211A938900D0BD11 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1825B22C2125254200B0A4DE /* ShopCartViewController.h */,
+				1825B22D2125254200B0A4DE /* ShopCartViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -592,6 +657,8 @@
 		18464A04211A938900D0BD11 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1825B2362125872C00B0A4DE /* CenterViewController.h */,
+				1825B2372125872C00B0A4DE /* CenterViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -606,6 +673,18 @@
 		18464A06211A938900D0BD11 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1825B23921269E1500B0A4DE /* TuiKuangTableViewCell.h */,
+				1825B23A21269E1500B0A4DE /* TuiKuangTableViewCell.m */,
+				1825B23B21269E1500B0A4DE /* TuiKuangTableViewCell.xib */,
+				1825B23E2126A0FD00B0A4DE /* TuiKuanTableViewCell.h */,
+				1825B23F2126A0FD00B0A4DE /* TuiKuanTableViewCell.m */,
+				1825B2402126A0FD00B0A4DE /* TuiKuanTableViewCell.xib */,
+				1825B2432126A43000B0A4DE /* OrderTableViewCell.h */,
+				1825B2442126A43000B0A4DE /* OrderTableViewCell.m */,
+				1825B2452126A43000B0A4DE /* OrderTableViewCell.xib */,
+				1825B2482126AA0200B0A4DE /* CouponTableViewCell.h */,
+				1825B2492126AA0200B0A4DE /* CouponTableViewCell.m */,
+				1825B24A2126AA0200B0A4DE /* CouponTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1137,6 +1216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				184649D321199EB500D0BD11 /* LaunchScreen.storyboard in Resources */,
+				1825B2472126A43000B0A4DE /* OrderTableViewCell.xib in Resources */,
 				18464B10211A9E9500D0BD11 /* SVProgressHUD.bundle in Resources */,
 				18464B4F211A9E9500D0BD11 /* MJRefresh.bundle in Resources */,
 				18464B4C211A9E9500D0BD11 /* LICENSE in Resources */,
@@ -1145,17 +1225,20 @@
 				18464B75211A9E9500D0BD11 /* LICENSE in Resources */,
 				18464B11211A9E9500D0BD11 /* LICENSE in Resources */,
 				18DE7CF1211AE3D9002E5CD0 /* Info.plist in Resources */,
+				1825B23D21269E1500B0A4DE /* TuiKuangTableViewCell.xib in Resources */,
 				18464B3C211A9E9500D0BD11 /* LICENSE in Resources */,
 				18464B47211A9E9500D0BD11 /* README.md in Resources */,
 				184649D021199EB500D0BD11 /* Assets.xcassets in Resources */,
 				18464B62211A9E9500D0BD11 /* LICENSE in Resources */,
 				18464B63211A9E9500D0BD11 /* README.md in Resources */,
+				1825B2422126A0FE00B0A4DE /* TuiKuanTableViewCell.xib in Resources */,
 				18464B76211A9E9500D0BD11 /* README.md in Resources */,
 				18464B0C211A9E9400D0BD11 /* license in Resources */,
 				18464B2A211A9E9500D0BD11 /* LICENSE in Resources */,
 				18464B61211A9E9500D0BD11 /* README.md in Resources */,
 				18464B12211A9E9500D0BD11 /* README.md in Resources */,
 				184649CE21199EB400D0BD11 /* Main.storyboard in Resources */,
+				1825B24C2126AA0200B0A4DE /* CouponTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1193,15 +1276,19 @@
 				18464B58211A9E9500D0BD11 /* MJRefreshAutoNormalFooter.m in Sources */,
 				18464B30211A9E9500D0BD11 /* UIButton+AFNetworking.m in Sources */,
 				18464B1A211A9E9500D0BD11 /* UIImage+MultiFormat.m in Sources */,
+				1825B2462126A43000B0A4DE /* OrderTableViewCell.m in Sources */,
 				18464B22211A9E9500D0BD11 /* UIImageView+WebCache.m in Sources */,
 				18464B5D211A9E9500D0BD11 /* MJRefreshHeader.m in Sources */,
 				18464B1E211A9E9500D0BD11 /* SDWebImageCoder.m in Sources */,
+				1825B23521257F0200B0A4DE /* LoginViewController.m in Sources */,
+				1825B2382125872C00B0A4DE /* CenterViewController.m in Sources */,
 				1825B22B2124208500B0A4DE /* FYUser.m in Sources */,
 				18464B6D211A9E9500D0BD11 /* MJProperty.m in Sources */,
 				18464B42211A9E9500D0BD11 /* NSArray+MASAdditions.m in Sources */,
 				18464B64211A9E9500D0BD11 /* SDCycleScrollView.m in Sources */,
 				18464B43211A9E9500D0BD11 /* View+MASAdditions.m in Sources */,
 				18464B5C211A9E9500D0BD11 /* MJRefreshFooter.m in Sources */,
+				1825B24B2126AA0200B0A4DE /* CouponTableViewCell.m in Sources */,
 				18464B66211A9E9500D0BD11 /* SDCollectionViewCell.m in Sources */,
 				18464A0B211A95FC00D0BD11 /* BaseNavigationController.m in Sources */,
 				18464B38211A9E9500D0BD11 /* AFURLRequestSerialization.m in Sources */,
@@ -1222,6 +1309,7 @@
 				18464B0F211A9E9500D0BD11 /* SVProgressHUD.m in Sources */,
 				18464B19211A9E9500D0BD11 /* UIImage+GIF.m in Sources */,
 				18464B69211A9E9500D0BD11 /* TAAnimatedDotView.m in Sources */,
+				1825B22E2125254200B0A4DE /* ShopCartViewController.m in Sources */,
 				18464B25211A9E9500D0BD11 /* SDImageCacheConfig.m in Sources */,
 				18464B6F211A9E9500D0BD11 /* MJExtensionConst.m in Sources */,
 				18464B29211A9E9500D0BD11 /* UIButton+WebCache.m in Sources */,
@@ -1231,6 +1319,7 @@
 				18464B5B211A9E9500D0BD11 /* MJRefreshGifHeader.m in Sources */,
 				18464B13211A9E9500D0BD11 /* SDWebImageManager.m in Sources */,
 				18464B5F211A9E9500D0BD11 /* MJRefreshAutoFooter.m in Sources */,
+				1825B23C21269E1500B0A4DE /* TuiKuangTableViewCell.m in Sources */,
 				18464B51211A9E9500D0BD11 /* NSBundle+MJRefresh.m in Sources */,
 				18464B50211A9E9500D0BD11 /* UIScrollView+MJExtension.m in Sources */,
 				184649CB21199EB400D0BD11 /* ViewController.m in Sources */,
@@ -1253,6 +1342,7 @@
 				18464B17211A9E9500D0BD11 /* SDWebImageCodersManager.m in Sources */,
 				18464B45211A9E9500D0BD11 /* MASViewConstraint.m in Sources */,
 				18464B53211A9E9500D0BD11 /* MJRefreshBackGifFooter.m in Sources */,
+				1825B2412126A0FD00B0A4DE /* TuiKuanTableViewCell.m in Sources */,
 				18464B68211A9E9500D0BD11 /* TAPageControl.m in Sources */,
 				18464B4B211A9E9500D0BD11 /* NSString+URLEncoding.m in Sources */,
 				18464B2F211A9E9500D0BD11 /* UIImageView+AFNetworking.m in Sources */,

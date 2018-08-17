@@ -7,9 +7,7 @@
 //
 
 #import "FYUser.h"
-#import "HZProvince.h"
-#import "HZDistrict.h"
-#import "HZCity.h"
+
 
 @implementation FYUser
 
@@ -32,10 +30,10 @@
     }
     return [NSNumber numberWithInt:[result intValue]];
 }
-- (NSString *)sign
+- (NSString *)token
 {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString *result = [defaults objectForKey:@"sign"];
+    NSString *result = [defaults objectForKey:@"token"];
     if (!result) {
         result = @"";
     }
@@ -78,121 +76,6 @@
 
 
 
-- (NSMutableArray *)getProvince{
-    NSString *database_path = [[NSBundle mainBundle] pathForResource:@"city" ofType:@"s3db"];
-    if (sqlite3_open([database_path UTF8String], &db) != SQLITE_OK) {
-        sqlite3_close(db);
-        NSLog(@"数据库打开失败");
-    }
-    
-    NSString *sqlQuery = @"SELECT * FROM province";
-    sqlite3_stmt * statement;
-    
-    NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    if (sqlite3_prepare_v2(db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK) {
-        while (sqlite3_step(statement) == SQLITE_ROW) {
-            
-            HZProvince *province = [[HZProvince alloc] init];
-            
-            char *name = (char*)sqlite3_column_text(statement, 2);
-            NSStringEncoding gbkEncoding =CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);  //GBK编码转换
-            NSString *nsNameStr = [NSString stringWithCString:name encoding:gbkEncoding];
-            
-            int ids = sqlite3_column_int(statement, 0);
-            
-            char *code = (char*)sqlite3_column_text(statement, 1);
-            NSString *codeStr = [[NSString alloc]initWithUTF8String:code];
-            
-            province.ids = ids;
-            province.name = nsNameStr;
-            province.code = codeStr;
-            [arr addObject:province];
-            //NSLog(@"name:%@  age:%d  address:%@",nsNameStr,ids, codeStr);
-        }
-    }
-    sqlite3_close(db);
-    return arr;
-}
-- (NSMutableArray *)getCity:(NSString *)pcode{
-    NSString *database_path = [[NSBundle mainBundle] pathForResource:@"city" ofType:@"s3db"];
-    if (sqlite3_open([database_path UTF8String], &db) != SQLITE_OK) {
-        sqlite3_close(db);
-        NSLog(@"数据库打开失败");
-    }
-    
-    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM city WHERE pcode = %@",pcode];
-    sqlite3_stmt * statement;
-    
-    NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    if (sqlite3_prepare_v2(db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK) {
-        while (sqlite3_step(statement) == SQLITE_ROW) {
-            
-            HZDistrict *province = [[HZDistrict alloc] init];
-            
-            char *name = (char*)sqlite3_column_text(statement, 2);
-            NSStringEncoding gbkEncoding =CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);  //GBK编码转换
-            NSString *nsNameStr = [NSString stringWithCString:name encoding:gbkEncoding];
-            
-            int ids = sqlite3_column_int(statement, 0);
-            
-            char *code = (char*)sqlite3_column_text(statement, 1);
-            NSString *codeStr = [[NSString alloc]initWithUTF8String:code];
-            
-            char *pcode = (char*)sqlite3_column_text(statement, 1);
-            NSString *pcodeStr = [[NSString alloc]initWithUTF8String:pcode];
-            
-            
-            province.ids = ids;
-            province.name = nsNameStr;
-            province.code = codeStr;
-            province.pcode = pcodeStr;
-            [arr addObject:province];
-        }
-    }
-    sqlite3_close(db);
-    return arr;
-}
-- (NSMutableArray *)getDistrict:(NSString *)pcode{
-    NSString *database_path = [[NSBundle mainBundle] pathForResource:@"city" ofType:@"s3db"];
-    if (sqlite3_open([database_path UTF8String], &db) != SQLITE_OK) {
-        sqlite3_close(db);
-        NSLog(@"数据库打开失败");
-    }
-    
-    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM district WHERE pcode = %@",pcode];
-    sqlite3_stmt * statement;
-    
-    NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    if (sqlite3_prepare_v2(db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK) {
-        while (sqlite3_step(statement) == SQLITE_ROW) {
-            
-            HZDistrict *province = [[HZDistrict alloc] init];
-            
-            char *name = (char*)sqlite3_column_text(statement, 2);
-            NSStringEncoding gbkEncoding =CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);  //GBK编码转换
-            NSString *nsNameStr = [NSString stringWithCString:name encoding:gbkEncoding];
-            
-            int ids = sqlite3_column_int(statement, 0);
-            
-            char *code = (char*)sqlite3_column_text(statement, 1);
-            NSString *codeStr = [[NSString alloc]initWithUTF8String:code];
-            
-            char *pcode = (char*)sqlite3_column_text(statement, 1);
-            NSString *pcodeStr = [[NSString alloc]initWithUTF8String:pcode];
-            
-            
-            province.ids = ids;
-            province.name = nsNameStr;
-            province.code = codeStr;
-            province.pcode = pcodeStr;
-            [arr addObject:province];
-        }
-    }
-    sqlite3_close(db);
-    return arr;
-}
+
 
 @end

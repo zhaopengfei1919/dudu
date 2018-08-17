@@ -10,21 +10,13 @@
 
 #import <sqlite3.h>
 
-@interface FYUser : NSObject{
-    sqlite3 *db;
-    
-}
-
+@interface FYUser : NSObject
 +(FYUser*)userInfo;
 @property (nonatomic, readonly) NSNumber *userId;
-@property (nonatomic, readonly) NSString *sign;
+@property (nonatomic, readonly) NSString *token;
 @property (nonatomic, readonly) NSDictionary * __nonnull userInfo;
 
 -(BOOL)isphonenumberwoth:(NSString *)phone;
 
 
-
-- (NSMutableArray *)getProvince;
-- (NSMutableArray *)getCity:(NSString *)pcode;
-- (NSMutableArray *)getDistrict:(NSString *)pcode;
 @end

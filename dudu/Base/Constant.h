@@ -11,38 +11,29 @@
 #ifndef Constant_h
 #define Constant_h
 
-#define HTTPURL @"http://47.100.224.21/api/gateway.jhtml/"
-#define APPID @"appid1236587459"
-#define APPKEY @"asdsaj89jkklasdklhhkllllj"
+#define HTTPURL @"http://47.100.224.21/api/gateway.jhtml"
+#define APPKEY @"appid1236587459"
+//#define APPKEY @"asdsaj89jkklasdklhhkllllj"
+#define SIGNKEY @"asdsaj89jkklasdklhhkllllj"
 
 //登录接口
-#define Login @"user/login"
-//注册接口
-#define Register @"user/register"
-//忘记密码
-#define Findpwd @"user/findpwd"
+#define Login @"token.get"
 //发送验证码
-#define Sendcode @"system/send-code"
+#define Sendcode @"token.smssend"
 //用户信息
-#define infouser @"user/info"
+#define userinfo @"member.get"
 //用户详情
 #define UserDetail @"user/detail"
 //上传头像
 #define SetAvatars @"user/set-avatars"
-//修改密码
-#define UpdatePwd @"user/update-pwd"
-//修改昵称
-#define SetnickName @"user/set-nickname"
-//实名验证
-#define VerifyIdCard @"user/verify-idcard"
 
 
-//热销商品
-#define HotList @"goods/hot-list"
+//一级分类信息
+#define GETRootProduce @"ad.getRootProductCategory"
 //热门店铺
 #define HotShop @"shop/hot-list"
 //首页广告位
-#define AdList @"ad/slide-show"
+#define AdList @"ad.getAdPosition"
 //店铺列表
 #define ShopList @"shop/list"
 //商品列表
