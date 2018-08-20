@@ -38,10 +38,8 @@
     }
 }
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
-    if ([viewController isKindOfClass:[CategoryViewController class]]){
-        UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        CategoryViewController * category = [sb instantiateViewControllerWithIdentifier:@"CategoryViewController"];
-        [self.navigationController pushViewController:category animated:YES];
+    if (viewController == [tabBarController.viewControllers objectAtIndex:1]){
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"pushcategory" object:nil userInfo:nil]];
         return NO;
     } else    {
         return YES;

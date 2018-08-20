@@ -28,6 +28,14 @@
 		1825B2612126CD1B00B0A4DE /* HomeHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1825B2602126CD1B00B0A4DE /* HomeHeader.xib */; };
 		1825B2642126CD3600B0A4DE /* HomeHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B2632126CD3600B0A4DE /* HomeHeader.m */; };
 		1825B2672126D91A00B0A4DE /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B2662126D91A00B0A4DE /* CategoryViewController.m */; };
+		1825B26A212A652100B0A4DE /* SalesManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B269212A652100B0A4DE /* SalesManViewController.m */; };
+		1825B277212A688B00B0A4DE /* QRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B26D212A688A00B0A4DE /* QRItem.m */; };
+		1825B278212A688B00B0A4DE /* QRView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B26E212A688A00B0A4DE /* QRView.m */; };
+		1825B279212A688B00B0A4DE /* QRMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B273212A688A00B0A4DE /* QRMenu.m */; };
+		1825B27A212A688B00B0A4DE /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B274212A688A00B0A4DE /* ScanViewController.m */; };
+		1825B27B212A688B00B0A4DE /* line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1825B275212A688A00B0A4DE /* line@2x.png */; };
+		1825B27F212A8CB000B0A4DE /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B27D212A8CB000B0A4DE /* CategoryTableViewCell.m */; };
+		1825B280212A8CB000B0A4DE /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1825B27E212A8CB000B0A4DE /* CategoryTableViewCell.xib */; };
 		184649C821199EB400D0BD11 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 184649C721199EB400D0BD11 /* AppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		184649CB21199EB400D0BD11 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184649CA21199EB400D0BD11 /* ViewController.m */; };
 		184649CE21199EB400D0BD11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184649CC21199EB400D0BD11 /* Main.storyboard */; };
@@ -206,6 +214,21 @@
 		1825B2632126CD3600B0A4DE /* HomeHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHeader.m; sourceTree = "<group>"; };
 		1825B2652126D91A00B0A4DE /* CategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
 		1825B2662126D91A00B0A4DE /* CategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
+		1825B268212A652100B0A4DE /* SalesManViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SalesManViewController.h; sourceTree = "<group>"; };
+		1825B269212A652100B0A4DE /* SalesManViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SalesManViewController.m; sourceTree = "<group>"; };
+		1825B26D212A688A00B0A4DE /* QRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRItem.m; sourceTree = "<group>"; };
+		1825B26E212A688A00B0A4DE /* QRView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRView.m; sourceTree = "<group>"; };
+		1825B26F212A688A00B0A4DE /* QRScanHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRScanHeader.h; sourceTree = "<group>"; };
+		1825B270212A688A00B0A4DE /* QRMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRMenu.h; sourceTree = "<group>"; };
+		1825B271212A688A00B0A4DE /* QRItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRItem.h; sourceTree = "<group>"; };
+		1825B272212A688A00B0A4DE /* QRView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRView.h; sourceTree = "<group>"; };
+		1825B273212A688A00B0A4DE /* QRMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRMenu.m; sourceTree = "<group>"; };
+		1825B274212A688A00B0A4DE /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
+		1825B275212A688A00B0A4DE /* line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line@2x.png"; sourceTree = "<group>"; };
+		1825B276212A688A00B0A4DE /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
+		1825B27C212A8CB000B0A4DE /* CategoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewCell.h; sourceTree = "<group>"; };
+		1825B27D212A8CB000B0A4DE /* CategoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewCell.m; sourceTree = "<group>"; };
+		1825B27E212A8CB000B0A4DE /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		184649C321199EB400D0BD11 /* dudu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dudu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184649C621199EB400D0BD11 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		184649C721199EB400D0BD11 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -497,6 +520,31 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1825B26B212A688A00B0A4DE /* 扫描 */ = {
+			isa = PBXGroup;
+			children = (
+				1825B26C212A688A00B0A4DE /* QRView */,
+				1825B274212A688A00B0A4DE /* ScanViewController.m */,
+				1825B275212A688A00B0A4DE /* line@2x.png */,
+				1825B276212A688A00B0A4DE /* ScanViewController.h */,
+			);
+			path = "扫描";
+			sourceTree = "<group>";
+		};
+		1825B26C212A688A00B0A4DE /* QRView */ = {
+			isa = PBXGroup;
+			children = (
+				1825B26D212A688A00B0A4DE /* QRItem.m */,
+				1825B26E212A688A00B0A4DE /* QRView.m */,
+				1825B26F212A688A00B0A4DE /* QRScanHeader.h */,
+				1825B270212A688A00B0A4DE /* QRMenu.h */,
+				1825B271212A688A00B0A4DE /* QRItem.h */,
+				1825B272212A688A00B0A4DE /* QRView.h */,
+				1825B273212A688A00B0A4DE /* QRMenu.m */,
+			);
+			path = QRView;
+			sourceTree = "<group>";
+		};
 		184649BA21199EB400D0BD11 = {
 			isa = PBXGroup;
 			children = (
@@ -586,6 +634,7 @@
 		184649FA211A8F8F00D0BD11 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				1825B26B212A688A00B0A4DE /* 扫描 */,
 				18464A4E211A9E9400D0BD11 /* AFNetworking */,
 				18464A94211A9E9400D0BD11 /* encord */,
 				18464A77211A9E9400D0BD11 /* Masonry */,
@@ -636,6 +685,9 @@
 				1825B2622126CD3600B0A4DE /* HomeHeader.h */,
 				1825B2632126CD3600B0A4DE /* HomeHeader.m */,
 				1825B2602126CD1B00B0A4DE /* HomeHeader.xib */,
+				1825B27C212A8CB000B0A4DE /* CategoryTableViewCell.h */,
+				1825B27D212A8CB000B0A4DE /* CategoryTableViewCell.m */,
+				1825B27E212A8CB000B0A4DE /* CategoryTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -693,6 +745,8 @@
 			children = (
 				1825B2362125872C00B0A4DE /* CenterViewController.h */,
 				1825B2372125872C00B0A4DE /* CenterViewController.m */,
+				1825B268212A652100B0A4DE /* SalesManViewController.h */,
+				1825B269212A652100B0A4DE /* SalesManViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1258,6 +1312,7 @@
 				18464B4C211A9E9500D0BD11 /* LICENSE in Resources */,
 				18464B2B211A9E9500D0BD11 /* README.md in Resources */,
 				18464B0E211A9E9500D0BD11 /* README.markdown in Resources */,
+				1825B27B212A688B00B0A4DE /* line@2x.png in Resources */,
 				1825B2572126CC5200B0A4DE /* ShopCartTableViewCell.xib in Resources */,
 				18464B75211A9E9500D0BD11 /* LICENSE in Resources */,
 				18464B11211A9E9500D0BD11 /* LICENSE in Resources */,
@@ -1265,6 +1320,7 @@
 				1825B23D21269E1500B0A4DE /* TuiKuangTableViewCell.xib in Resources */,
 				18464B3C211A9E9500D0BD11 /* LICENSE in Resources */,
 				18464B47211A9E9500D0BD11 /* README.md in Resources */,
+				1825B280212A8CB000B0A4DE /* CategoryTableViewCell.xib in Resources */,
 				184649D021199EB500D0BD11 /* Assets.xcassets in Resources */,
 				18464B62211A9E9500D0BD11 /* LICENSE in Resources */,
 				18464B63211A9E9500D0BD11 /* README.md in Resources */,
@@ -1330,6 +1386,7 @@
 				1825B24B2126AA0200B0A4DE /* CouponTableViewCell.m in Sources */,
 				18464B66211A9E9500D0BD11 /* SDCollectionViewCell.m in Sources */,
 				18464A0B211A95FC00D0BD11 /* BaseNavigationController.m in Sources */,
+				1825B278212A688B00B0A4DE /* QRView.m in Sources */,
 				18464B38211A9E9500D0BD11 /* AFURLRequestSerialization.m in Sources */,
 				1825B25A2126CC6C00B0A4DE /* HomeModel.m in Sources */,
 				18464B34211A9E9500D0BD11 /* AFImageDownloader.m in Sources */,
@@ -1357,12 +1414,14 @@
 				18464B72211A9E9500D0BD11 /* NSString+MJExtension.m in Sources */,
 				18464A0C211A95FC00D0BD11 /* BaseTableBarControllerView.m in Sources */,
 				18464B74211A9E9500D0BD11 /* MJFoundation.m in Sources */,
+				1825B26A212A652100B0A4DE /* SalesManViewController.m in Sources */,
 				18464B5B211A9E9500D0BD11 /* MJRefreshGifHeader.m in Sources */,
 				18464B13211A9E9500D0BD11 /* SDWebImageManager.m in Sources */,
 				18464B5F211A9E9500D0BD11 /* MJRefreshAutoFooter.m in Sources */,
 				1825B23C21269E1500B0A4DE /* TuiKuangTableViewCell.m in Sources */,
 				18464B51211A9E9500D0BD11 /* NSBundle+MJRefresh.m in Sources */,
 				18464B50211A9E9500D0BD11 /* UIScrollView+MJExtension.m in Sources */,
+				1825B277212A688B00B0A4DE /* QRItem.m in Sources */,
 				184649CB21199EB400D0BD11 /* ViewController.m in Sources */,
 				18464B52211A9E9500D0BD11 /* UIView+MJExtension.m in Sources */,
 				184649D621199EB500D0BD11 /* main.m in Sources */,
@@ -1380,6 +1439,8 @@
 				18464B41211A9E9500D0BD11 /* MASLayoutConstraint.m in Sources */,
 				18464B21211A9E9500D0BD11 /* NSData+ImageContentType.m in Sources */,
 				18464B27211A9E9500D0BD11 /* UIView+WebCache.m in Sources */,
+				1825B27A212A688B00B0A4DE /* ScanViewController.m in Sources */,
+				1825B27F212A8CB000B0A4DE /* CategoryTableViewCell.m in Sources */,
 				18464B2E211A9E9500D0BD11 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				18464B17211A9E9500D0BD11 /* SDWebImageCodersManager.m in Sources */,
 				18464B45211A9E9500D0BD11 /* MASViewConstraint.m in Sources */,
@@ -1405,6 +1466,7 @@
 				18464B32211A9E9500D0BD11 /* UIWebView+AFNetworking.m in Sources */,
 				1825B2522126CC3F00B0A4DE /* ShopCartModel.m in Sources */,
 				18464B60211A9E9500D0BD11 /* MJRefreshComponent.m in Sources */,
+				1825B279212A688B00B0A4DE /* QRMenu.m in Sources */,
 				18464B44211A9E9500D0BD11 /* MASConstraint.m in Sources */,
 				18464B14211A9E9500D0BD11 /* UIImageView+HighlightedWebCache.m in Sources */,
 				1825B2562126CC5200B0A4DE /* ShopCartTableViewCell.m in Sources */,

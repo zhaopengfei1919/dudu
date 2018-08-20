@@ -8,6 +8,7 @@
 
 #import "CenterViewController.h"
 #import "LoginViewController.h"
+#import "CategoryViewController.h"
 
 @interface CenterViewController ()
 
@@ -43,11 +44,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.ScrollTop.constant = - StatusHeight;
+    self.backImage.layer.cornerRadius = 33;
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpTocategoryController) name:@"pushcategory" object:nil];
 
     // Do any additional setup after loading the view.
 }
-
+- (void)jumpTocategoryController{
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CategoryViewController * category = [sb instantiateViewControllerWithIdentifier:@"CategoryViewController"];
+    [self.navigationController pushViewController:category animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -63,15 +71,26 @@
 }
 */
 
+- (IBAction)ChosenSalesman:(id)sender {
+    if ([FYUser userInfo].token.length > 0) {
+        [self performSegueWithIdentifier:@"mysalesman" sender:nil];
+    }else{
+        [self loginclick];
+    }
+}
+
 - (IBAction)login:(id)sender {
     if ([FYUser userInfo].token.length > 0) {
         
     }else{
-        UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        LoginViewController * login = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        [self presentViewController:login animated:YES completion:^{
-            
-        }];
+        [self loginclick];
     }
+}
+-(void)loginclick{
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController * login = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    [self presentViewController:login animated:YES completion:^{
+        
+    }];
 }
 @end

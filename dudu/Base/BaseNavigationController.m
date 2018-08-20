@@ -25,7 +25,7 @@
 
     [self.navigationBar setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
-      UIColorFromRGB(0xffffff),NSForegroundColorAttributeName,
+      UIColorFromRGB(0x333333),NSForegroundColorAttributeName,
       [UIFont systemFontOfSize:18], NSFontAttributeName,
       nil]];
     // Do any additional setup after loading the view.

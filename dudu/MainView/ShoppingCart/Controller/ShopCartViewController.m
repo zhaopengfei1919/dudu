@@ -7,6 +7,7 @@
 //
 
 #import "ShopCartViewController.h"
+#import "CategoryViewController.h"
 
 @interface ShopCartViewController ()
 
@@ -16,9 +17,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpTocategoryController) name:@"pushcategory" object:nil];
     // Do any additional setup after loading the view.
 }
-
+- (void)jumpTocategoryController{
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CategoryViewController * category = [sb instantiateViewControllerWithIdentifier:@"CategoryViewController"];
+    [self.navigationController pushViewController:category animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

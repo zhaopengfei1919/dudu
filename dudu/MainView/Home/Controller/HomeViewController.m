@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "CategoryViewController.h"
 
 @interface HomeViewController ()
 
@@ -39,7 +40,14 @@
     self.title = @"首页";
 //    [self request];
     [self adlist];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpTocategoryController) name:@"pushcategory" object:nil];
     // Do any additional setup after loading the view.
+}
+- (void)jumpTocategoryController{
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CategoryViewController * category = [sb instantiateViewControllerWithIdentifier:@"CategoryViewController"];
+    [self.navigationController pushViewController:category animated:YES];
 }
 -(void)request{
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
