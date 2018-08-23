@@ -20,9 +20,9 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [NetWorkManager manager];
-        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         manager.requestSerializer=[AFJSONRequestSerializer serializer];
-        [manager.responseSerializer setAcceptableContentTypes: [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", nil]];
+        [manager.responseSerializer setAcceptableContentTypes: [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil]];
         
     });
     return manager;
@@ -32,7 +32,6 @@
         
     NSString *baseURL = @"";
     baseURL = HTTPURL;
-    NSLog(@"%@",baseURL);
     
     NSMutableDictionary * Para = [[NSMutableDictionary alloc]init];
     [Para setObject:APPKEY forKey:@"app_key"];
@@ -49,16 +48,19 @@
     [Para setObject:@"json" forKey:@"format"];
     NSString * sign = [[NetWorkManager sharedManager] paixu:Para];
     [Para setObject:sign forKey:@"sign"];
-    NSLog(@"%@",Para);
+//    NSLog(@"%@",Para);
     
     switch (method) {
         case POST:{
             [[NetWorkManager sharedManager] POST:baseURL parameters:Para progress:^(NSProgress * _Nonnull uploadProgress) {
                 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                NSLog(@"success --%@",responseObject);
+                NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//                NSLog(@"success --%@",dic);
+                NSString * str = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+//                NSLog(@"success --%@",str);
                 if (success) {
-                    success(responseObject);
+                    success(dic);
                 }
 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -90,6 +92,10 @@
 }
 -(NSString *)paixu:(NSDictionary *)dic{
     NSMutableDictionary * newdic = [[NSMutableDictionary alloc] initWithDictionary:dic];
+//    NSString * data = [newdic safeObjectForKey:@"data"];
+//    if ([data isEqualToString:@"{}"]) {
+//        [newdic removeObjectForKey:@"data"];
+//    }
     NSArray *keyArray = [newdic allKeys];
     NSArray *sortArray = [keyArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         return [obj1 compare:obj2 options:NSNumericSearch];

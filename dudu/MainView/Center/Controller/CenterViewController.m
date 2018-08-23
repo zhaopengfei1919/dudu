@@ -16,7 +16,7 @@
 
 @implementation CenterViewController
 -(void)userInfo{
-    WS(weakself);
+//    WS(weakself);
     NSMutableDictionary *paraDic = @{}.mutableCopy;
     [paraDic setObject:[FYUser userInfo].token forKey:@"token"];
     

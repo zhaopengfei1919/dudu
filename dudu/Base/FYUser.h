@@ -17,6 +17,6 @@
 @property (nonatomic, readonly) NSDictionary * __nonnull userInfo;
 
 -(BOOL)isphonenumberwoth:(NSString *)phone;
-
+- (CGSize)sizeForString:(NSString *)string withFontSize:(int)sizenumber withWidth:(int)width;
 
 @end

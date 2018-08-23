@@ -7,8 +7,16 @@
 //
 
 #import "BaseNavigationController.h"
+#import "HomeHeader.h"
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : UIViewController{
+    HomeHeader * header;
+}
 @property (weak, nonatomic) IBOutlet UIButton *btn;
+
+@property (weak, nonatomic) IBOutlet UITableView *table;
+@property (strong,nonatomic) NSMutableArray * dataSourse;
+@property (strong,nonatomic) NSMutableArray * promotionSourse;
+@property (strong,nonatomic) NSMutableArray * bannerList;
 
 @end

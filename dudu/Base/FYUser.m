@@ -73,6 +73,15 @@
     }
 }
 
+- (CGSize)sizeForString:(NSString *)string withFontSize:(int)sizenumber withWidth:(int)width
+{
+    UIFont *font = [UIFont systemFontOfSize:sizenumber];
+    //设置一个行高上限
+    CGSize size = CGSizeMake(width,2000);
+    NSDictionary * fontDict = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName, nil];
+    CGRect labelsize = [string boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:fontDict context:nil];
+    return labelsize.size;
+}
 
 
 

@@ -137,7 +137,7 @@ NSString * const ID = @"SDCycleScrollViewCell";
     _flowLayout = flowLayout;
     
     UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
-    mainView.backgroundColor = [UIColor clearColor];
+    mainView.backgroundColor = [UIColor whiteColor];
     mainView.pagingEnabled = YES;
     mainView.showsHorizontalScrollIndicator = NO;
     mainView.showsVerticalScrollIndicator = NO;

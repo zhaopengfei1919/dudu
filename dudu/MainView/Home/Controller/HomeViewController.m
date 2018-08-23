@@ -9,8 +9,15 @@
 #import "HomeViewController.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "CategoryViewController.h"
+#import "HomeTableViewCell1.h"
+#import "HomeTableViewCell2.h"
+#import "HomeTableViewCell3.h"
+#import "HomeHotProduce.h"
+#import "AppDelegate.h"
+#import "BaseTableBarControllerView.h"
+#import "PromotionModel.h"
 
-@interface HomeViewController ()
+@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,homeHeaderViewDelegate>
 
 @end
 
@@ -19,109 +26,119 @@
 -(void)adlist{
     WS(weakself);
     NSMutableDictionary *paraDic = @{}.mutableCopy;
-    [paraDic setObject:@"17621987169" forKey:@"mobile"];
-    [paraDic setObject:@"761614" forKey:@"messageCode"];
+    [paraDic setObject:[NSNumber numberWithInt:2] forKey:@"adPositionId"];
     
-//    [NetWorkManager requestWithMethod:POST Url:Login Parameters:paraDic success:^(id responseObject) {
-//
-//    } requestRrror:^(id requestRrror) {
-//
-//    }];
-    
-    NSMutableDictionary *para = @{}.mutableCopy;
-    [NetWorkManager requestWithMethod:POST Url:AdList Parameters:para success:^(id responseObject) {
-        
+    [NetWorkManager requestWithMethod:POST Url:AdList Parameters:paraDic success:^(id responseObject) {
+        NSString * code = [responseObject objectForKey:@"code"];
+        if ([code intValue] == 0) {
+            NSLog(@"%@",responseObject);
+            NSArray * data = [responseObject safeObjectForKey:@"data"];
+            [weakself.bannerList addObjectsFromArray:data];
+            NSMutableArray *pic = [NSMutableArray array];
+            for (int i = 0; i <self.bannerList.count; i ++) {
+                NSDictionary * dic = self.bannerList[i];
+                NSString * path = [dic safeObjectForKey:@"path"];
+                if (path.length > 0) {
+                    [pic addObject:path];
+                }
+            }
+            self->header.imageUrl = pic;
+            self->header.Scroll.hidden = NO;
+        }else
+            self->header.Scroll.hidden = YES;
     } requestRrror:^(id requestRrror) {
         
     }];
 }
+//首页促销模块
+-(void)promotion{
+    WS(weakself);
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    
+    [NetWorkManager requestWithMethod:POST Url:Promotion Parameters:paraDic success:^(id responseObject) {
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code isEqualToString:@"0"]) {
+            NSArray * array = [PromotionModel mj_objectArrayWithKeyValuesArray:[responseObject objectForKey:@"data"]];
+            [weakself.promotionSourse addObjectsFromArray:array];
+            [weakself.table reloadData];
+        }
+    } requestRrror:^(id requestRrror) {
+        
+    }];
+}
+//首页热卖商品列表
+-(void)hotproduce{
+    WS(weakself);
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    
+    [NetWorkManager requestWithMethod:POST Url:HotProduce Parameters:paraDic success:^(id responseObject) {
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code isEqualToString:@"0"]) {
+            NSArray * array = [HomeHotProduce mj_objectArrayWithKeyValuesArray:[responseObject objectForKey:@"data"]];
+            [weakself.dataSourse addObjectsFromArray:array];
+            [weakself.table reloadData];
+        }
+    } requestRrror:^(id requestRrror) {
+        
+    }];
+}
+//购物车数量
+-(void)cartcount{
+//    WS(weakself);
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    [paraDic setObject:[FYUser userInfo].token forKey:@"token"];
+    [NetWorkManager requestWithMethod:POST Url:CartCount Parameters:paraDic success:^(id responseObject) {
+        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        BaseTableBarControllerView *tabbar = (BaseTableBarControllerView *)delegate.window.rootViewController;
+        [tabbar.tabBar showBadgeOnItemIndex:2 Withnum:25];
+    } requestRrror:^(id requestRrror) {
+        
+    }];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = NO;
+    [super viewWillDisappear:animated];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    if ([FYUser userInfo].token.length > 0) {
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"首页";
-//    [self request];
+    self.dataSourse = [[NSMutableArray alloc]init];
+    self.promotionSourse = [[NSMutableArray alloc]init];
+    self.bannerList = [[NSMutableArray alloc]init];
+    [self hotproduce];
     [self adlist];
+    [self promotion];
+    [self cartcount];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpTocategoryController) name:@"pushcategory" object:nil];
+    
+    adjustsScrollViewInsets_NO(self.table, self);
+    [self.table registerNib:[UINib nibWithNibName:@"HomeTableViewCell1" bundle:nil] forCellReuseIdentifier:@"HomeTableViewCell1"];
+    [self.table registerNib:[UINib nibWithNibName:@"HomeTableViewCell2" bundle:nil] forCellReuseIdentifier:@"HomeTableViewCell2"];
+    [self.table registerNib:[UINib nibWithNibName:@"HomeTableViewCell3" bundle:nil] forCellReuseIdentifier:@"HomeTableViewCell3"];
+    
+    UIView *baseHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , SCRXFrom6(140))];
+    header = [[[NSBundle mainBundle] loadNibNamed:@"HomeHeader" owner:self options:nil] objectAtIndex:0];
+    header.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCRXFrom6(140));
+    header.delegate = self;
+    [baseHeaderView addSubview:header];
+    self.table.tableHeaderView = baseHeaderView;
     // Do any additional setup after loading the view.
+}
+-(void)homeScrollViewClickWith:(NSInteger)index{
+    
 }
 - (void)jumpTocategoryController{
     UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CategoryViewController * category = [sb instantiateViewControllerWithIdentifier:@"CategoryViewController"];
     [self.navigationController pushViewController:category animated:YES];
-}
--(void)request{
-    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
-    
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html",@"text/plain", nil];
-    
-    NSMutableDictionary * Para = [[NSMutableDictionary alloc]init];
-    [Para setObject:APPKEY forKey:@"app_key"];
-    NSMutableDictionary *paraDic = @{}.mutableCopy;
-    [paraDic setObject:@"17621987169" forKey:@"strParam"];
-    [Para setObject:[paraDic mj_JSONString] forKey:@"data"];
-    [Para setObject:@"1.0" forKey:@"version"];
-    [Para setObject:[self getTimeNow] forKey:@"timestamp"];
-    //获取UUID
-    CFUUIDRef puuid = CFUUIDCreate(nil);
-    CFStringRef uuidString = CFUUIDCreateString(nil, puuid);
-    NSString *result = (NSString *)CFBridgingRelease(CFStringCreateCopy(NULL, uuidString));
-    NSString *strUrl = [result stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    [Para setObject:strUrl forKey:@"nonce"];
-    [Para setObject:Sendcode forKey:@"name"];
-    [Para setObject:@"json" forKey:@"format"];
-    NSString * sign = [self paixu:Para];
-    [Para setObject:sign forKey:@"sign"];
-    NSLog(@"%@",Para);
-    
-    [manager POST:@"http://47.100.224.21/api/gateway.jhtml" parameters:Para progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject)
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-    }];
-}
--(NSString *)paixu:(NSDictionary *)dic{
-    NSMutableDictionary * newdic = [[NSMutableDictionary alloc] initWithDictionary:dic];
-    NSArray *keyArray = [newdic allKeys];
-    NSArray *sortArray = [keyArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        return [obj1 compare:obj2 options:NSNumericSearch];
-    }];
-    NSMutableArray *valueArray = [NSMutableArray array];
-    for (NSString *sortString in sortArray) {
-        [valueArray addObject:[dic objectForKey:sortString]];
-    }
-    NSMutableArray *signArray = [NSMutableArray array];
-    for (int i = 0; i < sortArray.count; i++) {
-        NSString * str = [NSString stringWithFormat:@"%@",valueArray[i]];
-        if (str.length == 0) {
-            continue;
-        }
-        if ([valueArray[i] isKindOfClass:[NSNull class]]) {
-            continue;
-        }
-        NSString *keyValueStr = [NSString stringWithFormat:@"%@=%@",sortArray[i],valueArray[i]];
-        [signArray addObject:keyValueStr];
-    }
-    NSString *sign1 = [signArray componentsJoinedByString:@"&"];
-    NSString * sign2 = [sign1 stringByAppendingString:SIGNKEY];
-    
-    const char* input = [sign2 UTF8String];
-    unsigned char result[CC_MD5_DIGEST_LENGTH];
-    CC_MD5(input, (CC_LONG)strlen(input), result);
-    
-    NSMutableString *digest = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-    for (NSInteger i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
-        [digest appendFormat:@"%02x", result[i]];
-    }
-    return digest;
-}
-
-- (NSString *)getTimeNow
-{
-    NSTimeInterval nowtime = [[NSDate date] timeIntervalSince1970]*1000;
-    
-    long long theTime = [[NSNumber numberWithDouble:nowtime] longLongValue];
-    
-    NSString *curTime = [NSString stringWithFormat:@"%llu",theTime];
-    return curTime;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -137,5 +154,91 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if ((self.promotionSourse.count > 0 && section == 1) || (self.promotionSourse.count == 0 && section == 0)) {
+        return 39;
+    }
+    return 0.01;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if ((self.promotionSourse.count > 0 && section == 1) || (self.promotionSourse.count == 0 && section == 0)) {
+        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 39)];
+        view.backgroundColor = [UIColor whiteColor];
+        
+        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 13, SCREEN_WIDTH, 18)];
+        label.textColor = UIColorFromRGB(0xf39700);
+        label.font = [UIFont systemFontOfSize:18];
+        label.text = @"—— 热销商品 ——";
+        label.textAlignment = NSTextAlignmentCenter;
+        [view addSubview:label];
+        
+        return view;
+    }
+    return nil;
+}
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if (self.promotionSourse.count > 0) {
+        return self.dataSourse.count + 1;
+    }
+    return self.dataSourse.count;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSInteger count = section;
+    if (self.promotionSourse.count > 0 && section == 0) {
+        int number = (int)self.promotionSourse.count;
+        return number/3;
+    }
+    if (self.promotionSourse.count > 0 && section > 0) {
+        count = section - 1;
+    }
+    HomeHotProduce * model = self.dataSourse[count];
+    NSArray * products = model.products;
+    if ([model.showType isEqualToString:@"1"]) {
+        return products.count;
+    }
+    NSInteger coun = products.count;
+//    if (coun % 2 == 1) {
+//        return coun/2 + 1;
+//    }
+    return coun/2;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger count = indexPath.section;
+    if (self.promotionSourse.count > 0 && indexPath.section == 0) {
+        return 240;
+    }
+    if (self.promotionSourse.count > 0 && indexPath.section > 0) {
+        count = count - 1;
+    }
+    HomeHotProduce * model = self.dataSourse[count];
+    if ([model.showType isEqualToString:@"1"]) {
+        return 155;
+    }
+    return 270;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger count = indexPath.section;
+    if (self.promotionSourse.count > 0 && indexPath.section == 0) {
+        HomeTableViewCell3 * cell = [tableView dequeueReusableCellWithIdentifier:@"HomeTableViewCell3" forIndexPath:indexPath];
+        cell.array = [self.promotionSourse subarrayWithRange:NSMakeRange(indexPath.row * 3, 3)];
+        return cell;
+    }
+    if (self.promotionSourse.count > 0 && indexPath.section > 0) {
+        count = indexPath.section - 1;
+    }
+    HomeHotProduce * model = self.dataSourse[count];
+    NSArray * products = model.products;
+    NSArray * produceModel = [HomeModel mj_objectArrayWithKeyValuesArray:products];
+    if ([model.showType isEqualToString:@"1"]) {
+        HomeTableViewCell1 * cell = [tableView dequeueReusableCellWithIdentifier:@"HomeTableViewCell1" forIndexPath:indexPath];
+        cell.model = produceModel[indexPath.row];
+        return cell;
+    }
+    HomeTableViewCell2 * cell = [tableView dequeueReusableCellWithIdentifier:@"HomeTableViewCell2" forIndexPath:indexPath];
+    cell.array = [produceModel subarrayWithRange:NSMakeRange(indexPath.row * 2, 2)];
+    return cell;
+}
 @end

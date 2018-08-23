@@ -7,6 +7,8 @@
 //
 
 #import "HomeHeader.h"
+@interface HomeHeader()<SDCycleScrollViewDelegate>
+@end
 
 @implementation HomeHeader
 
@@ -17,5 +19,16 @@
     // Drawing code
 }
 */
+- (void)setImageUrl:(NSArray *)imageUrl{
+    _imageUrl = imageUrl;
+    self.Scroll.imageURLStringsGroup = imageUrl;
+    self.Scroll.delegate = self;
+}
 
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    if ([self.delegate respondsToSelector:@selector(homeScrollViewClickWith:)]) {
+        [self.delegate homeScrollViewClickWith:index];
+    }
+}
 @end
