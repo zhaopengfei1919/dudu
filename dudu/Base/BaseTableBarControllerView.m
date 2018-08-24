@@ -9,6 +9,7 @@
 #import "BaseTableBarControllerView.h"
 #import "HomeViewController.h"
 #import "CategoryViewController.h"
+#import "BaseNavigationController.h"
 
 @interface BaseTableBarControllerView ()<UITabBarControllerDelegate>
 
@@ -40,6 +41,7 @@
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     if (viewController == [tabBarController.viewControllers objectAtIndex:1]){
         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"pushcategory" object:nil userInfo:nil]];
+        
         return NO;
     } else    {
         return YES;

@@ -1599,14 +1599,14 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hET-qA-rrE">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="4ye-xb-gBU" id="AIR-4h-jhg"/>
                                     <outlet property="delegate" destination="4ye-xb-gBU" id="T9Y-iu-ZuN"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="hET-qA-rrE" firstAttribute="top" secondItem="ZNS-HC-q5m" secondAttribute="top" id="7sE-IO-UPq"/>
                             <constraint firstItem="ZNS-HC-q5m" firstAttribute="bottom" secondItem="hET-qA-rrE" secondAttribute="bottom" id="Jkp-ef-MNv"/>

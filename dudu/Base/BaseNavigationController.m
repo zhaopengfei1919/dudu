@@ -7,6 +7,7 @@
 //
 
 #import "BaseNavigationController.h"
+#import "CategoryViewController.h"
 
 @interface BaseNavigationController ()<UIGestureRecognizerDelegate>
 
@@ -28,9 +29,25 @@
       UIColorFromRGB(0x333333),NSForegroundColorAttributeName,
       [UIFont systemFontOfSize:18], NSFontAttributeName,
       nil]];
+    
+
     // Do any additional setup after loading the view.
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"pushcategory" object:nil];
+    [super viewWillDisappear:animated];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpTocategoryController) name:@"pushcategory" object:nil];
+}
+- (void)jumpTocategoryController{
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CategoryViewController * category = [sb instantiateViewControllerWithIdentifier:@"CategoryViewController"];
+    [self pushViewController:category animated:YES];
+}
 // 只初始化一次
 
 - (UIStatusBarStyle)preferredStatusBarStyle

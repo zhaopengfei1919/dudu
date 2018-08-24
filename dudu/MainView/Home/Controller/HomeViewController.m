@@ -117,7 +117,7 @@
     [self promotion];
     [self cartcount];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpTocategoryController) name:@"pushcategory" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpTocategoryController) name:@"pushcategory" object:nil];
     
     adjustsScrollViewInsets_NO(self.table, self);
     [self.table registerNib:[UINib nibWithNibName:@"HomeTableViewCell1" bundle:nil] forCellReuseIdentifier:@"HomeTableViewCell1"];
@@ -136,9 +136,10 @@
     
 }
 - (void)jumpTocategoryController{
-    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    CategoryViewController * category = [sb instantiateViewControllerWithIdentifier:@"CategoryViewController"];
-    [self.navigationController pushViewController:category animated:YES];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"pushcategory" object:nil];
+//    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    CategoryViewController * category = [sb instantiateViewControllerWithIdentifier:@"CategoryViewController"];
+//    [self.navigationController pushViewController:category animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
