@@ -12,6 +12,7 @@
 #import "CategoryTableViewCell.h"
 #import "CateGoryCell.h"
 #import "HomeHotProduce.h"
+#import "GoodsDetailViewController.h"
 
 @interface CategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -23,15 +24,19 @@
     WS(weakself);
     NSMutableDictionary *paraDic = @{}.mutableCopy;
     [NetWorkManager requestWithMethod:POST Url:GETRootProduce Parameters:paraDic success:^(id responseObject) {
-        NSArray * array = [CategoryModel mj_objectArrayWithKeyValuesArray:[responseObject objectForKey:@"data"]];
-        CategoryModel * model = array[0];
-        NSArray * subProductCategory = model.subProductCategory;
-        NSArray * arr = [CategoryModel mj_objectArrayWithKeyValuesArray:subProductCategory];
-        self->Num = 0;
-        [weakself.dataSourse1 addObjectsFromArray:array];
-        [weakself.hotProduce addObjectsFromArray:arr];
-        [weakself.table1 reloadData];
-        [self produceWith:model.ID];
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code isEqualToString:@"0"]) {
+            NSArray * array = [CategoryModel mj_objectArrayWithKeyValuesArray:[responseObject objectForKey:@"data"]];
+            CategoryModel * model = array[0];
+            NSArray * subProductCategory = model.subProductCategory;
+            NSArray * arr = [CategoryModel mj_objectArrayWithKeyValuesArray:subProductCategory];
+            self->Num = 0;
+            [weakself.dataSourse1 addObjectsFromArray:array];
+            [weakself.hotProduce addObjectsFromArray:arr];
+            [weakself.table1 reloadData];
+            [self produceWith:model.ID];
+        }else
+            [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
     } requestRrror:^(id requestRrror) {
         
     }];
@@ -57,6 +62,40 @@
         
     }];
 }
+-(void)cartlist{
+    WS(weakself);
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    [NetWorkManager requestWithMethod:POST Url:CartList Parameters:paraDic success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code isEqualToString:@"0"]) {
+            NSArray * data = [responseObject safeObjectForKey:@"data"];
+            self->cartView.array = data;
+            [weakself cartcount];
+        }else
+            [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
+    } requestRrror:^(id requestRrror) {
+    }];
+}
+//购物车数量
+-(void)cartcount{
+    //    WS(weakself);
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    [paraDic setObject:[FYUser userInfo].token forKey:@"token"];
+    [NetWorkManager requestWithMethod:POST Url:CartCount Parameters:paraDic success:^(id responseObject) {
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code intValue] == 0) {
+            int data = [[responseObject safeObjectForKey:@"data"] intValue];
+            if (data > 0) {
+                self.CountBtn.text = [NSString stringWithFormat:@"%d",data];
+                self.CountBtn.hidden = NO;
+            }else
+                self.CountBtn.hidden = YES;
+        }
+    } requestRrror:^(id requestRrror) {
+        
+    }];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataSourse1 = [[NSMutableArray alloc]init];
@@ -64,6 +103,8 @@
     self.hotProduce = [[NSMutableArray alloc]init];
     Page = 0;
     [self rootproduce];
+    [self cartcount];
+    self.CountBtn.layer.cornerRadius = 7.5;
     
     adjustsScrollViewInsets_NO(self.table1, self);
     adjustsScrollViewInsets_NO(_table2, self);
@@ -73,6 +114,16 @@
     
     [self createView];
     self.CountBtn.layer.cornerRadius = 7.5;
+    
+    UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+    cartView = [[[NSBundle mainBundle] loadNibNamed:@"CartView" owner:self options:nil] objectAtIndex:0];
+    cartView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 51 - BarBottomHeight);
+    cartView.hidden = YES;
+    [window addSubview:cartView];
+    WS(weakself);
+    [cartView setCartBlock:^{
+        [weakself cartlist];
+    }];
     // Do any additional setup after loading the view.
 }
 -(void)createView{
@@ -187,7 +238,75 @@
     }
     CategoryTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell" forIndexPath:indexPath];
     cell.model = self.dataSourse2[indexPath.row];
+    cell.CartBtn.tag = indexPath.row;
+    [cell.CartBtn addTarget:self action:@selector(addcart:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
+}
+-(void)addcart:(UIButton *)btn{
+    HomeModel * model = self.dataSourse2[btn.tag];
+    if (model.specificationNumber == 0) {//没有规格，直接加入购物车
+        NSMutableDictionary *paraDic = @{}.mutableCopy;
+        [paraDic setObject:[NSNumber numberWithInt:1] forKey:@"quantity"];
+        NSMutableDictionary * dic = @{}.mutableCopy;
+        [dic setObject:model.ID forKey:@"id"];
+        [paraDic setObject:dic forKey:@"productParam"];
+        
+        [self sureaddcart:paraDic];
+    }else{//多规格，调用商品详情接口，获取规格信息
+//        WS(weakself);
+        NSMutableDictionary *paraDic = @{}.mutableCopy;
+        [paraDic setObject:model.ID forKey:@"id"];
+        [NetWorkManager requestWithMethod:POST Url:GoodsDetail Parameters:paraDic success:^(id responseObject) {
+            NSLog(@"%@",responseObject);
+            NSString * code = [responseObject safeObjectForKey:@"code"];
+            if ([code isEqualToString:@"0"]) {
+                UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+                self->submitView = [[[NSBundle mainBundle] loadNibNamed:@"HZSubmitView" owner:self options:nil] objectAtIndex:0];
+                self->submitView.frame = window.bounds;
+                [self->submitView createViewWith:[responseObject safeObjectForKey:@"data"]];
+                [self->submitView createBigviewWith:[responseObject safeObjectForKey:@"data"]];
+                [self->submitView.SureBtn addTarget:self action:@selector(cartadd) forControlEvents:UIControlEventTouchUpInside];
+                [window addSubview:self->submitView];
+            }else
+                [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
+        } requestRrror:^(id requestRrror) {
+            
+        }];
+    }
+}
+-(void)cartadd{
+    NSArray * specifications = [submitView.data safeObjectForKey:@"specifications"];
+    if (specifications.count == 2) {
+        if (submitView.firstID.length == 0 || submitView.secondID.length == 0) {
+            [SVProgressHUD showErrorWithStatus:@"请选择相应规格"];
+            return;
+        }
+    }else if (specifications.count == 1){
+        if (submitView.firstID.length == 0){
+            [SVProgressHUD showErrorWithStatus:@"请选择相应规格"];
+            return;
+        }
+    }
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    [paraDic setObject:submitView.CountLabel.text forKey:@"quantity"];
+    NSMutableDictionary * dic = @{}.mutableCopy;
+    [dic setObject:submitView.GoodsID forKey:@"id"];
+    [paraDic setObject:dic forKey:@"productParam"];
+    
+    [self sureaddcart:paraDic];
+}
+-(void)sureaddcart:(NSDictionary *)dic{
+    [NetWorkManager requestWithMethod:POST Url:CartAdd Parameters:dic success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code isEqualToString:@"0"]) {
+            [SVProgressHUD showSuccessWithStatus:@"加入购物车成功"];
+            [self->submitView removeFromSuperview];
+        }else
+            [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
+    } requestRrror:^(id requestRrror) {
+        
+    }];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.table1) {
@@ -196,9 +315,24 @@
         [self produceWith:model.ID];
         Rownum = indexPath.row + 1;
         [self.table1 reloadData];
+    }else{
+        UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        GoodsDetailViewController * detail = [sb instantiateViewControllerWithIdentifier:@"GoodsDetailViewController"];
+        HomeModel * model = self.dataSourse2[indexPath.row];
+        detail.GoodsID = model.ID;
+        [self.navigationController pushViewController:detail animated:YES];
     }
 }
 - (IBAction)cartClick:(id)sender {
+    static BOOL ishidden = YES;
+    if (ishidden) {
+        [self cartlist];
+        ishidden = NO;
+        cartView.hidden = NO;
+    }else{
+        ishidden = YES;
+        cartView.hidden = YES;
+    }
 }
 - (IBAction)sure:(id)sender {
 }

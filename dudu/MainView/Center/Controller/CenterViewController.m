@@ -16,15 +16,29 @@
 
 @implementation CenterViewController
 -(void)userInfo{
-//    WS(weakself);
+    WS(weakself);
     NSMutableDictionary *paraDic = @{}.mutableCopy;
     [paraDic setObject:[FYUser userInfo].token forKey:@"token"];
     
     [NetWorkManager requestWithMethod:POST Url:userinfo Parameters:paraDic success:^(id responseObject) {
-
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code isEqualToString:@"0"]) {
+            self->usermodel = [UserModel mj_objectWithKeyValues:[responseObject safeObjectForKey:@"data"]];
+            [weakself createUI];
+        }else
+            [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
     } requestRrror:^(id requestRrror) {
 
     }];
+}
+-(void)createUI{
+    self.PhoneLabel.text = usermodel.mobile;
+    self.JifenLabel.text = [NSString stringWithFormat:@"我的积分：%@积分",usermodel.point];
+    if (usermodel.memberRank.length > 0) {
+        self.LevelLabel.text = usermodel.memberRank;
+        self.LevelLabel.hidden = NO;
+        self.LevelLabel.layer.cornerRadius = 3;
+    }
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -75,13 +89,43 @@
     if ([FYUser userInfo].token.length > 0) {
         [self performSegueWithIdentifier:@"mysalesman" sender:nil];
     }else{
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
         [self loginclick];
     }
 }
 
+- (IBAction)chosenCoupon:(id)sender {
+    if ([FYUser userInfo].token.length == 0) {
+
+        return;
+    }
+//    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    AddressEditViewController * edit = [sb instantiateViewControllerWithIdentifier:@"AddressEditViewController"];
+//    [self.navigationController pushViewController:edit animated:YES];
+    [self performSegueWithIdentifier:@"gotocoupon" sender:nil];
+}
+
+- (IBAction)myaddress:(id)sender {
+    if ([FYUser userInfo].token.length == 0) {
+        
+        return;
+    }
+    [self performSegueWithIdentifier:@"gotoaddress" sender:nil];
+}
+
+- (IBAction)myTuikuan:(id)sender {
+}
+
+- (IBAction)myTuikuang:(id)sender {
+}
+
 - (IBAction)login:(id)sender {
     if ([FYUser userInfo].token.length > 0) {
-        
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:@{} forKey:@"UserInfo"];
+        [defaults setObject:@"" forKey:@"token"];
+        [defaults synchronize];
+        [self.loginBtn setTitle:@"点击登录" forState:0];
     }else{
         [self loginclick];
     }

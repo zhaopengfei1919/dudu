@@ -16,6 +16,7 @@
 #import "AppDelegate.h"
 #import "BaseTableBarControllerView.h"
 #import "PromotionModel.h"
+#import "GoodsDetailViewController.h"
 
 @interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,homeHeaderViewDelegate>
 
@@ -88,9 +89,12 @@
     NSMutableDictionary *paraDic = @{}.mutableCopy;
     [paraDic setObject:[FYUser userInfo].token forKey:@"token"];
     [NetWorkManager requestWithMethod:POST Url:CartCount Parameters:paraDic success:^(id responseObject) {
-        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        BaseTableBarControllerView *tabbar = (BaseTableBarControllerView *)delegate.window.rootViewController;
-        [tabbar.tabBar showBadgeOnItemIndex:2 Withnum:25];
+        int data = [[responseObject safeObjectForKey:@"data"] intValue];
+        if (data > 0) {
+            AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            BaseTableBarControllerView *tabbar = (BaseTableBarControllerView *)delegate.window.rootViewController;
+            [tabbar.tabBar showBadgeOnItemIndex:2 Withnum:data];
+        }
     } requestRrror:^(id requestRrror) {
         
     }];
@@ -106,6 +110,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([FYUser userInfo].token.length > 0) {
     }
+    [self cartcount];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -115,10 +120,7 @@
     [self hotproduce];
     [self adlist];
     [self promotion];
-    [self cartcount];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpTocategoryController) name:@"pushcategory" object:nil];
-    
+        
     adjustsScrollViewInsets_NO(self.table, self);
     [self.table registerNib:[UINib nibWithNibName:@"HomeTableViewCell1" bundle:nil] forCellReuseIdentifier:@"HomeTableViewCell1"];
     [self.table registerNib:[UINib nibWithNibName:@"HomeTableViewCell2" bundle:nil] forCellReuseIdentifier:@"HomeTableViewCell2"];
@@ -134,12 +136,6 @@
 }
 -(void)homeScrollViewClickWith:(NSInteger)index{
     
-}
-- (void)jumpTocategoryController{
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"pushcategory" object:nil];
-//    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    CategoryViewController * category = [sb instantiateViewControllerWithIdentifier:@"CategoryViewController"];
-//    [self.navigationController pushViewController:category animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -241,5 +237,24 @@
     HomeTableViewCell2 * cell = [tableView dequeueReusableCellWithIdentifier:@"HomeTableViewCell2" forIndexPath:indexPath];
     cell.array = [produceModel subarrayWithRange:NSMakeRange(indexPath.row * 2, 2)];
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger count = indexPath.section;
+    if (self.promotionSourse.count > 0 && indexPath.section == 0) {
+        return;
+    }
+    if (self.promotionSourse.count > 0 && indexPath.section > 0) {
+        count = indexPath.section - 1;
+    }
+    HomeHotProduce * model = self.dataSourse[count];
+    NSArray * products = model.products;
+    NSArray * produceModel = [HomeModel mj_objectArrayWithKeyValuesArray:products];
+    if ([model.showType isEqualToString:@"1"]) {
+        UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        GoodsDetailViewController * detail = [sb instantiateViewControllerWithIdentifier:@"GoodsDetailViewController"];
+        HomeModel * model = produceModel[indexPath.row];
+        detail.GoodsID = model.ID;
+        [self.navigationController pushViewController:detail animated:YES];
+    }
 }
 @end

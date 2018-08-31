@@ -11,20 +11,18 @@
 
 @interface HZSubmitView : UIView{
     int itemStock;//库存
-    
-    NSString *guigeID;
-    NSString *guigeName;
-    NSString *yanseID;
-    NSString *yanseName;
-    int Cartcount;
+    int GoodsCount;
 }
 @property (weak, nonatomic) IBOutlet UIView *backView;
 - (IBAction)remove:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *MainImage;
 @property (weak, nonatomic) IBOutlet UILabel *MainLabel;
+@property (weak, nonatomic) IBOutlet UILabel *GuigeLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *GuigeLabelWidth;
+@property (weak, nonatomic) IBOutlet UILabel *unitPriceLabel;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *PriceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *Name1;
-@property (weak, nonatomic) IBOutlet UILabel *Name2;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *Bottom;
 @property (weak, nonatomic) IBOutlet UILabel *TishiLabel;
@@ -44,9 +42,9 @@
 @property (strong,nonatomic) NSDictionary * data;
 
 @property (strong,nonatomic) NSString * count;
-@property (strong,nonatomic) NSString * cartid;
-@property (strong,nonatomic) NSString * yanse;
-@property (strong,nonatomic) NSString * guige;
+@property (strong,nonatomic) NSString * GoodsID;
+@property (strong,nonatomic) NSString * firstID;
+@property (strong,nonatomic) NSString * secondID;
 
 -(void)createViewWith:(NSDictionary *)MyData;
 -(void)createBigviewWith:(NSDictionary *)data;

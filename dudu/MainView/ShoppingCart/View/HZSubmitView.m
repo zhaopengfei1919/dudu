@@ -16,8 +16,6 @@
  */
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-    yanseID = @"";
-    guigeID = @"";
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapview:)];
     [self.backView addGestureRecognizer:tap];
 }
@@ -29,321 +27,156 @@
     [self removeFromSuperview];
 }
 -(void)createViewWith:(NSDictionary *)MyData{
-    itemStock = [[MyData safeObjectForKey:@"itemStock"] intValue];
+    self.GoodsID = [MyData safeObjectForKey:@"id"];
+    self.data = MyData;
     
     self.PriceLabel.text = [NSString stringWithFormat:@"%@",[MyData safeObjectForKey:@"itemPrice"]];
-//    [self.MainImage setImageURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@@480w",[MyData safeObjectForKey:@"itemImage"]]] placeholder:[UIImage imageNamed:@"load_huancun"]];
-    [self.MainImage sd_setImageWithURL:[NSURL URLWithString:@""]];
-    self.MainLabel.text = @"";
+    [self.MainImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[MyData safeObjectForKey:@"image"]]]];
+
+    self.MainLabel.text = [MyData safeObjectForKey:@"name"];
     
     self.Jia.userInteractionEnabled = YES;
     self.Jian.userInteractionEnabled = YES;
-    self.MainImage.layer.cornerRadius = 2;
+    [self.Jian addTarget:self action:@selector(jian:) forControlEvents:UIControlEventTouchUpInside];
+    [self.Jia addTarget:self action:@selector(jia:) forControlEvents:UIControlEventTouchUpInside];
+    
+    float unitPrice = [[MyData safeObjectForKey:@"unitPrice"] floatValue];
+    self.unitPriceLabel.text = [NSString stringWithFormat:@"￥%.1f/%@",unitPrice,[MyData safeObjectForKey:@"unit"]];
+    
+    float price = [[MyData safeObjectForKey:@"price"] floatValue];
+    NSString * str = [NSString stringWithFormat:@"总价￥%.1f",price];
+    NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
+    [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 3)];
+    [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string.length - 3)];
+    self.PriceLabel.attributedText = string;
+    
+    NSString * packaging = [MyData safeObjectForKey:@"packaging"];
+    if (packaging.length > 0) {
+        self.GuigeLabel.text = packaging;
+        self.GuigeLabel.hidden = NO;
+        self.GuigeLabel.layer.cornerRadius = 3;
+        self.GuigeLabel.layer.borderWidth = 0.5;
+        self.GuigeLabel.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
+        CGSize size = [[FYUser userInfo] sizeForString:packaging withFontSize:10 withWidth:200];
+        self.GuigeLabelWidth.constant = size.width + 8;
+    }else
+        self.GuigeLabel.hidden = YES;
 }
 -(void)createBigviewWith:(NSDictionary *)data{
-    [self.SureBtn addTarget:self action:@selector(addCart) forControlEvents:UIControlEventTouchUpInside];
-    [self.Jia addTarget:self action:@selector(jia:) forControlEvents:UIControlEventTouchUpInside];
-    [self.Jian addTarget:self action:@selector(jian:) forControlEvents:UIControlEventTouchUpInside];
-    if (self.yanse.length > 0) {
-        yanseID = self.yanse;
-        self.yanse = @"";
-    }
-    if (self.guige.length > 0) {
-        guigeID = self.guige;
-        self.guige = @"";
-    }
-    if (self.count.length > 0) {
-        Cartcount = [self.count intValue];
-        self.count = @"";
-    }
-    
-    self.data = data;
-//    self.Name1.text = [data safeObjectForKey:@"itemStandardFirstName"];
-//    self.Name2.text = [data safeObjectForKey:@"itemStandardSecondName"];
-    
-    itemStock = [[data safeObjectForKey:@"itemStock"] intValue];
-    
-    NSArray *itemFirstStandard = [data safeObjectForKey:@"itemFirstStandard"];
-    NSArray *itemSecondStandard = [data safeObjectForKey:@"itemSecondStandard"];
-    
-    NSInteger height = 60;
-    //颜色
+    NSArray * specifications = [data safeObjectForKey:@"specifications"];
+    float height = 0;
     for (UIView *vi in self.ColorView.subviews) {
-        if ([vi isKindOfClass:[DDButton class]]) {
+        if ([vi isKindOfClass:[DDButton class]] || [vi isKindOfClass:[UILabel class]]) {
             [vi removeFromSuperview];
         }
     }
-    if (itemFirstStandard.count == 0) {
-        self.ColorView.hidden = YES;
-    }else{
-        float width = 40;
-        float buttonwidth = 19;
-        int x = 0;
-        for (int i=0; i<itemFirstStandard.count; i++) {
-            NSDictionary *dic1 = [itemFirstStandard objectAtIndex:i];
-            NSString * itemName = [dic1 safeObjectForKey:@"itemName"];
-            NSString * itemRemark = [dic1 safeObjectForKey:@"itemRemark"];
-            NSString * btntitle = @"";
-            if (itemRemark.length > 0) {
-                btntitle = [NSString stringWithFormat:@"%@",itemRemark];
-            }else
-                btntitle = [NSString stringWithFormat:@"%@",itemName];
+    float buttonwidth = (SCREEN_WIDTH - 60)/3;
+    for (int i =0; i < specifications.count; i++) {
+        NSDictionary * dic = specifications[i];
+        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(16, 15 + height, 200, 15)];
+        label.text = [dic safeObjectForKey:@"name"];
+        label.textColor = UIColorFromRGB(0x333333);
+        label.font = [UIFont systemFontOfSize:15];
+        [self.ColorView addSubview:label];
+        NSArray * specificationValues = [dic safeObjectForKey:@"specificationValues"];
+        for (int j = 0; j < specificationValues.count; j++) {
+            int x = j%3;
+            int y = j/3;
+            NSDictionary *dic1 = [specificationValues objectAtIndex:j];
             
-            CGSize size = [[FYUser userInfo] sizeForString:btntitle withFontSize:11 withWidth:280];
-            width = width + size.width + 20;
-            if (buttonwidth + size.width > SCREEN_WIDTH - 20) {
-                width = 40;
-                buttonwidth = 19;
-                x++;
-            }
-            //NSLog(@"%f,%f,%f",width,size.width,buttonwidth);
             DDButton * button = [DDButton buttonWithType:UIButtonTypeCustom];
             button.dic = dic1;
+            button.tag = i;
+            NSLog(@"%ld",(long)button.tag);
             button.layer.borderWidth = 0.5;
             button.layer.cornerRadius = 2;
-            button.frame = CGRectMake(buttonwidth, x * 29 +42, size.width + 24, 24);
-            buttonwidth = buttonwidth + size.width + 34;
-            [button setTitle:btntitle forState:0];
-            button.titleLabel.font = [UIFont systemFontOfSize:13];
-            [button setTitleColor:UIColorFromRGB(0xcdcdcd) forState:0];
+            button.frame = CGRectMake(10 + (buttonwidth + 20) * x, y * 42 +42 + height, buttonwidth, 34);
+            [button setTitle:[dic1 safeObjectForKey:@"name"] forState:0];
+            button.titleLabel.font = [UIFont systemFontOfSize:15];
+            [button setTitleColor:UIColorFromRGB(0xcccccc) forState:0];
             [self.ColorView addSubview:button];
             
-            NSString *itemStock1 = [dic1 safeObjectForKey:@"itemStock"];
-            if ([itemStock1 intValue] == 0) {
-                [button setBackgroundColor:UIColorFromRGB(0xf3f5f7)];
-                button.layer.borderColor = UIColorFromRGB(0xcdcdcd).CGColor;
-                button.userInteractionEnabled = NO;
-                [button setTitleColor:[UIColor lightGrayColor] forState:0];
+            NSString * strID = [NSString stringWithFormat:@"%@",[dic1 safeObjectForKey:@"id"]];
+            if ([self.firstID isEqualToString:strID] || [self.secondID isEqualToString:strID]) {
+                button.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
+                [button setTitleColor:UIColorFromRGB(0x20d994) forState:0];
+                
             }else{
-                if ([yanseID isEqualToString:[dic1 safeObjectForKey:@"itemId"]]) {
-                    [button setBackgroundColor:UIColorFromRGB(0xd2af78)];
-                    button.layer.borderColor = UIColorFromRGB(0xd2af78).CGColor;
-                    [button setTitleColor:[UIColor whiteColor] forState:0];
-                    
-                }else{
-                    [button setBackgroundColor:UIColorFromRGB(0xffffff)];
-                    button.layer.borderColor = UIColorFromRGB(0xcdcdcd).CGColor;
-                    [button setTitleColor:UIColorFromRGB(0x3d3d3d) forState:0];
-                }
-                button.userInteractionEnabled = YES;
+                button.layer.borderColor = UIColorFromRGB(0xcccccc).CGColor;
+                [button setTitleColor:UIColorFromRGB(0x333333) forState:0];
             }
-            button.tag = i + 1;
-            [button addTarget:self action:@selector(ColorChoose:) forControlEvents:UIControlEventTouchUpInside];
+            button.userInteractionEnabled = YES;
+            [button addTarget:self action:@selector(chosenguige:) forControlEvents:UIControlEventTouchUpInside];
+            [self.ColorView addSubview:button];
         }
-        self.ColorHeight.constant = (x + 1) * 33 + 33;
-        height += (x + 1) * 33 + 33;
-    }
-    
-    //    //尺寸
-    for (UIView *vi in self.SizeView.subviews) {
-        if ([vi isKindOfClass:[DDButton class]]) {
-            [vi removeFromSuperview];
+        int x = (int)specificationValues.count%3;
+        int y = (int)specificationValues.count/3;
+        if (x > 0) {
+            y ++ ;
         }
+        height += 44 * (y + 1);
     }
-    if (itemSecondStandard.count == 0) {
-        self.SizeView.hidden = YES;
-    }else{
-        float width = 40;
-        float buttonwidth = 19;
-        int x = 0;
-        for (int i=0; i<itemSecondStandard.count; i++) {
-            NSDictionary *dic1 = [itemSecondStandard objectAtIndex:i];
-            NSString * itemName = [dic1 safeObjectForKey:@"itemName"];
-            NSString * itemRemark = [dic1 safeObjectForKey:@"itemRemark"];
-            NSString * btntitle = @"";
-            if (itemRemark.length > 0) {
-                btntitle = [NSString stringWithFormat:@"%@",itemRemark];
-            }else
-                btntitle = [NSString stringWithFormat:@"%@",itemName];
-            
-            CGSize size = [[FYUser userInfo] sizeForString:btntitle withFontSize:11 withWidth:280];
-            width = width + size.width + 20;
-            if (buttonwidth + size.width > SCREEN_WIDTH - 20) {
-                width = 40;
-                buttonwidth = 19;
-                x++;
-            }
-            //NSLog(@"%f,%f,%f",width,size.width,buttonwidth);
-            DDButton * button = [DDButton buttonWithType:UIButtonTypeCustom];
-            button.dic = dic1;
-            button.layer.borderWidth = 0.5;
-            button.layer.cornerRadius = 2;
-            button.frame = CGRectMake(buttonwidth, x * 29 +42, size.width + 24, 24);
-            buttonwidth = buttonwidth + size.width + 34;
-            [button setTitle:btntitle forState:0];
-            button.titleLabel.font = [UIFont systemFontOfSize:13];
-            [button setTitleColor:UIColorFromRGB(0xcdcdcd) forState:0];
-            [self.SizeView addSubview:button];
-            
-            NSString *itemStock1 = [dic1 safeObjectForKey:@"itemStock"];
-            if ([itemStock1 intValue] == 0) {
-                [button setBackgroundColor:UIColorFromRGB(0xf3f5f7)];
-                button.layer.borderColor = UIColorFromRGB(0xcdcdcd).CGColor;
-                button.userInteractionEnabled = NO;
-                [button setTitleColor:[UIColor lightGrayColor] forState:0];
-            }else{
-                if ([guigeID isEqualToString:[dic1 safeObjectForKey:@"itemId"]]) {
-                    [button setBackgroundColor:UIColorFromRGB(0xd2af78)];
-                    button.layer.borderColor = UIColorFromRGB(0xd2af78).CGColor;
-                    [button setTitleColor:[UIColor whiteColor] forState:0];
-                }else{
-                    [button setBackgroundColor:UIColorFromRGB(0xffffff)];
-                    button.layer.borderColor = UIColorFromRGB(0xcdcdcd).CGColor;
-                    [button setTitleColor:UIColorFromRGB(0x3d3d3d) forState:0];
-                }
-                button.userInteractionEnabled = YES;
-            }
-            button.tag = i + 1;
-            [button addTarget:self action:@selector(SizeChoose:) forControlEvents:UIControlEventTouchUpInside];
-        }
-        self.SizeHeight.constant = (x + 1) * 33 + 33;
-        height += (x + 1) * 33 + 33;
-    }
-    self.Jian.userInteractionEnabled = NO;
-    if (height < 210) {
-        height = 210;
-    }
-    self.MainViewHeight.constant = height;
-    self.CountLabel.text = [NSString stringWithFormat:@"%d",Cartcount];
-    if (itemStock == 0) {
-        self.CountLabel.text = [NSString stringWithFormat:@"0"];
-        [self.Jia setBackgroundImage:[UIImage imageNamed:@"gwc_s_add_gray"] forState:0];
-        [self.Jian setBackgroundImage:[UIImage imageNamed:@"gwc_s_add_gray"] forState:0];
-        self.Jia.userInteractionEnabled = NO;
-        self.Jian.userInteractionEnabled = NO;
-        self.SureBtn.backgroundColor = UIColorFromRGB(0xcdcdcd);
-        self.TishiLabel.hidden = NO;
-        self.Bottom.constant = 30;
-    }else{
-        if (Cartcount > 1) {
-            [self.Jian setBackgroundImage:[UIImage imageNamed:@"gwc_s_minus_black"] forState:0];
-            self.Jian.userInteractionEnabled = YES;
-        }
-        self.SureBtn.backgroundColor = UIColorFromRGB(0xd2af78);
-        self.TishiLabel.hidden = YES;
-        self.Bottom.constant = 0;
-    }
+    self.ColorHeight.constant = height > 140 ? height : 140;
+    self.MainViewHeight.constant = self.ColorHeight.constant + 100;
 }
-- (void)ColorChoose:(id)sender
-{
-    Cartcount = 1;
-    self.Jian.userInteractionEnabled = NO;
-    [self.Jian setBackgroundImage:[UIImage imageNamed:@"gwc_s_minus_gray"] forState:0];
-    self.CountLabel.text = [NSString stringWithFormat:@"%d",Cartcount];
+-(void)chosenguige:(DDButton *)btn{
+    if (btn.tag == 0) {
+        self.firstID = [NSString stringWithFormat:@"%@",[btn.dic safeObjectForKey:@"id"]];
+    }else
+        self.secondID = [NSString stringWithFormat:@"%@",[btn.dic safeObjectForKey:@"id"]];
     
-    DDButton *btn = (DDButton *)sender;
-    NSDictionary *dic = btn.dic;
-    
-    if ([yanseID isEqualToString:@""]) {
-        yanseID = [dic safeObjectForKey:@"itemId"];
-        yanseName = [dic safeObjectForKey:@"itemName"];
-    }else{
-        if ([yanseID isEqualToString:[dic safeObjectForKey:@"itemId"]]) {
-            yanseID = @"";
-            yanseName = @"";
-        }else{
-            yanseID = [dic safeObjectForKey:@"itemId"];
-            yanseName = [dic safeObjectForKey:@"itemName"];
-        }
+    WS(weakself);
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    [paraDic setObject:self.GoodsID forKey:@"productId"];
+    NSMutableArray * array = [[NSMutableArray alloc]init];
+    if (self.firstID.length > 0) {
+        NSArray * specifications = [self.data safeObjectForKey:@"specifications"];
+        NSDictionary * dic = specifications[0];
+        NSString * ID = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"id"]];
+        NSString * str = [NSString stringWithFormat:@"%@:%@",ID,self.firstID];
+        [array addObject:str];
     }
-    NSMutableDictionary * oderm = [[NSMutableDictionary alloc]init];
-    [oderm setObject:[self.data safeObjectForKey:@"itemId"] forKey:@"commodityId"];
-    [oderm setObject:yanseID forKey:@"firstId"];
-    [oderm setObject:guigeID forKey:@"secondId"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"commodityStandard" object:oderm userInfo:nil];
-}
-- (void)SizeChoose:(id)sender
-{
-    Cartcount = 1;
-    self.Jian.userInteractionEnabled = NO;
-    [self.Jian setBackgroundImage:[UIImage imageNamed:@"gwc_s_minus_gray"] forState:0];
-    self.CountLabel.text = [NSString stringWithFormat:@"%d",Cartcount];
+    if (self.secondID.length > 0) {
+        NSArray * specifications = [self.data safeObjectForKey:@"specifications"];
+        NSDictionary * dic = specifications[1];
+        NSString * ID = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"id"]];
+        NSString * str = [NSString stringWithFormat:@"%@:%@",ID,self.secondID];
+        [array addObject:str];
+    }
+    NSString * str = [array componentsJoinedByString:@","];
+    [paraDic setObject:str forKey:@"specParam"];
     
-    DDButton *btn = (DDButton *)sender;
-    NSDictionary *dic = btn.dic;
-    
-    if ([guigeID isEqualToString:@""]) {
-        guigeID = [dic safeObjectForKey:@"itemId"];
-        guigeName = [dic safeObjectForKey:@"itemName"];
+    [NetWorkManager requestWithMethod:POST Url:GetProductDetail Parameters:paraDic success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code isEqualToString:@"0"]) {
+            [weakself createBigviewWith:[responseObject safeObjectForKey:@"data"]];
+            [weakself createViewWith:[responseObject safeObjectForKey:@"data"]];
+        }else
+            [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
+    } requestRrror:^(id requestRrror) {
         
-    }else{
-        if ([guigeID isEqualToString:[dic objectForKey:@"itemId"]]) {
-            guigeID = @"";
-            guigeName = @"";
-        }else{
-            guigeID = [dic safeObjectForKey:@"itemId"];
-            guigeName = [dic safeObjectForKey:@"itemName"];
-        }
-    }
-    NSMutableDictionary * oderm = [[NSMutableDictionary alloc]init];
-    [oderm setObject:[self.data safeObjectForKey:@"itemId"] forKey:@"commodityId"];
-    [oderm setObject:yanseID forKey:@"firstId"];
-    [oderm setObject:guigeID forKey:@"secondId"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"commodityStandard" object:oderm userInfo:nil];
+    }];
 }
--(void)jia:(UIButton *)btn{
-    if (itemStock == 0) {
-        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"库存总数:%d",itemStock]];
+-(void)jia:(DDButton *)btn{
+    int stock =  [[self.data safeObjectForKey:@"stock"] intValue];
+    if (GoodsCount >= stock) {
+        [SVProgressHUD showErrorWithStatus:@"已到最大数量"];
         return;
     }
-    Cartcount ++;
-    if (Cartcount > itemStock) {
-        Cartcount = itemStock;
-        self.Jia.userInteractionEnabled = NO;
-        [self.Jia setBackgroundImage:[UIImage imageNamed:@"gwc_s_add_gray"] forState:0];
-    }
-    self.CountLabel.text = [NSString stringWithFormat:@"%d",Cartcount];
-    [self.Jian setBackgroundImage:[UIImage imageNamed:@"gwc_s_minus_black"] forState:0];
-    self.Jian.userInteractionEnabled = YES;
+    GoodsCount += 1;
+    self.CountLabel.text = [NSString stringWithFormat:@"%d",GoodsCount];
 }
--(void)jian:(UIButton *)btn{
-    if (itemStock == 0) {
-        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"库存总数:%d",itemStock]];
+-(void)jian:(DDButton *)btn{
+    if (GoodsCount <2) {
+        [SVProgressHUD showErrorWithStatus:@"已到最小数量"];
         return;
     }
-    
-    Cartcount --;
-    
-    if (Cartcount < 1) {
-        Cartcount = 1;
-        self.Jian.userInteractionEnabled = NO;
-        [self.Jian setBackgroundImage:[UIImage imageNamed:@"gwc_s_minus_gray"] forState:0];
-    }
-    self.CountLabel.text = [NSString stringWithFormat:@"%d",Cartcount];
-    [self.Jia setBackgroundImage:[UIImage imageNamed:@"gwc_s_add_black"] forState:0];
-    self.Jia.userInteractionEnabled = YES;
+    GoodsCount -= 1;
+    self.CountLabel.text = [NSString stringWithFormat:@"%d",GoodsCount];
 }
 
 -(void)addCart{
-    NSArray *itemFirstStandard = [self.data safeObjectForKey:@"itemFirstStandard"];
-    NSArray *itemSecondStandard = [self.data safeObjectForKey:@"itemSecondStandard"];
-    
-    if ([yanseID isEqualToString:@""] && itemFirstStandard.count != 0) {
-        [SVProgressHUD showErrorWithStatus:@"请选择商品颜色"];
-        return;
-    }
-    if ([guigeID isEqualToString:@""] && itemSecondStandard.count != 0) {
-        [SVProgressHUD showErrorWithStatus:@"请选择商品颜色"];
-        return;
-    }
-    
-    if (itemStock == 0) {
-        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"库存总数:%d",itemStock]];
-        return;
-    }
-    
-    if (Cartcount > itemStock){
-        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"库存总数:%d",itemStock]];
-        return;
-    }
-    NSMutableDictionary * oderParams = [[NSMutableDictionary alloc] init];
-    [oderParams setObject:self.cartid forKey:@"cartId"];
-    [oderParams setObject:[FYUser userInfo].userId forKey:@"userId"];
-    [oderParams setObject:[self.data safeObjectForKey:@"itemId"] forKey:@"commodityId"];
-    [oderParams setObject:yanseID forKey:@"firstId"];
-    [oderParams setObject:guigeID forKey:@"secondId"];
-    [oderParams setObject:[NSString stringWithFormat:@"%d",Cartcount] forKey:@"stock"];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"carteditNew" object:oderParams userInfo:nil];
+
 }
 @end

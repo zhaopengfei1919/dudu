@@ -9,5 +9,21 @@
 #import <UIKit/UIKit.h>
 
 @interface ShopCartViewController : UIViewController
+@property (strong,nonatomic) NSMutableArray * dataSourse;
+@property (strong,nonatomic) NSMutableArray * selectSourse;
+@property (weak, nonatomic) IBOutlet UITableView *table;
+
+@property (weak, nonatomic) IBOutlet UIView *tishi;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tishiHeight;
+@property (weak, nonatomic) IBOutlet UILabel *tishiLabel;
+
+- (IBAction)allchosen:(id)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *allchosenImage;
+
+@property (weak, nonatomic) IBOutlet UILabel *PriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *yaJinLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *sureBtn;
+- (IBAction)sure:(id)sender;
 
 @end

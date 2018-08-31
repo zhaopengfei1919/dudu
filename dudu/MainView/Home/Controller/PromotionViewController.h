@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HZSubmitView.h"
 
 @interface PromotionViewController : UIViewController{
     UIView * tishiView;
+    
+    HZSubmitView * submitView;
 }
 
 

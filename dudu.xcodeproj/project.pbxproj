@@ -16,6 +16,15 @@
 		18177597212D6B7700474BC1 /* HZSubmitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18177594212D6B7600474BC1 /* HZSubmitView.m */; };
 		18177598212D6B7700474BC1 /* HZSubmitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18177595212D6B7600474BC1 /* HZSubmitView.xib */; };
 		1817759B212E4EAC00474BC1 /* AddOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1817759A212E4EAC00474BC1 /* AddOrderViewController.m */; };
+		1817759E2133A26000474BC1 /* CouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1817759D2133A26000474BC1 /* CouponViewController.m */; };
+		181775A12133C42200474BC1 /* CouponModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181775A02133C42200474BC1 /* CouponModel.m */; };
+		181775A52133E0C800474BC1 /* AddressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181775A42133E0C800474BC1 /* AddressListViewController.m */; };
+		181775AB2134E76500474BC1 /* GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181775AA2134E76500474BC1 /* GoodsDetailViewController.m */; };
+		181775AE2134ECFC00474BC1 /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181775AD2134ECFC00474BC1 /* GoodsModel.m */; };
+		181775B121352A4400474BC1 /* HZCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181775B021352A4400474BC1 /* HZCityViewController.m */; };
+		181775B421352D1700474BC1 /* addressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181775B321352D1700474BC1 /* addressModel.m */; };
+		181775B82135315A00474BC1 /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181775B62135315A00474BC1 /* AddressTableViewCell.m */; };
+		181775B92135315A00474BC1 /* AddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181775B72135315A00474BC1 /* AddressTableViewCell.xib */; };
 		1825B22521241EE000B0A4DE /* NetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B22421241EE000B0A4DE /* NetWorkManager.m */; };
 		1825B22B2124208500B0A4DE /* FYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B2282124208400B0A4DE /* FYUser.m */; };
 		1825B22E2125254200B0A4DE /* ShopCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1825B22D2125254200B0A4DE /* ShopCartViewController.m */; };
@@ -180,6 +189,8 @@
 		18464B74211A9E9500D0BD11 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464AFA211A9E9400D0BD11 /* MJFoundation.m */; };
 		18464B75211A9E9500D0BD11 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 18464AFB211A9E9400D0BD11 /* LICENSE */; };
 		18464B76211A9E9500D0BD11 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 18464AFC211A9E9400D0BD11 /* README.md */; };
+		188A495E21353E4200CF1FB3 /* AddressEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A495C21353E4100CF1FB3 /* AddressEditViewController.m */; };
+		188A4961213544CC00CF1FB3 /* BoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A4960213544CC00CF1FB3 /* BoxViewController.m */; };
 		18DE7CF1211AE3D9002E5CD0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 184649D421199EB500D0BD11 /* Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -216,6 +227,23 @@
 		18177596212D6B7600474BC1 /* HZSubmitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZSubmitView.h; sourceTree = "<group>"; };
 		18177599212E4EAC00474BC1 /* AddOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddOrderViewController.h; sourceTree = "<group>"; };
 		1817759A212E4EAC00474BC1 /* AddOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddOrderViewController.m; sourceTree = "<group>"; };
+		1817759C2133A26000474BC1 /* CouponViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CouponViewController.h; sourceTree = "<group>"; };
+		1817759D2133A26000474BC1 /* CouponViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CouponViewController.m; sourceTree = "<group>"; };
+		1817759F2133C42200474BC1 /* CouponModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CouponModel.h; sourceTree = "<group>"; };
+		181775A02133C42200474BC1 /* CouponModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CouponModel.m; sourceTree = "<group>"; };
+		181775A32133E0C800474BC1 /* AddressListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressListViewController.h; sourceTree = "<group>"; };
+		181775A42133E0C800474BC1 /* AddressListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressListViewController.m; sourceTree = "<group>"; };
+		181775A92134E76500474BC1 /* GoodsDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoodsDetailViewController.h; sourceTree = "<group>"; };
+		181775AA2134E76500474BC1 /* GoodsDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailViewController.m; sourceTree = "<group>"; };
+		181775AC2134ECFC00474BC1 /* GoodsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoodsModel.h; sourceTree = "<group>"; };
+		181775AD2134ECFC00474BC1 /* GoodsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodsModel.m; sourceTree = "<group>"; };
+		181775AF21352A4300474BC1 /* HZCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZCityViewController.h; sourceTree = "<group>"; };
+		181775B021352A4400474BC1 /* HZCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZCityViewController.m; sourceTree = "<group>"; };
+		181775B221352D1700474BC1 /* addressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = addressModel.h; sourceTree = "<group>"; };
+		181775B321352D1700474BC1 /* addressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = addressModel.m; sourceTree = "<group>"; };
+		181775B52135315A00474BC1 /* AddressTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressTableViewCell.h; sourceTree = "<group>"; };
+		181775B62135315A00474BC1 /* AddressTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressTableViewCell.m; sourceTree = "<group>"; };
+		181775B72135315A00474BC1 /* AddressTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressTableViewCell.xib; sourceTree = "<group>"; };
 		1825B22321241EE000B0A4DE /* NetWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkManager.h; sourceTree = "<group>"; };
 		1825B22421241EE000B0A4DE /* NetWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkManager.m; sourceTree = "<group>"; };
 		1825B22621241F7E00B0A4DE /* duduPch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = duduPch.pch; sourceTree = "<group>"; };
@@ -529,6 +557,10 @@
 		18464AFA211A9E9400D0BD11 /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
 		18464AFB211A9E9400D0BD11 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		18464AFC211A9E9400D0BD11 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		188A495C21353E4100CF1FB3 /* AddressEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressEditViewController.m; sourceTree = "<group>"; };
+		188A495D21353E4100CF1FB3 /* AddressEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressEditViewController.h; sourceTree = "<group>"; };
+		188A495F213544CC00CF1FB3 /* BoxViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoxViewController.h; sourceTree = "<group>"; };
+		188A4960213544CC00CF1FB3 /* BoxViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoxViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -556,6 +588,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		181775A22133E0AF00474BC1 /* 地址 */ = {
+			isa = PBXGroup;
+			children = (
+				181775A32133E0C800474BC1 /* AddressListViewController.h */,
+				181775A42133E0C800474BC1 /* AddressListViewController.m */,
+				188A495D21353E4100CF1FB3 /* AddressEditViewController.h */,
+				188A495C21353E4100CF1FB3 /* AddressEditViewController.m */,
+				181775AF21352A4300474BC1 /* HZCityViewController.h */,
+				181775B021352A4400474BC1 /* HZCityViewController.m */,
+			);
+			path = "地址";
+			sourceTree = "<group>";
+		};
 		1825B22F21257E9900B0A4DE /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -647,8 +692,8 @@
 				184649CC21199EB400D0BD11 /* Main.storyboard */,
 				184649CF21199EB500D0BD11 /* Assets.xcassets */,
 				184649D121199EB500D0BD11 /* LaunchScreen.storyboard */,
-				184649D421199EB500D0BD11 /* Info.plist */,
 				1825B22621241F7E00B0A4DE /* duduPch.pch */,
+				184649D421199EB500D0BD11 /* Info.plist */,
 				184649D521199EB500D0BD11 /* main.m */,
 			);
 			path = dudu;
@@ -737,6 +782,8 @@
 				1825B2662126D91A00B0A4DE /* CategoryViewController.m */,
 				18177591212D573B00474BC1 /* PromotionViewController.h */,
 				18177592212D573C00474BC1 /* PromotionViewController.m */,
+				181775A92134E76500474BC1 /* GoodsDetailViewController.h */,
+				181775AA2134E76500474BC1 /* GoodsDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -756,6 +803,8 @@
 				1825B297212BDB1E00B0A4DE /* CategoryListModel.m */,
 				1825B290212BBE5800B0A4DE /* DDButton.h */,
 				1825B291212BBE5800B0A4DE /* DDButton.m */,
+				181775AC2134ECFC00474BC1 /* GoodsModel.h */,
+				181775AD2134ECFC00474BC1 /* GoodsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -859,6 +908,11 @@
 				1825B2372125872C00B0A4DE /* CenterViewController.m */,
 				1825B268212A652100B0A4DE /* SalesManViewController.h */,
 				1825B269212A652100B0A4DE /* SalesManViewController.m */,
+				1817759C2133A26000474BC1 /* CouponViewController.h */,
+				1817759D2133A26000474BC1 /* CouponViewController.m */,
+				188A495F213544CC00CF1FB3 /* BoxViewController.h */,
+				188A4960213544CC00CF1FB3 /* BoxViewController.m */,
+				181775A22133E0AF00474BC1 /* 地址 */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -868,6 +922,10 @@
 			children = (
 				1825B24D2126CAE200B0A4DE /* UserModel.h */,
 				1825B24E2126CAE200B0A4DE /* UserModel.m */,
+				1817759F2133C42200474BC1 /* CouponModel.h */,
+				181775A02133C42200474BC1 /* CouponModel.m */,
+				181775B221352D1700474BC1 /* addressModel.h */,
+				181775B321352D1700474BC1 /* addressModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -887,6 +945,9 @@
 				1825B2482126AA0200B0A4DE /* CouponTableViewCell.h */,
 				1825B2492126AA0200B0A4DE /* CouponTableViewCell.m */,
 				1825B24A2126AA0200B0A4DE /* CouponTableViewCell.xib */,
+				181775B52135315A00474BC1 /* AddressTableViewCell.h */,
+				181775B62135315A00474BC1 /* AddressTableViewCell.m */,
+				181775B72135315A00474BC1 /* AddressTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1433,6 +1494,7 @@
 				18464B75211A9E9500D0BD11 /* LICENSE in Resources */,
 				18464B11211A9E9500D0BD11 /* LICENSE in Resources */,
 				18DE7CF1211AE3D9002E5CD0 /* Info.plist in Resources */,
+				181775B92135315A00474BC1 /* AddressTableViewCell.xib in Resources */,
 				1825B23D21269E1500B0A4DE /* TuiKuangTableViewCell.xib in Resources */,
 				18177588212D11E100474BC1 /* ChosenTimeAndStyle.xib in Resources */,
 				18464B3C211A9E9500D0BD11 /* LICENSE in Resources */,
@@ -1521,6 +1583,7 @@
 				18464B65211A9E9500D0BD11 /* UIView+SDExtension.m in Sources */,
 				1825B298212BDB1E00B0A4DE /* CategoryListModel.m in Sources */,
 				1825B28E212BBA3400B0A4DE /* HomeTableViewCell2.m in Sources */,
+				181775A12133C42200474BC1 /* CouponModel.m in Sources */,
 				18464B55211A9E9500D0BD11 /* MJRefreshBackNormalFooter.m in Sources */,
 				18464B15211A9E9500D0BD11 /* SDWebImageFrame.m in Sources */,
 				18464B49211A9E9500D0BD11 /* Filter.m in Sources */,
@@ -1530,8 +1593,10 @@
 				18464B3F211A9E9500D0BD11 /* MASCompositeConstraint.m in Sources */,
 				18464B1D211A9E9500D0BD11 /* SDWebImagePrefetcher.m in Sources */,
 				18464B54211A9E9500D0BD11 /* MJRefreshBackStateFooter.m in Sources */,
+				1817759E2133A26000474BC1 /* CouponViewController.m in Sources */,
 				18464B31211A9E9500D0BD11 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				18464B48211A9E9500D0BD11 /* NSDictionary+VASafeObjectForKey.m in Sources */,
+				181775AE2134ECFC00474BC1 /* GoodsModel.m in Sources */,
 				1825B2AB212D02EB00B0A4DE /* OrderFooterView.m in Sources */,
 				18464B0F211A9E9500D0BD11 /* SVProgressHUD.m in Sources */,
 				18464B19211A9E9500D0BD11 /* UIImage+GIF.m in Sources */,
@@ -1571,14 +1636,18 @@
 				1825B2A8212CF8A200B0A4DE /* UITabBar+badge.m in Sources */,
 				18464B0D211A9E9400D0BD11 /* UIView+Toast.m in Sources */,
 				18464B41211A9E9500D0BD11 /* MASLayoutConstraint.m in Sources */,
+				181775B421352D1700474BC1 /* addressModel.m in Sources */,
+				188A495E21353E4200CF1FB3 /* AddressEditViewController.m in Sources */,
 				18464B21211A9E9500D0BD11 /* NSData+ImageContentType.m in Sources */,
 				18464B27211A9E9500D0BD11 /* UIView+WebCache.m in Sources */,
 				1825B27A212A688B00B0A4DE /* ScanViewController.m in Sources */,
 				1825B27F212A8CB000B0A4DE /* CategoryTableViewCell.m in Sources */,
 				1825B292212BBE5800B0A4DE /* DDButton.m in Sources */,
 				18464B2E211A9E9500D0BD11 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				181775A52133E0C800474BC1 /* AddressListViewController.m in Sources */,
 				18464B17211A9E9500D0BD11 /* SDWebImageCodersManager.m in Sources */,
 				18177593212D573C00474BC1 /* PromotionViewController.m in Sources */,
+				181775AB2134E76500474BC1 /* GoodsDetailViewController.m in Sources */,
 				18464B45211A9E9500D0BD11 /* MASViewConstraint.m in Sources */,
 				18464B53211A9E9500D0BD11 /* MJRefreshBackGifFooter.m in Sources */,
 				1825B2412126A0FD00B0A4DE /* TuiKuanTableViewCell.m in Sources */,
@@ -1592,6 +1661,7 @@
 				184649C821199EB400D0BD11 /* AppDelegate.m in Sources */,
 				18464B70211A9E9500D0BD11 /* NSObject+MJProperty.m in Sources */,
 				18464B73211A9E9500D0BD11 /* MJPropertyKey.m in Sources */,
+				181775B121352A4400474BC1 /* HZCityViewController.m in Sources */,
 				18464B40211A9E9500D0BD11 /* MASConstraintMaker.m in Sources */,
 				18464B39211A9E9500D0BD11 /* AFNetworkReachabilityManager.m in Sources */,
 				18464B5E211A9E9500D0BD11 /* MJRefreshBackFooter.m in Sources */,
@@ -1608,9 +1678,11 @@
 				18464B14211A9E9500D0BD11 /* UIImageView+HighlightedWebCache.m in Sources */,
 				1825B2562126CC5200B0A4DE /* ShopCartTableViewCell.m in Sources */,
 				18464B35211A9E9500D0BD11 /* AFURLResponseSerialization.m in Sources */,
+				181775B82135315A00474BC1 /* AddressTableViewCell.m in Sources */,
 				18464B4E211A9E9500D0BD11 /* MJRefreshConst.m in Sources */,
 				18464B3B211A9E9500D0BD11 /* GCPlaceholderTextView.m in Sources */,
 				18464B18211A9E9500D0BD11 /* SDWebImageDownloader.m in Sources */,
+				188A4961213544CC00CF1FB3 /* BoxViewController.m in Sources */,
 				1825B2B0212D076E00B0A4DE /* OrderHeaderView.m in Sources */,
 				18464A0F211A9B2100D0BD11 /* HomeViewController.m in Sources */,
 			);
@@ -1791,7 +1863,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dudu.zpf;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dudu.fresh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1811,7 +1883,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dudu.zpf;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dudu.fresh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

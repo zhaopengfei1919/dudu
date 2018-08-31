@@ -26,12 +26,12 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvh-dY-glo">
                             <rect key="frame" x="0.0" y="250" width="375" height="50"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="筐（可退）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABc-Bz-h2B">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="筐(可退)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABc-Bz-h2B">
                                     <rect key="frame" x="16" y="15" width="179" height="20"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLH-eB-HCB">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLH-eB-HCB">
                                     <rect key="frame" x="205" y="17.5" width="50" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="15" id="4XR-Ab-j5k"/>
@@ -41,7 +41,7 @@
                                     <color key="textColor" red="0.12549019610000001" green="0.85098039219999999" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCe-Sx-jaY">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCe-Sx-jaY">
                                     <rect key="frame" x="290" y="17" width="70" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="16" id="90W-sk-nGQ"/>
@@ -124,7 +124,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="ERM-fa-E6S" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Bys-co-zEj"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="4hW-Ji-4vC" secondAttribute="trailing" id="EQa-pA-UKJ"/>
@@ -137,6 +137,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="Count" destination="DLH-eB-HCB" id="54i-dA-U3G"/>
+                <outlet property="MainViewHeight" destination="x74-T8-bHt" id="zOK-N8-EOI"/>
                 <outlet property="Price" destination="DCe-Sx-jaY" id="pMp-9T-PiD"/>
                 <outlet property="scroll" destination="YvG-oc-wMf" id="t27-bu-F8k"/>
             </connections>

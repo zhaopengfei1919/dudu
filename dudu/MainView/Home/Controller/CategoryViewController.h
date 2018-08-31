@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CartView.h"
 
 @interface CategoryViewController : UIViewController{
     NSInteger Num;
     NSInteger Rownum;
     NSInteger Page;
     UIView * tishiView;
+    HZSubmitView * submitView;
+    CartView * cartView;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *table1;

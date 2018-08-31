@@ -21,6 +21,7 @@
     // Configure the view for the selected state
 }
 -(void)setModel:(HomeModel *)model{
+    _model = model;
     [self.Image sd_setImageWithURL:[NSURL URLWithString:model.image] placeholderImage:[UIImage imageNamed:@"logo拷贝"]];
     self.TitleLabel.text = model.name;
     if (model.memo.length > 0) {
@@ -28,11 +29,11 @@
     }else
         self.ConteneLabel.text = @"";
     if (model.tag.length > 0) {
-        self.IsCoupon.hidden = NO;
-        [self.IsCoupon setTitle:model.tag forState:0];
+        [self.CouponImage sd_setImageWithURL:[NSURL URLWithString:model.tag]];
+        self.CouponImage.hidden = NO;
     }else
-        self.IsCoupon.hidden = YES;
-    
+        self.CouponImage.hidden = YES;
+        
     self.unitPriceLabel.text = [NSString stringWithFormat:@"￥%.1f/%@",model.unitPrice,model.unit];
     
     NSString * str = [NSString stringWithFormat:@"总价￥%.1f",model.price];
@@ -56,5 +57,70 @@
         [self.CartBtn setBackgroundImage:[UIImage imageNamed:@""] forState:0];
     }else
         [self.CartBtn setBackgroundImage:[UIImage imageNamed:@"加入购物车"] forState:0];
+}
+- (IBAction)addcart:(id)sender {
+    if (self.model.specificationNumber == 0) {//没有规格，直接加入购物车
+        NSMutableDictionary *paraDic = @{}.mutableCopy;
+        [paraDic setObject:[NSNumber numberWithInt:1] forKey:@"quantity"];
+        NSMutableDictionary * dic = @{}.mutableCopy;
+        [dic setObject:self.model.ID forKey:@"id"];
+        [paraDic setObject:dic forKey:@"productParam"];
+        
+        [self sureaddcart:paraDic];
+    }else{//多规格，调用商品详情接口，获取规格信息
+        //        WS(weakself);
+        NSMutableDictionary *paraDic = @{}.mutableCopy;
+        [paraDic setObject:self.model.ID forKey:@"id"];
+        [NetWorkManager requestWithMethod:POST Url:GoodsDetail Parameters:paraDic success:^(id responseObject) {
+            NSLog(@"%@",responseObject);
+            NSString * code = [responseObject safeObjectForKey:@"code"];
+            if ([code isEqualToString:@"0"]) {
+                UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+                self->submitView = [[[NSBundle mainBundle] loadNibNamed:@"HZSubmitView" owner:self options:nil] objectAtIndex:0];
+                self->submitView.frame = window.bounds;
+                [self->submitView createViewWith:[responseObject safeObjectForKey:@"data"]];
+                [self->submitView createBigviewWith:[responseObject safeObjectForKey:@"data"]];
+                [self->submitView.SureBtn addTarget:self action:@selector(cartadd) forControlEvents:UIControlEventTouchUpInside];
+                [window addSubview:self->submitView];
+            }else
+                [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
+        } requestRrror:^(id requestRrror) {
+            
+        }];
+    }
+}
+-(void)cartadd{
+    NSArray * specifications = [submitView.data safeObjectForKey:@"specifications"];
+    if (specifications.count == 2) {
+        if (submitView.firstID.length == 0 || submitView.secondID.length == 0) {
+            [SVProgressHUD showErrorWithStatus:@"请选择相应规格"];
+            return;
+        }
+    }else if (specifications.count == 1){
+        if (submitView.firstID.length == 0){
+            [SVProgressHUD showErrorWithStatus:@"请选择相应规格"];
+            return;
+        }
+    }
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    [paraDic setObject:submitView.CountLabel.text forKey:@"quantity"];
+    NSMutableDictionary * dic = @{}.mutableCopy;
+    [dic setObject:submitView.GoodsID forKey:@"id"];
+    [paraDic setObject:dic forKey:@"productParam"];
+    
+    [self sureaddcart:paraDic];
+}
+-(void)sureaddcart:(NSDictionary *)dic{
+    [NetWorkManager requestWithMethod:POST Url:CartAdd Parameters:dic success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code isEqualToString:@"0"]) {
+            [SVProgressHUD showSuccessWithStatus:@"加入购物车成功"];
+            [self->submitView removeFromSuperview];
+        }else
+            [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
+    } requestRrror:^(id requestRrror) {
+        
+    }];
 }
 @end

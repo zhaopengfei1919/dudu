@@ -20,7 +20,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [NetWorkManager manager];
-        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
         manager.requestSerializer=[AFJSONRequestSerializer serializer];
         [manager.responseSerializer setAcceptableContentTypes: [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil]];
         
@@ -35,7 +35,12 @@
     
     NSMutableDictionary * Para = [[NSMutableDictionary alloc]init];
     [Para setObject:APPKEY forKey:@"app_key"];
-    [Para setObject:[parameters mj_JSONString] forKey:@"data"];
+    if ([FYUser userInfo].token.length > 0) {
+        [Para setObject:[FYUser userInfo].token forKey:@"token"];
+    }
+    NSMutableDictionary * dic = [[NSMutableDictionary alloc]initWithDictionary:parameters];
+//    [dic removeObjectForKey:@"token"];
+    [Para setObject:[dic mj_JSONString] forKey:@"data"];
     [Para setObject:@"1.0" forKey:@"version"];
     [Para setObject:[[NetWorkManager sharedManager] getTimeNow] forKey:@"timestamp"];
     //获取UUID
@@ -48,6 +53,7 @@
     [Para setObject:@"json" forKey:@"format"];
     NSString * sign = [[NetWorkManager sharedManager] paixu:Para];
     [Para setObject:sign forKey:@"sign"];
+//    [Para setObject:[parameters mj_JSONString] forKey:@"data"];
 //    NSLog(@"%@",Para);
     
     switch (method) {
@@ -55,12 +61,12 @@
             [[NetWorkManager sharedManager] POST:baseURL parameters:Para progress:^(NSProgress * _Nonnull uploadProgress) {
                 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//                NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
 //                NSLog(@"success --%@",dic);
-                NSString * str = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+//                NSString * str = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
 //                NSLog(@"success --%@",str);
                 if (success) {
-                    success(dic);
+                    success(responseObject);
                 }
 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -92,10 +98,7 @@
 }
 -(NSString *)paixu:(NSDictionary *)dic{
     NSMutableDictionary * newdic = [[NSMutableDictionary alloc] initWithDictionary:dic];
-//    NSString * data = [newdic safeObjectForKey:@"data"];
-//    if ([data isEqualToString:@"{}"]) {
-//        [newdic removeObjectForKey:@"data"];
-//    }
+//    [newdic removeObjectForKey:@"token"];
     NSArray *keyArray = [newdic allKeys];
     NSArray *sortArray = [keyArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         return [obj1 compare:obj2 options:NSNumericSearch];

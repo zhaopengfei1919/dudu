@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserModel.h"
 
-@interface CenterViewController : UIViewController
+@interface CenterViewController : UIViewController{
+    UserModel * usermodel;
+}
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ScrollTop;
 @property (weak, nonatomic) IBOutlet UIScrollView *scroll;
 
@@ -24,6 +27,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *salesPlace;
 
 
+- (IBAction)chosenCoupon:(id)sender;
+- (IBAction)myaddress:(id)sender;
+- (IBAction)myTuikuan:(id)sender;
+- (IBAction)myTuikuang:(id)sender;
 
 
 

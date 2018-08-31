@@ -13,6 +13,7 @@
 @property (strong,nonatomic) NSString * name;//名称
 @property (strong,nonatomic) NSString * introduction;//活动介绍
 @property (strong,nonatomic) NSString * mobileImage;
+@property (strong,nonatomic) NSString * smallMobileImage;
 @property (strong,nonatomic) NSArray * productInfoList;
 
 @end

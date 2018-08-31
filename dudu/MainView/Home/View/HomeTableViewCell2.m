@@ -79,7 +79,7 @@
     NSString * str1 = [NSString stringWithFormat:@"总价￥%.1f",model2.price];
     NSMutableAttributedString * string1 = [[NSMutableAttributedString alloc]initWithString:str1];
     [string1 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 3)];
-    [string1 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string.length - 3)];
+    [string1 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string1.length - 3)];
     self.PriceLabel2.attributedText = string1;
     
     if (model2.packaging.length > 0) {

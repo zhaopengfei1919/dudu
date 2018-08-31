@@ -24,4 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 
 
+@property (strong,nonatomic) NSString * code;
+@property (strong,nonatomic) NSString * name;
+
+@property (strong,nonatomic) NSDictionary * dic;
 @end

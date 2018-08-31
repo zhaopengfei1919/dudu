@@ -12,26 +12,26 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="126" id="KGk-i7-Jjw" customClass="ShopCartTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="126" id="KGk-i7-Jjw" customClass="ShopCartTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="126"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="125.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGk-hl-i60">
-                        <rect key="frame" x="0.0" y="0.0" width="34" height="126"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="34" id="VlH-oh-rlG"/>
-                        </constraints>
-                    </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="购物车商品未选中" translatesAutoresizingMaskIntoConstraints="NO" id="4l8-1m-mxj">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="购物车商品选中" translatesAutoresizingMaskIntoConstraints="NO" id="4l8-1m-mxj">
                         <rect key="frame" x="5" y="50" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="24" id="Rjl-uW-Kja"/>
                             <constraint firstAttribute="height" constant="24" id="ze4-BL-BIW"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGk-hl-i60">
+                        <rect key="frame" x="0.0" y="0.0" width="34" height="126"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="34" id="VlH-oh-rlG"/>
+                        </constraints>
+                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PAb-10-vyr">
                         <rect key="frame" x="34" y="20" width="86" height="86"/>
                         <constraints>
@@ -48,7 +48,7 @@
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k17-RS-UTU">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k17-RS-UTU">
                         <rect key="frame" x="130" y="40" width="50" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="NCO-nG-WzR"/>
@@ -99,7 +99,7 @@
                             <constraint firstAttribute="height" constant="0.5" id="AFa-7c-C1t"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBp-dn-bWg">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="34" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBp-dn-bWg">
                         <rect key="frame" x="259" y="82" width="20" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="RzG-ll-6Jb"/>
@@ -141,11 +141,24 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="GuigeLabel" destination="k17-RS-UTU" id="Dpk-lO-gnI"/>
+                <outlet property="GuigeLabelWidth" destination="NCO-nG-WzR" id="GTO-f0-AZo"/>
+                <outlet property="MainImage" destination="PAb-10-vyr" id="RMc-l1-G2J"/>
+                <outlet property="PriceLabel" destination="auT-Ij-0Sg" id="J9L-X9-hwT"/>
+                <outlet property="countLabel" destination="yBp-dn-bWg" id="8uu-ay-gQA"/>
+                <outlet property="editBtn" destination="KGk-hl-i60" id="8a9-kt-B88"/>
+                <outlet property="jia" destination="qh5-hh-SOA" id="CAQ-14-e53"/>
+                <outlet property="jian" destination="9KF-K0-3gV" id="xcT-iX-Jyw"/>
+                <outlet property="selectImage" destination="4l8-1m-mxj" id="eUS-Pt-438"/>
+                <outlet property="titleLabel" destination="lBt-v1-3Gw" id="vQt-ia-xHx"/>
+                <outlet property="unitPriceLabel" destination="ia6-VC-PQZ" id="ict-et-ZNc"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>
         <image name="+" width="24" height="24"/>
         <image name="_" width="24" height="24"/>
-        <image name="购物车商品未选中" width="42" height="42"/>
+        <image name="购物车商品选中" width="42" height="42"/>
     </resources>
 </document>

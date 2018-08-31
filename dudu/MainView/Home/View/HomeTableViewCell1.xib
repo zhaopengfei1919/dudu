@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="155" id="KGk-i7-Jjw" customClass="HomeTableViewCell1">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="155" id="KGk-i7-Jjw" customClass="HomeTableViewCell1">
             <rect key="frame" x="0.0" y="0.0" width="375" height="155"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -24,6 +24,13 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="120" id="PKR-bh-88v"/>
                             <constraint firstAttribute="height" constant="120" id="sUH-Lm-Lhj"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ymM-vR-1Ps">
+                        <rect key="frame" x="15" y="7" width="26" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="26" id="G8B-Nt-Vta"/>
+                            <constraint firstAttribute="height" constant="30" id="NzT-DI-zmk"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Ao1-ay-esc">
@@ -91,6 +98,9 @@
                             <constraint firstAttribute="width" constant="35" id="Y4q-nl-jvk"/>
                         </constraints>
                         <state key="normal" image="加入购物车"/>
+                        <connections>
+                            <action selector="addcart:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="k5p-NY-kTT"/>
+                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ud-ph-3YW">
                         <rect key="frame" x="0.0" y="154" width="375" height="0.5"/>
@@ -103,10 +113,12 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="ouN-B0-oYh" secondAttribute="trailing" constant="10" id="0B3-bk-oz2"/>
                     <constraint firstItem="DeZ-jO-d1H" firstAttribute="leading" secondItem="zTd-OD-VWL" secondAttribute="trailing" constant="10" id="2h1-X8-xFe"/>
+                    <constraint firstItem="ymM-vR-1Ps" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="53D-0c-gZT"/>
                     <constraint firstItem="9Pw-jR-ga3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="27" id="ByA-Bm-jHy"/>
                     <constraint firstItem="HlG-9K-78T" firstAttribute="leading" secondItem="zTd-OD-VWL" secondAttribute="trailing" constant="10" id="CzZ-FK-UdH"/>
                     <constraint firstItem="ouN-B0-oYh" firstAttribute="leading" secondItem="zTd-OD-VWL" secondAttribute="trailing" constant="10" id="Ds9-yz-Jzl"/>
                     <constraint firstItem="zTd-OD-VWL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17.5" id="Gql-P1-nqb"/>
+                    <constraint firstItem="ymM-vR-1Ps" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Q1Q-Q5-OfM"/>
                     <constraint firstAttribute="trailing" secondItem="DeZ-jO-d1H" secondAttribute="trailing" constant="10" id="RsW-P0-1r7"/>
                     <constraint firstItem="xIG-fo-S98" firstAttribute="top" secondItem="HlG-9K-78T" secondAttribute="bottom" constant="14" id="UDu-QY-Qfw"/>
                     <constraint firstAttribute="trailing" secondItem="1ud-ph-3YW" secondAttribute="trailing" id="VLg-39-yIH"/>
@@ -130,6 +142,7 @@
             <connections>
                 <outlet property="CartBtn" destination="xIG-fo-S98" id="gW8-vF-Yr2"/>
                 <outlet property="ConteneLabel" destination="DeZ-jO-d1H" id="jc3-ly-CQ0"/>
+                <outlet property="CouponImage" destination="ymM-vR-1Ps" id="0xl-EZ-dL0"/>
                 <outlet property="GuiGeLabel" destination="HlG-9K-78T" id="Pki-q8-hOj"/>
                 <outlet property="GuigeLabelWidth" destination="rII-gZ-htn" id="EN9-QV-Ob9"/>
                 <outlet property="Image" destination="zTd-OD-VWL" id="eeV-ZQ-n98"/>

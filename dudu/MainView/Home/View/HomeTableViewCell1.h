@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "HomeModel.h"
+#import "HZSubmitView.h"
 
-@interface HomeTableViewCell1 : UITableViewCell
+@interface HomeTableViewCell1 : UITableViewCell{
+    HZSubmitView * submitView;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *Image;
 @property (weak, nonatomic) IBOutlet UIButton *IsCoupon;
+@property (weak, nonatomic) IBOutlet UIImageView *CouponImage;
 @property (weak, nonatomic) IBOutlet UILabel *TitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ConteneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *GuiGeLabel;
@@ -19,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *PriceLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *CartBtn;
+- (IBAction)addcart:(id)sender;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *GuigeLabelWidth;
 

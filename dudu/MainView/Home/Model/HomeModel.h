@@ -23,6 +23,6 @@
 @property (assign) NSInteger specificationNumber;//规格数量
 @property (assign) BOOL isGift;//是否赠品
 @property (strong,nonatomic) NSString * memo;//备注
-@property (strong,nonatomic) NSString * tag;//标签
+@property (strong,nonatomic) NSString * tag;//左上角图片
 
 @end

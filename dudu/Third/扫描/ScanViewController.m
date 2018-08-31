@@ -28,11 +28,19 @@
 @end
 
 @implementation ScanViewController
-
+- (void)backLastViewController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"扫一扫";
     
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame = CGRectMake(0, 11 + StatusHeight, 50, 22);
+    
+    [backButton addTarget:self action:@selector(backLastViewController) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setImage:[UIImage imageNamed:@"返回"] forState:0];
+    [self.view addSubview:backButton];
    
     // Do any additional setup after loading the view.
     
@@ -211,30 +219,9 @@
     
     NSLog(@" 结果：%@",stringValue);
     
-    NSRange dalie = [stringValue rangeOfString:@"dalie"];
-    if (dalie.length == 0) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"无法识别二维码，请重新扫描" preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            [self->_session startRunning];
-        }];
-        UIView *subView1 = alertController.view.subviews[0];
-        UIView *subView2 = subView1.subviews[0];
-        UIView *subView3 = subView2.subviews[0];
-        UIView *subView4 = subView3.subviews[0];
-        UIView *subView5 = subView4.subviews[0];
-        UILabel *message = subView5.subviews[1];
-        message.textAlignment = NSTextAlignmentLeft;
-        
-        [cancel setValue:[UIColor blackColor] forKey:@"titleTextColor"];
-        [alertController addAction:cancel];
-        [self presentViewController:alertController animated:YES completion:nil];
-        return;
-    }
-    
     if (self.qrUrlBlock) {
         self.qrUrlBlock(stringValue);
-        //[self.navigationController popViewControllerAnimated:NO];
+        [self.navigationController popViewControllerAnimated:NO];
     }
 }
 
