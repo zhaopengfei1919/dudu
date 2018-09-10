@@ -11,6 +11,7 @@
 typedef void(^changeCart)(void);
 
 @interface CartView : UIView
+@property (weak, nonatomic) IBOutlet UIView *BackView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *MainViewHeight;
 
@@ -21,6 +22,7 @@ typedef void(^changeCart)(void);
 @property (weak, nonatomic) IBOutlet UILabel *Count;
 @property (weak, nonatomic) IBOutlet UILabel *Price;
 
+@property (strong,nonatomic) NSDictionary * dic;
 @property (strong,nonatomic) NSArray * array;
 @property (nonatomic,copy) changeCart CartBlock;
 @end

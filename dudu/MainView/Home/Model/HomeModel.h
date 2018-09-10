@@ -24,5 +24,6 @@
 @property (assign) BOOL isGift;//是否赠品
 @property (strong,nonatomic) NSString * memo;//备注
 @property (strong,nonatomic) NSString * tag;//左上角图片
-
+@property (assign) NSInteger boxPrice;//单个筐费
+@property (strong,nonatomic) NSString * boxCode;//筐码
 @end

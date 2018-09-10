@@ -25,7 +25,7 @@
 @property (assign) NSNumber * addressID;
 @property (strong,nonatomic) NSString * day;
 @property (strong,nonatomic) NSString * time;
-@property (assign) NSNumber * payID;
+@property (assign) NSString * payID;
 
 @property (strong,nonatomic) ChosenTimeAndStyle * chosenView;
 

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^chosenCoupon)(CouponModel * model);
+
 @interface CouponViewController : UIViewController{
     NSInteger status;
     UIView * tishiView;
@@ -18,4 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *table;
 @property (strong,nonatomic) NSMutableArray * dataSourse;
+
+@property (copy,nonatomic) chosenCoupon chosencou;
+@property (assign) BOOL ischosen;
 @end

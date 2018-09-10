@@ -32,7 +32,7 @@
     [NetWorkManager requestWithMethod:POST Url:AdList Parameters:paraDic success:^(id responseObject) {
         NSString * code = [responseObject objectForKey:@"code"];
         if ([code intValue] == 0) {
-            NSLog(@"%@",responseObject);
+//            NSLog(@"%@",responseObject);
             NSArray * data = [responseObject safeObjectForKey:@"data"];
             [weakself.bannerList addObjectsFromArray:data];
             NSMutableArray *pic = [NSMutableArray array];
@@ -58,9 +58,11 @@
     
     [NetWorkManager requestWithMethod:POST Url:Promotion Parameters:paraDic success:^(id responseObject) {
         NSString * code = [responseObject safeObjectForKey:@"code"];
+        NSLog(@"%@",responseObject);
         if ([code isEqualToString:@"0"]) {
             NSArray * array = [PromotionModel mj_objectArrayWithKeyValuesArray:[responseObject objectForKey:@"data"]];
             [weakself.promotionSourse addObjectsFromArray:array];
+//            [weakself.promotionSourse removeObjectsInRange:NSMakeRange(1, 2)];
             [weakself.table reloadData];
         }
     } requestRrror:^(id requestRrror) {
@@ -186,7 +188,9 @@
     NSInteger count = section;
     if (self.promotionSourse.count > 0 && section == 0) {
         int number = (int)self.promotionSourse.count;
-        return number/3;
+        int num = number%3 > 0 ? number/3 + 1 : number/3;
+        NSLog(@"%d,%d",number,num);
+        return num;
     }
     if (self.promotionSourse.count > 0 && section > 0) {
         count = section - 1;
@@ -205,6 +209,9 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger count = indexPath.section;
     if (self.promotionSourse.count > 0 && indexPath.section == 0) {
+        if (indexPath.row * 3 + 3 > self.promotionSourse.count) {
+            return 120;
+        }
         return 240;
     }
     if (self.promotionSourse.count > 0 && indexPath.section > 0) {
@@ -220,7 +227,10 @@
     NSInteger count = indexPath.section;
     if (self.promotionSourse.count > 0 && indexPath.section == 0) {
         HomeTableViewCell3 * cell = [tableView dequeueReusableCellWithIdentifier:@"HomeTableViewCell3" forIndexPath:indexPath];
-        cell.array = [self.promotionSourse subarrayWithRange:NSMakeRange(indexPath.row * 3, 3)];
+        if (indexPath.row * 3 + 3 > self.promotionSourse.count) {
+            cell.array = [self.promotionSourse subarrayWithRange:NSMakeRange(indexPath.row * 3, self.promotionSourse.count - indexPath.row * 3)];
+        }else
+            cell.array = [self.promotionSourse subarrayWithRange:NSMakeRange(indexPath.row * 3, 3)];
         return cell;
     }
     if (self.promotionSourse.count > 0 && indexPath.section > 0) {

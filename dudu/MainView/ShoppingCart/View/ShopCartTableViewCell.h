@@ -26,10 +26,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
 
 @property (strong,nonatomic) HomeModel * model;
-
-
-
-
-
-
 @end

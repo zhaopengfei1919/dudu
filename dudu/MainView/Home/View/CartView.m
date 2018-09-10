@@ -10,8 +10,26 @@
 
 @implementation CartView
 
-
-
+-(void)drawRect:(CGRect)rect{
+    [super drawRect:rect];
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapview:)];
+    [self.BackView addGestureRecognizer:tap];
+}
+-(void)tapview:(UITapGestureRecognizer *)tap{
+    self.hidden = YES;
+}
+-(void)setDic:(NSDictionary *)dic{
+    NSArray * cartItems = [dic safeObjectForKey:@"cartItems"];
+    self.Count.text = [NSString stringWithFormat:@"%lu",cartItems.count];
+    
+    NSString * boxAmount = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"boxAmount"]];
+    float money = [boxAmount floatValue];
+    NSString * str = [NSString stringWithFormat:@"￥%.1f",money];
+    NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
+    [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 1)];
+    [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(1, string.length - 1)];
+    self.Price.attributedText = string;
+}
 -(void)setArray:(NSArray *)array{
     _array = array;
     if (array.count < 5) {
@@ -45,7 +63,20 @@
         [btn2 addTarget:self action:@selector(jian:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:btn2];
         
-        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(16, 15, SCREEN_WIDTH - 106, 16)];
+        UILabel * pricelabel = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 170, 15, 70, 16)];
+        pricelabel.textColor = UIColorFromRGB(0xf39700);
+        pricelabel.font = [UIFont systemFontOfSize:15];
+        pricelabel.textAlignment = NSTextAlignmentRight;
+        [view addSubview:pricelabel];
+        NSString * price = [NSString stringWithFormat:@"%@",[productInfo safeObjectForKey:@"price"]];
+        float money = [price floatValue];
+        NSString * str = [NSString stringWithFormat:@"￥%.1f",money];
+        NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
+        [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 1)];
+        [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(1, string.length - 1)];
+        pricelabel.attributedText = string;
+        
+        UILabel * title = [[UILabel alloc]initWithFrame:CGRectMake(16, 15, SCREEN_WIDTH - 186, 16)];
         title.textColor = UIColorFromRGB(0x333333);
         title.font = [UIFont systemFontOfSize:15];
         title.text = [productInfo safeObjectForKey:@"name"];

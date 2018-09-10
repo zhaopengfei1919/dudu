@@ -13,6 +13,8 @@
 #import "CateGoryCell.h"
 #import "HomeHotProduce.h"
 #import "GoodsDetailViewController.h"
+#import "AppDelegate.h"
+#import "BaseTableBarControllerView.h"
 
 @interface CategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -66,20 +68,54 @@
     WS(weakself);
     NSMutableDictionary *paraDic = @{}.mutableCopy;
     [NetWorkManager requestWithMethod:POST Url:CartList Parameters:paraDic success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
         NSString * code = [responseObject safeObjectForKey:@"code"];
         if ([code isEqualToString:@"0"]) {
-            NSArray * data = [responseObject safeObjectForKey:@"data"];
+            NSArray * data = [responseObject safeObjectForKey:@"data"][@"cartItems"];
             self->cartView.array = data;
+            self->cartView.dic = [responseObject safeObjectForKey:@"data"];
             [weakself cartcount];
+            [weakself checklist:[responseObject safeObjectForKey:@"data"]];
         }else
             [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
     } requestRrror:^(id requestRrror) {
     }];
 }
+-(void)checklist:(NSDictionary *)dic{
+    NSArray * cartItems = [dic safeObjectForKey:@"cartItems"];
+    float money = 0;
+    float yajin = 0;
+    for (int i =0; i<cartItems.count; i++) {
+        NSDictionary * data = cartItems[i];
+        NSDictionary * dic = [data safeObjectForKey:@"productInfo"];
+        HomeModel * model = [HomeModel mj_objectWithKeyValues:dic];
+        NSString * countstr = [NSString stringWithFormat:@"%@",[data safeObjectForKey:@"quantity"]];
+        int quantity = [countstr intValue];
+        money = money + model.price * quantity;
+        yajin = yajin + model.boxPrice * quantity;
+    }
+    NSString * boxAmount = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"boxAmount"]];
+    NSString * freeFreight = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"freeFreight"]];
+    if (money < [freeFreight floatValue]) {
+        self.tishiLabel.text = [NSString stringWithFormat:@"还差%.2f元起送",[freeFreight floatValue] - money];
+        self.tishiHeight.constant = 26;
+        self.tishi.hidden = NO;
+        self.PriceLabel.text = [NSString stringWithFormat:@"另需筐押金%.0f元，运费%@",yajin,[dic safeObjectForKey:@"freight"]];
+        
+    }else{
+        self.tishiHeight.constant = 0;
+        self.tishi.hidden = YES;
+        self.PriceLabel.text = [NSString stringWithFormat:@"另需筐押金%.0f元",yajin];
+    }
+    
+    NSString * str = [NSString stringWithFormat:@"合计￥%.1f",money];
+    NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
+    [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 3)];
+    [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string.length - 3)];
+    self.TitleLabel.attributedText = string;
+}
 //购物车数量
 -(void)cartcount{
-    //    WS(weakself);
+        WS(weakself);
     NSMutableDictionary *paraDic = @{}.mutableCopy;
     [paraDic setObject:[FYUser userInfo].token forKey:@"token"];
     [NetWorkManager requestWithMethod:POST Url:CartCount Parameters:paraDic success:^(id responseObject) {
@@ -87,10 +123,13 @@
         if ([code intValue] == 0) {
             int data = [[responseObject safeObjectForKey:@"data"] intValue];
             if (data > 0) {
-                self.CountBtn.text = [NSString stringWithFormat:@"%d",data];
-                self.CountBtn.hidden = NO;
+                weakself.CountBtn.text = [NSString stringWithFormat:@"%d",data];
+                weakself.CountBtn.hidden = NO;
+                AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                BaseTableBarControllerView *tabbar = (BaseTableBarControllerView *)delegate.window.rootViewController;
+                [tabbar.tabBar showBadgeOnItemIndex:2 Withnum:data];
             }else
-                self.CountBtn.hidden = YES;
+                weakself.CountBtn.hidden = YES;
         }
     } requestRrror:^(id requestRrror) {
         
@@ -104,16 +143,18 @@
     Page = 0;
     [self rootproduce];
     [self cartcount];
+    [self cartlist];
     self.CountBtn.layer.cornerRadius = 7.5;
     
     adjustsScrollViewInsets_NO(self.table1, self);
-    adjustsScrollViewInsets_NO(_table2, self);
+    adjustsScrollViewInsets_NO(self.table2, self);
     
     [self.table2 registerNib:[UINib nibWithNibName:@"CategoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"CategoryTableViewCell"];
     [self.table1 registerNib:[UINib nibWithNibName:@"CateGoryCell" bundle:nil] forCellReuseIdentifier:@"CateGoryCell"];
     
     [self createView];
     self.CountBtn.layer.cornerRadius = 7.5;
+    self.SearchView.layer.cornerRadius = 15;
     
     UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
     cartView = [[[NSBundle mainBundle] loadNibNamed:@"CartView" owner:self options:nil] objectAtIndex:0];
@@ -296,12 +337,15 @@
     [self sureaddcart:paraDic];
 }
 -(void)sureaddcart:(NSDictionary *)dic{
+    WS(weakself);
     [NetWorkManager requestWithMethod:POST Url:CartAdd Parameters:dic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         NSString * code = [responseObject safeObjectForKey:@"code"];
         if ([code isEqualToString:@"0"]) {
             [SVProgressHUD showSuccessWithStatus:@"加入购物车成功"];
             [self->submitView removeFromSuperview];
+            [weakself cartlist];
+            [weakself cartcount];
         }else
             [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
     } requestRrror:^(id requestRrror) {
@@ -324,7 +368,7 @@
     }
 }
 - (IBAction)cartClick:(id)sender {
-    static BOOL ishidden = YES;
+    BOOL ishidden = cartView.hidden;
     if (ishidden) {
         [self cartlist];
         ishidden = NO;

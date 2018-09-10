@@ -26,21 +26,56 @@
 }
 -(void)setArray:(NSArray *)array{
     _array = array;
-    PromotionModel * model1 = array[0];
-    PromotionModel * model2 = array[1];
-    PromotionModel * model3 = array[2];
-    
-    [self.image1 sd_setImageWithURL:[NSURL URLWithString:model1.mobileImage]];
-    [self.image2 sd_setImageWithURL:[NSURL URLWithString:model2.mobileImage]];
-    [self.image3 sd_setImageWithURL:[NSURL URLWithString:model3.mobileImage]];
-    
-    self.btn1.tag = 0;
-    self.btn2.tag = 1;
-    self.btn3.tag = 2;
-    
-    [self.btn1 addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.btn2 addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.btn3 addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];
+    self.View2Top.constant = 0;
+    if (array.count == 3) {
+        self.View1.hidden = NO;
+        self.View2.hidden = NO;
+        self.View1Height.constant = 120;
+        
+        PromotionModel * model1 = array[0];
+        PromotionModel * model2 = array[1];
+        PromotionModel * model3 = array[2];
+        
+        [self.image1 sd_setImageWithURL:[NSURL URLWithString:model1.smallMobileImage]];
+        [self.image2 sd_setImageWithURL:[NSURL URLWithString:model2.smallMobileImage]];
+        [self.image3 sd_setImageWithURL:[NSURL URLWithString:model3.mobileImage]];
+        
+        self.btn1.tag = 0;
+        self.btn2.tag = 1;
+        self.btn3.tag = 2;
+        
+        [self.btn1 addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.btn2 addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.btn3 addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];
+    }else if (array.count == 2){
+        self.View1.hidden = NO;
+        self.View2.hidden = YES;
+        
+        PromotionModel * model1 = array[0];
+        PromotionModel * model2 = array[1];
+        
+        [self.image1 sd_setImageWithURL:[NSURL URLWithString:model1.smallMobileImage]];
+        [self.image2 sd_setImageWithURL:[NSURL URLWithString:model2.smallMobileImage]];
+        
+        self.btn1.tag = 0;
+        self.btn2.tag = 1;
+        
+        [self.btn1 addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.btn2 addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];
+    }else{
+        self.View1.hidden = YES;
+        self.View2.hidden = NO;
+        self.View2Top.constant = -120;
+        
+        PromotionModel * model3 = array[0];
+        
+        [self.image3 sd_setImageWithURL:[NSURL URLWithString:model3.mobileImage]];
+        
+        self.btn3.tag = 0;
+        
+        [self.btn3 addTarget:self action:@selector(btnclick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+
 }
 -(void)btnclick:(UIButton *)btn{
     id object = [self nextResponder];

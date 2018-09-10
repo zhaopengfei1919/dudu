@@ -13,7 +13,12 @@
 @interface AddOrderViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *table;
 
+@property (strong,nonatomic) NSDictionary * data;
 @property (strong,nonatomic) NSMutableArray * dataSourse;
 @property (strong,nonatomic) OrderHeaderView * headerView;
 @property (strong,nonatomic) OrderFooterView * footerView;
+
+@property (weak, nonatomic) IBOutlet UILabel *PriceLabel;
+- (IBAction)SurePay:(id)sender;
+@property (strong,nonatomic) NSArray * listArray;
 @end

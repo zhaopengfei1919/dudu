@@ -183,4 +183,11 @@
         
     }];
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    GoodsDetailViewController * detail = [sb instantiateViewControllerWithIdentifier:@"GoodsDetailViewController"];
+    HomeModel * model = self.dataSourse[indexPath.row];
+    detail.GoodsID = model.ID;
+    [self.navigationController pushViewController:detail animated:YES];
+}
 @end

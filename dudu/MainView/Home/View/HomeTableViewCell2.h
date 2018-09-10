@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "HomeModel.h"
 
-@interface HomeTableViewCell2 : UITableViewCell
+@interface HomeTableViewCell2 : UITableViewCell{
+    HZSubmitView * submitView;
+}
 @property (weak, nonatomic) IBOutlet UIView *View1;
 @property (weak, nonatomic) IBOutlet UIButton *isCoupon1;
 @property (weak, nonatomic) IBOutlet UIImageView *Image1;
@@ -34,7 +36,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *GuigeLabelWidth2;
 @property (weak, nonatomic) IBOutlet UILabel *unitPriceLabel2;
 @property (weak, nonatomic) IBOutlet UILabel *PriceLabel2;
-@property (weak, nonatomic) IBOutlet UIButton *CartBtn2;
+@property (weak, nonatomic) IBOutlet DDButton *CartBtn2;
 
 
 

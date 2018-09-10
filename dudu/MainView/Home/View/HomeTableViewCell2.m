@@ -7,6 +7,7 @@
 //
 
 #import "HomeTableViewCell2.h"
+#import "GoodsDetailViewController.h"
 
 @implementation HomeTableViewCell2
 
@@ -21,8 +22,12 @@
     // Configure the view for the selected state
 }
 -(void)setArray:(NSArray *)array{
+    _array = array;
     HomeModel * model1 = array[0];
     HomeModel * model2 = array[1];
+    
+    self.CartBtn1.dic = @{@"ID":model1.ID};
+    self.CartBtn2.dic = @{@"ID":model2.ID};
     
     [self.Image1 sd_setImageWithURL:[NSURL URLWithString:model1.image] placeholderImage:[UIImage imageNamed:@"logo拷贝"]];
     self.TitleLabel1.text = model1.name;
@@ -99,8 +104,89 @@
         [self.CartBtn2 setBackgroundImage:[UIImage imageNamed:@"加入购物车"] forState:0];
 }
 - (IBAction)gotodetail:(id)sender {
+    DDButton * btn = (DDButton *)sender;
+    id object = [self nextResponder];
+    while (![object isKindOfClass:[UIViewController class]] && object != nil) {
+        object = [object nextResponder];
+    }
+    UIViewController *superController = (UIViewController*)object;
+    
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    GoodsDetailViewController * detail = [sb instantiateViewControllerWithIdentifier:@"GoodsDetailViewController"];
+    HomeModel * model = [btn.dic safeObjectForKey:@"ID"];
+    detail.GoodsID = model.ID;
+    [superController.navigationController pushViewController:detail animated:YES];
 }
 
 - (IBAction)addcart:(id)sender {
+    DDButton * btn = (DDButton *)sender;
+    HomeModel * model = [[HomeModel alloc]init];
+    if (btn.tag == 1) {
+        model = self.array[0];
+    }else
+        model = self.array[1];
+    if (model.specificationNumber == 0) {//没有规格，直接加入购物车
+        NSMutableDictionary *paraDic = @{}.mutableCopy;
+        [paraDic setObject:[NSNumber numberWithInt:1] forKey:@"quantity"];
+        NSMutableDictionary * dic = @{}.mutableCopy;
+        [dic setObject:model.ID forKey:@"id"];
+        [paraDic setObject:dic forKey:@"productParam"];
+        
+        [self sureaddcart:paraDic];
+    }else{//多规格，调用商品详情接口，获取规格信息
+        //        WS(weakself);
+        NSMutableDictionary *paraDic = @{}.mutableCopy;
+        [paraDic setObject:model.ID forKey:@"id"];
+        [NetWorkManager requestWithMethod:POST Url:GoodsDetail Parameters:paraDic success:^(id responseObject) {
+            NSLog(@"%@",responseObject);
+            NSString * code = [responseObject safeObjectForKey:@"code"];
+            if ([code isEqualToString:@"0"]) {
+                UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+                self->submitView = [[[NSBundle mainBundle] loadNibNamed:@"HZSubmitView" owner:self options:nil] objectAtIndex:0];
+                self->submitView.frame = window.bounds;
+                [self->submitView createViewWith:[responseObject safeObjectForKey:@"data"]];
+                [self->submitView createBigviewWith:[responseObject safeObjectForKey:@"data"]];
+                [self->submitView.SureBtn addTarget:self action:@selector(cartadd) forControlEvents:UIControlEventTouchUpInside];
+                [window addSubview:self->submitView];
+            }else
+                [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
+        } requestRrror:^(id requestRrror) {
+            
+        }];
+    }
+}
+-(void)cartadd{
+    NSArray * specifications = [submitView.data safeObjectForKey:@"specifications"];
+    if (specifications.count == 2) {
+        if (submitView.firstID.length == 0 || submitView.secondID.length == 0) {
+            [SVProgressHUD showErrorWithStatus:@"请选择相应规格"];
+            return;
+        }
+    }else if (specifications.count == 1){
+        if (submitView.firstID.length == 0){
+            [SVProgressHUD showErrorWithStatus:@"请选择相应规格"];
+            return;
+        }
+    }
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    [paraDic setObject:submitView.CountLabel.text forKey:@"quantity"];
+    NSMutableDictionary * dic = @{}.mutableCopy;
+    [dic setObject:submitView.GoodsID forKey:@"id"];
+    [paraDic setObject:dic forKey:@"productParam"];
+    
+    [self sureaddcart:paraDic];
+}
+-(void)sureaddcart:(NSDictionary *)dic{
+    [NetWorkManager requestWithMethod:POST Url:CartAdd Parameters:dic success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code isEqualToString:@"0"]) {
+            [SVProgressHUD showSuccessWithStatus:@"加入购物车成功"];
+            [self->submitView removeFromSuperview];
+        }else
+            [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
+    } requestRrror:^(id requestRrror) {
+        
+    }];
 }
 @end

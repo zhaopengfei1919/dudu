@@ -191,6 +191,11 @@
 		18464B76211A9E9500D0BD11 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 18464AFC211A9E9400D0BD11 /* README.md */; };
 		188A495E21353E4200CF1FB3 /* AddressEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A495C21353E4100CF1FB3 /* AddressEditViewController.m */; };
 		188A4961213544CC00CF1FB3 /* BoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A4960213544CC00CF1FB3 /* BoxViewController.m */; };
+		18D8DE59214112600072B58D /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8DE58214112600072B58D /* OrderListViewController.m */; };
+		18D8DE5C214112700072B58D /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8DE5B214112700072B58D /* OrderDetailViewController.m */; };
+		18D8DE6021411C090072B58D /* OrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8DE5E21411C090072B58D /* OrderListTableViewCell.m */; };
+		18D8DE6121411C090072B58D /* OrderListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D8DE5F21411C090072B58D /* OrderListTableViewCell.xib */; };
+		18D8DE6421421D300072B58D /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8DE6321421D300072B58D /* SearchViewController.m */; };
 		18DE7CF1211AE3D9002E5CD0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 184649D421199EB500D0BD11 /* Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -561,6 +566,15 @@
 		188A495D21353E4100CF1FB3 /* AddressEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressEditViewController.h; sourceTree = "<group>"; };
 		188A495F213544CC00CF1FB3 /* BoxViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoxViewController.h; sourceTree = "<group>"; };
 		188A4960213544CC00CF1FB3 /* BoxViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoxViewController.m; sourceTree = "<group>"; };
+		18D8DE57214112600072B58D /* OrderListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderListViewController.h; sourceTree = "<group>"; };
+		18D8DE58214112600072B58D /* OrderListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderListViewController.m; sourceTree = "<group>"; };
+		18D8DE5A214112700072B58D /* OrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
+		18D8DE5B214112700072B58D /* OrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		18D8DE5D21411C090072B58D /* OrderListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderListTableViewCell.h; sourceTree = "<group>"; };
+		18D8DE5E21411C090072B58D /* OrderListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderListTableViewCell.m; sourceTree = "<group>"; };
+		18D8DE5F21411C090072B58D /* OrderListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderListTableViewCell.xib; sourceTree = "<group>"; };
+		18D8DE6221421D300072B58D /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		18D8DE6321421D300072B58D /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -588,7 +602,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		181775A22133E0AF00474BC1 /* 地址 */ = {
+		181775A22133E0AF00474BC1 /* address */ = {
 			isa = PBXGroup;
 			children = (
 				181775A32133E0C800474BC1 /* AddressListViewController.h */,
@@ -598,7 +612,7 @@
 				181775AF21352A4300474BC1 /* HZCityViewController.h */,
 				181775B021352A4400474BC1 /* HZCityViewController.m */,
 			);
-			path = "地址";
+			path = address;
 			sourceTree = "<group>";
 		};
 		1825B22F21257E9900B0A4DE /* User */ = {
@@ -780,6 +794,8 @@
 				18464A0E211A9B2100D0BD11 /* HomeViewController.m */,
 				1825B2652126D91A00B0A4DE /* CategoryViewController.h */,
 				1825B2662126D91A00B0A4DE /* CategoryViewController.m */,
+				18D8DE6221421D300072B58D /* SearchViewController.h */,
+				18D8DE6321421D300072B58D /* SearchViewController.m */,
 				18177591212D573B00474BC1 /* PromotionViewController.h */,
 				18177592212D573C00474BC1 /* PromotionViewController.m */,
 				181775A92134E76500474BC1 /* GoodsDetailViewController.h */,
@@ -912,7 +928,8 @@
 				1817759D2133A26000474BC1 /* CouponViewController.m */,
 				188A495F213544CC00CF1FB3 /* BoxViewController.h */,
 				188A4960213544CC00CF1FB3 /* BoxViewController.m */,
-				181775A22133E0AF00474BC1 /* 地址 */,
+				18D8DE562141123E0072B58D /* Order */,
+				181775A22133E0AF00474BC1 /* address */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -939,6 +956,9 @@
 				1825B23E2126A0FD00B0A4DE /* TuiKuanTableViewCell.h */,
 				1825B23F2126A0FD00B0A4DE /* TuiKuanTableViewCell.m */,
 				1825B2402126A0FD00B0A4DE /* TuiKuanTableViewCell.xib */,
+				18D8DE5D21411C090072B58D /* OrderListTableViewCell.h */,
+				18D8DE5E21411C090072B58D /* OrderListTableViewCell.m */,
+				18D8DE5F21411C090072B58D /* OrderListTableViewCell.xib */,
 				1825B2432126A43000B0A4DE /* OrderTableViewCell.h */,
 				1825B2442126A43000B0A4DE /* OrderTableViewCell.m */,
 				1825B2452126A43000B0A4DE /* OrderTableViewCell.xib */,
@@ -1375,6 +1395,17 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
+		18D8DE562141123E0072B58D /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				18D8DE57214112600072B58D /* OrderListViewController.h */,
+				18D8DE58214112600072B58D /* OrderListViewController.m */,
+				18D8DE5A214112700072B58D /* OrderDetailViewController.h */,
+				18D8DE5B214112700072B58D /* OrderDetailViewController.m */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1500,6 +1531,7 @@
 				18464B3C211A9E9500D0BD11 /* LICENSE in Resources */,
 				18464B47211A9E9500D0BD11 /* README.md in Resources */,
 				1825B280212A8CB000B0A4DE /* CategoryTableViewCell.xib in Resources */,
+				18D8DE6121411C090072B58D /* OrderListTableViewCell.xib in Resources */,
 				1825B28F212BBA3400B0A4DE /* HomeTableViewCell2.xib in Resources */,
 				184649D021199EB500D0BD11 /* Assets.xcassets in Resources */,
 				18464B62211A9E9500D0BD11 /* LICENSE in Resources */,
@@ -1570,6 +1602,7 @@
 				1825B24B2126AA0200B0A4DE /* CouponTableViewCell.m in Sources */,
 				18464B66211A9E9500D0BD11 /* SDCollectionViewCell.m in Sources */,
 				1817759B212E4EAC00474BC1 /* AddOrderViewController.m in Sources */,
+				18D8DE5C214112700072B58D /* OrderDetailViewController.m in Sources */,
 				18464A0B211A95FC00D0BD11 /* BaseNavigationController.m in Sources */,
 				18177597212D6B7700474BC1 /* HZSubmitView.m in Sources */,
 				1825B278212A688B00B0A4DE /* QRView.m in Sources */,
@@ -1601,6 +1634,7 @@
 				18464B0F211A9E9500D0BD11 /* SVProgressHUD.m in Sources */,
 				18464B19211A9E9500D0BD11 /* UIImage+GIF.m in Sources */,
 				18464B69211A9E9500D0BD11 /* TAAnimatedDotView.m in Sources */,
+				18D8DE6021411C090072B58D /* OrderListTableViewCell.m in Sources */,
 				1825B2A0212BF19600B0A4DE /* HomeHotProduce.m in Sources */,
 				1825B22E2125254200B0A4DE /* ShopCartViewController.m in Sources */,
 				18464B25211A9E9500D0BD11 /* SDImageCacheConfig.m in Sources */,
@@ -1626,6 +1660,7 @@
 				1825B2642126CD3600B0A4DE /* HomeHeader.m in Sources */,
 				18464B6B211A9E9500D0BD11 /* MJPropertyType.m in Sources */,
 				18464B6A211A9E9500D0BD11 /* TAAbstractDotView.m in Sources */,
+				18D8DE6421421D300072B58D /* SearchViewController.m in Sources */,
 				18464B1B211A9E9500D0BD11 /* SDWebImageCoderHelper.m in Sources */,
 				1825B289212BB36200B0A4DE /* HomeTableViewCell1.m in Sources */,
 				18464B33211A9E9500D0BD11 /* AFAutoPurgingImageCache.m in Sources */,
@@ -1637,6 +1672,7 @@
 				18464B0D211A9E9400D0BD11 /* UIView+Toast.m in Sources */,
 				18464B41211A9E9500D0BD11 /* MASLayoutConstraint.m in Sources */,
 				181775B421352D1700474BC1 /* addressModel.m in Sources */,
+				18D8DE59214112600072B58D /* OrderListViewController.m in Sources */,
 				188A495E21353E4200CF1FB3 /* AddressEditViewController.m in Sources */,
 				18464B21211A9E9500D0BD11 /* NSData+ImageContentType.m in Sources */,
 				18464B27211A9E9500D0BD11 /* UIView+WebCache.m in Sources */,

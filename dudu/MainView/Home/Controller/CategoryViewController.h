@@ -17,6 +17,7 @@
     HZSubmitView * submitView;
     CartView * cartView;
 }
+@property (weak, nonatomic) IBOutlet UIView *SearchView;
 
 @property (weak, nonatomic) IBOutlet UITableView *table1;
 @property (weak, nonatomic) IBOutlet UITableView *table2;

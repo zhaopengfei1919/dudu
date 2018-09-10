@@ -9,6 +9,7 @@
 #import "CenterViewController.h"
 #import "LoginViewController.h"
 #import "CategoryViewController.h"
+#import "OrderListViewController.h"
 
 @interface CenterViewController ()
 
@@ -94,9 +95,33 @@
     }
 }
 
+- (IBAction)OrderClick:(id)sender {
+    if ([FYUser userInfo].token.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
+        return;
+    }
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    OrderListViewController * order = [sb instantiateViewControllerWithIdentifier:@"OrderListViewController"];
+    UIButton * btn = (UIButton *)sender;
+    if (btn.tag == 0) {
+        
+    }else if (btn.tag == 1){
+        
+    }else if (btn.tag == 2){
+        
+    }else if (btn.tag == 3){
+        
+    }else if (btn.tag == 4){
+        
+    }else if (btn.tag == 5){
+        
+    }
+    [self.navigationController pushViewController:order animated:YES];
+}
+
 - (IBAction)chosenCoupon:(id)sender {
     if ([FYUser userInfo].token.length == 0) {
-
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];    
         return;
     }
 //    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

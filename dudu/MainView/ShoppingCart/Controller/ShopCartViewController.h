@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShopCartViewController : UIViewController
+@interface ShopCartViewController : UIViewController{
+    UIView * tishiView;
+    UILabel * tishilabel;
+}
+@property (strong,nonatomic) NSDictionary * data;
 @property (strong,nonatomic) NSMutableArray * dataSourse;
 @property (strong,nonatomic) NSMutableArray * selectSourse;
 @property (weak, nonatomic) IBOutlet UITableView *table;
@@ -19,6 +23,7 @@
 
 - (IBAction)allchosen:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *allchosenImage;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 @property (weak, nonatomic) IBOutlet UILabel *PriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yaJinLabel;

@@ -58,6 +58,8 @@
 #define GoodsDetail @"product.getProductDetailById"
 //根据产品规格获取产品具体信息
 #define GetProductDetail @"product.getProductDetailByProductSpec"
+//搜搜
+#define Search @"product.search"
 
 
 //首页广告位
@@ -65,6 +67,21 @@
 
 //我要退筐
 #define OrderBox @"order.box.list"
+//生成退筐单
+#define ReturnBox @"return.box.create"
+//我的退筐单
+#define MyReturnBox @"return.box.list"
+
+//取消订单
+#define OrderCancel @"order.cancel"
+//订单列表
+#define Orderlist @"order.list"
+//根据订单编号付款
+#define OrderPay @"order.pay"
+//保存订单
+#define OrderSave @"order.save"
+//订单详情
+#define Orderdetail @"order.view"
 
 //加入购物车
 #define CartAdd @"cart.addProduct"

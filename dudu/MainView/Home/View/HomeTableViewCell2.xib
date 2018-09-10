@@ -97,7 +97,7 @@
                                     <action selector="addcart:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Rie-yY-ZeR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAz-gP-dVa" customClass="DDButton">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAz-gP-dVa" customClass="DDButton">
                                 <rect key="frame" x="5" y="5" width="162.5" height="195"/>
                                 <connections>
                                     <action selector="gotodetail:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="04s-i1-MLJ"/>
@@ -199,7 +199,7 @@
                                 <color key="textColor" red="0.95294117649999999" green="0.59215686270000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLX-Nk-vle">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLX-Nk-vle" customClass="DDButton">
                                 <rect key="frame" x="137.5" y="210" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="RZj-9q-zP6"/>
@@ -210,7 +210,7 @@
                                     <action selector="addcart:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2rs-ZG-geo"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oDs-4p-hcf" customClass="DDButton">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oDs-4p-hcf" customClass="DDButton">
                                 <rect key="frame" x="4.5" y="5" width="162.5" height="195"/>
                                 <connections>
                                     <action selector="gotodetail:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0mi-TX-1Fs"/>
@@ -265,7 +265,7 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="CartBtn1" destination="d6V-Zd-di7" id="Fzn-jy-nv9"/>
-                <outlet property="CartBtn2" destination="jLX-Nk-vle" id="BG6-5t-H4f"/>
+                <outlet property="CartBtn2" destination="jLX-Nk-vle" id="MKh-JM-eo2"/>
                 <outlet property="ContentLabel1" destination="jgM-4t-z0L" id="LBi-rL-Z5R"/>
                 <outlet property="ContentLabel2" destination="sFh-RR-fUe" id="Sf4-xO-tx8"/>
                 <outlet property="GuiGeLabelWidth1" destination="itX-je-VcO" id="91V-XU-MvW"/>

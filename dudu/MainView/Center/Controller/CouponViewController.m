@@ -42,10 +42,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataSourse = [[NSMutableArray alloc] init];
-    status = 0;
+    status = 1;
     [self coupon];
     [self createView];
     
+    adjustsScrollViewInsets_NO(self.table, self);
     [self.table registerNib:[UINib nibWithNibName:@"CouponTableViewCell" bundle:nil] forCellReuseIdentifier:@"CouponTableViewCell"];
     // Do any additional setup after loading the view.
 }
@@ -95,12 +96,21 @@
     if (btn.tag == 1) {
         self.btn1.selected = YES;
         self.btn2.selected = NO;
-        status = 0;
+        status = 1;
     }else{
         self.btn1.selected = NO;
         self.btn2.selected = YES;
-        status = 1;
+        status = 0;
     }
     [self coupon];
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.ischosen) {
+        if (self.chosencou) {
+            CouponModel * model = self.dataSourse[indexPath.row];
+            self.chosencou(model);
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
 }
 @end
