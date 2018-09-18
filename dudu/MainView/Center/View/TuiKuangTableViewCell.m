@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.array = [[NSMutableArray alloc]init];
     // Initialization code
 }
 
@@ -19,6 +20,14 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+-(void)setDic:(NSDictionary *)dic{
+    _dic = dic;
+    self.OrderLabel.text = [NSString stringWithFormat:@"订单号：%@",[dic safeObjectForKey:@"orderId"]];
+    self.dateLabel.text = [NSString stringWithFormat:@"下单时间：%@",[dic safeObjectForKey:@"orderDate"]];
+    NSString * effectiveDate = [[NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"effectiveDate"]] substringToIndex:10];
+    self.dateTimeLabel.text = [NSString stringWithFormat:@"%@即将过期",effectiveDate];
+    
 }
 
 @end

@@ -54,11 +54,29 @@
         self.GuiGeLabel.hidden = YES;
     
     if (model.cartNumber > 0) {
-        [self.CartBtn setBackgroundImage:[UIImage imageNamed:@""] forState:0];
+        [self.CartBtn setBackgroundImage:[UIImage imageNamed:@"加入购物车"] forState:0];
     }else
         [self.CartBtn setBackgroundImage:[UIImage imageNamed:@"加入购物车"] forState:0];
 }
+-(void)login{
+    id object = [self nextResponder];
+    while (![object isKindOfClass:[UIViewController class]] && object != nil) {
+        object = [object nextResponder];
+    }
+    UIViewController *superController = (UIViewController*)object;
+    
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController * login = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    [superController presentViewController:login animated:YES completion:^{
+        
+    }];
+}
 - (IBAction)addcart:(id)sender {
+    if ([FYUser userInfo].token.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
+        [self login];
+        return;
+    }
     if (self.model.specificationNumber == 0) {//没有规格，直接加入购物车
         NSMutableDictionary *paraDic = @{}.mutableCopy;
         [paraDic setObject:[NSNumber numberWithInt:1] forKey:@"quantity"];

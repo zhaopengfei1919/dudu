@@ -8,8 +8,10 @@
 
 #import "AppDelegate.h"
 #import "BaseTableBarControllerView.h"
+#import "WXApi.h"
 
-@interface AppDelegate ()
+
+@interface AppDelegate ()<WXApiDelegate>
 
 @end
 
@@ -20,6 +22,13 @@
     // Override point for customization after application launch.
 //    self.window.rootViewController = [[BaseTableBarControllerView alloc]init];
 //    [self.window makeKeyWindow];
+    [WXApi startLogByLevel:WXLogLevelNormal logBlock:^(NSString *log) {
+        NSLog(@"log : %@", log);
+    }];
+    
+    //向微信注册,发起支付必须注册
+    [WXApi registerApp:@"wx50dd81792e10ae50" enableMTA:YES];
+//    [WXApi registerApp:@"wx50dd81792e10ae50"];
     return YES;
 }
 
@@ -50,5 +59,57 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
+-(void)onResp:(BaseResp *)resp{
+    if ([resp isKindOfClass:[PayResp class]]){
+        PayResp*response=(PayResp*)resp;
+        switch(response.errCode){
+            case WXSuccess:
+                //服务器端查询支付通知或查询API返回的结果再提示成功
+                NSLog(@"支付成功");
+                break;
+            default:
+                NSLog(@"支付失败");
+                break;
+        }
+    }
+}
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+{
+    NSLog(@"er:%@",url.host);
+    if ([url.host isEqualToString:@"safepay"]) {
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+            NSString * str = [resultDic safeObjectForKey:@"resultStatus"];
+            if ([str intValue] == 9000) {
+                NSNotification *notification = [NSNotification notificationWithName:@"PAY_SUCCESS" object:@"success"];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+            }
+            else{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"PAY_FAILE" object:@"fail"];
+            }
+        }];
+    }
+    if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
+        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+        }];
+    }
+    if ([url.host isEqualToString:@"pay"]) {
+        NSString * str = [NSString stringWithFormat:@"%@",url];
+        NSRange range = [str rangeOfString:@"ret="];
+        NSString * ret = @"";
+        if (range.length > 0) {
+            ret = [str substringFromIndex:(range.location + range.length + 1)];
+        }
+        if ([ret intValue] == 0) {
+            NSNotification *notification = [NSNotification notificationWithName:@"PAY_SUCCESS" object:@"success"];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+        }
+        else{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"PAY_FAILE" object:@"fail"];
+        }
+    }
+    return [WXApi handleOpenURL:url delegate:self];
+    return YES;
+}
 @end

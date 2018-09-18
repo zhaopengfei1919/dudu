@@ -140,6 +140,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="Picker" destination="Fp3-uK-S7T" id="8fl-D0-FqO"/>
+                <outlet property="TitleLabel" destination="IRS-Q2-qv1" id="hYn-DH-Xoq"/>
                 <outlet property="payView" destination="7GT-6f-cs1" id="aWe-yN-Oo0"/>
                 <outlet property="scroll" destination="Xds-Nc-bVd" id="ZN2-vd-ZAO"/>
                 <outlet property="timeView" destination="4ed-tp-Wul" id="KbF-sz-SOw"/>

@@ -17,6 +17,7 @@
 - (IBAction)login:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *LoginBtn;
 
+- (IBAction)returnView:(id)sender;
 
 @property (assign) int daojishu;
 @property (nonatomic, strong) NSTimer *timer;

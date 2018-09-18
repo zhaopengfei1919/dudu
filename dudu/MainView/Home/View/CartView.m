@@ -22,9 +22,17 @@
     NSArray * cartItems = [dic safeObjectForKey:@"cartItems"];
     self.Count.text = [NSString stringWithFormat:@"%lu",cartItems.count];
     
-    NSString * boxAmount = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"boxAmount"]];
-    float money = [boxAmount floatValue];
-    NSString * str = [NSString stringWithFormat:@"￥%.1f",money];
+    float yajin = 0;
+    for (int i =0; i<cartItems.count; i++) {
+        NSDictionary * data = cartItems[i];
+        NSDictionary * dic = [data safeObjectForKey:@"productInfo"];
+        HomeModel * model = [HomeModel mj_objectWithKeyValues:dic];
+        NSString * countstr = [NSString stringWithFormat:@"%@",[data safeObjectForKey:@"quantity"]];
+        int quantity = [countstr intValue];
+        yajin = yajin + model.boxPrice * quantity;
+    }
+    
+    NSString * str = [NSString stringWithFormat:@"￥%.1f",yajin];
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 1)];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(1, string.length - 1)];

@@ -27,9 +27,10 @@
         NSString * code = [responseObject safeObjectForKey:@"code"];
         if ([code isEqualToString:@"0"]) {
             NSLog(@"%@",responseObject);
+            [weakself.table.mj_footer endRefreshing];
             NSArray * data = [responseObject objectForKey:@"data"];
             NSArray * array = [HomeModel mj_objectArrayWithKeyValuesArray:data];
-            if (array.count == 0) {
+            if (array.count == 0 && self->page_number == 1) {
                 self->tishiView.hidden = NO;
             }else
                 self->tishiView.hidden = YES;
@@ -51,7 +52,7 @@
     
     [self createView];
     [self refreshUI];
-    page_number = 0;
+    page_number = 1;
     // Do any additional setup after loading the view.
 }
 -(void)refreshUI{
@@ -120,6 +121,15 @@
     return cell;
 }
 -(void)addcart:(UIButton *)btn{
+    if ([FYUser userInfo].token.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
+        UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        LoginViewController * login = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        [self presentViewController:login animated:YES completion:^{
+            
+        }];
+        return;
+    }
     HomeModel * model = self.dataSourse[btn.tag];
     if (model.specificationNumber == 0) {//没有规格，直接加入购物车
         NSMutableDictionary *paraDic = @{}.mutableCopy;

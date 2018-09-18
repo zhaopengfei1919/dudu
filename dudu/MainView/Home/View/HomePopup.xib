@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HomePopup">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cny-Eq-3tF">
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ysw-yk-OfG">
+                    <rect key="frame" x="37" y="153" width="300" height="360"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="360" id="FV8-G9-Ee8"/>
+                        <constraint firstAttribute="width" constant="300" id="SMd-rd-cPp"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDt-TN-veh">
+                    <rect key="frame" x="37" y="153" width="300" height="360"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="XHF-h8-R2g"/>
+                        <constraint firstAttribute="height" constant="360" id="ax9-cr-LFI"/>
+                    </constraints>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQl-4L-2k5">
+                    <rect key="frame" x="167" y="533" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="H86-AG-NFD"/>
+                        <constraint firstAttribute="height" constant="40" id="Nf4-XU-0Wv"/>
+                    </constraints>
+                    <state key="normal" image="弹窗关闭"/>
+                    <connections>
+                        <action selector="removeView:" destination="iN0-l3-epB" eventType="touchUpInside" id="QD1-6D-bGo"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="ZQl-4L-2k5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="13R-oD-YnT"/>
+                <constraint firstItem="cny-Eq-3tF" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="36U-ng-tmT"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="cny-Eq-3tF" secondAttribute="bottom" id="4qu-0w-AxF"/>
+                <constraint firstItem="DDt-TN-veh" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="I77-mq-bs7"/>
+                <constraint firstItem="cny-Eq-3tF" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="aU6-aJ-ErM"/>
+                <constraint firstItem="DDt-TN-veh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="f8F-xs-Sjq"/>
+                <constraint firstItem="ysw-yk-OfG" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fys-o3-5xM"/>
+                <constraint firstItem="ysw-yk-OfG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hbl-qB-6sH"/>
+                <constraint firstItem="ZQl-4L-2k5" firstAttribute="top" secondItem="ysw-yk-OfG" secondAttribute="bottom" constant="20" id="nQv-ex-hSl"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cny-Eq-3tF" secondAttribute="trailing" id="qyx-dc-Js5"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="clickBtn" destination="DDt-TN-veh" id="AI5-aC-vMq"/>
+                <outlet property="images" destination="ysw-yk-OfG" id="TY8-EG-zee"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="弹窗关闭" width="30" height="30"/>
+    </resources>
+</document>

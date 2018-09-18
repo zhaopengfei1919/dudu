@@ -17,6 +17,10 @@
 #import "BaseTableBarControllerView.h"
 #import "PromotionModel.h"
 #import "GoodsDetailViewController.h"
+#import "PromotionViewController.h"
+#import "CategoryViewController.h"
+#import "SearchViewController.h"
+#import "WebViewController.h"
 
 @interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,homeHeaderViewDelegate>
 
@@ -47,6 +51,31 @@
             self->header.Scroll.hidden = NO;
         }else
             self->header.Scroll.hidden = YES;
+    } requestRrror:^(id requestRrror) {
+        
+    }];
+}
+//首页广告弹窗
+-(void)tanchuang{
+    WS(weakself);
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    [paraDic setObject:[NSNumber numberWithInt:1] forKey:@"adPositionId"];
+    
+    [NetWorkManager requestWithMethod:POST Url:AdList Parameters:paraDic success:^(id responseObject) {
+        NSString * code = [responseObject objectForKey:@"code"];
+        if ([code intValue] == 0) {
+            NSArray * data = [responseObject safeObjectForKey:@"data"];
+            if (data.count > 0) {
+                NSDictionary * dic = data[0];
+                weakself.popupDic = dic;
+                UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+                self->popup = [[[NSBundle mainBundle] loadNibNamed:@"HomePopup" owner:self options:nil] objectAtIndex:0];
+                self->popup.frame = window.bounds;
+                [self->popup.clickBtn addTarget:self action:@selector(popupbtnclick) forControlEvents:UIControlEventTouchUpInside];
+                [self->popup.images sd_setImageWithURL:[NSURL URLWithString:[dic safeObjectForKey:@"path"]]];
+                [window addSubview:self->popup];
+            }
+        }
     } requestRrror:^(id requestRrror) {
         
     }];
@@ -121,23 +150,59 @@
     self.bannerList = [[NSMutableArray alloc]init];
     [self hotproduce];
     [self adlist];
+    [self tanchuang];
     [self promotion];
-        
+    
+    self.tableTop.constant = -StatusHeight;
     adjustsScrollViewInsets_NO(self.table, self);
     [self.table registerNib:[UINib nibWithNibName:@"HomeTableViewCell1" bundle:nil] forCellReuseIdentifier:@"HomeTableViewCell1"];
     [self.table registerNib:[UINib nibWithNibName:@"HomeTableViewCell2" bundle:nil] forCellReuseIdentifier:@"HomeTableViewCell2"];
     [self.table registerNib:[UINib nibWithNibName:@"HomeTableViewCell3" bundle:nil] forCellReuseIdentifier:@"HomeTableViewCell3"];
     
-    UIView *baseHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , SCRXFrom6(140))];
+    UIView *baseHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , SCREEN_WIDTH/2)];
     header = [[[NSBundle mainBundle] loadNibNamed:@"HomeHeader" owner:self options:nil] objectAtIndex:0];
-    header.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCRXFrom6(140));
+    header.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH/2);
     header.delegate = self;
     [baseHeaderView addSubview:header];
     self.table.tableHeaderView = baseHeaderView;
     // Do any additional setup after loading the view.
 }
 -(void)homeScrollViewClickWith:(NSInteger)index{
-    
+    NSDictionary * dic = self.bannerList[index];
+    [self clicktoViewcontroller:dic];
+}
+-(void)popupbtnclick{
+    [popup removeFromSuperview];
+    [self clicktoViewcontroller:self.popupDic];
+}
+-(void)clicktoViewcontroller:(NSDictionary *)dic{
+    NSString * type = [dic safeObjectForKey:@"type"];
+    if ([type isEqualToString:@"product"]) {//商品详情
+        UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        GoodsDetailViewController * detail = [sb instantiateViewControllerWithIdentifier:@"GoodsDetailViewController"];
+        detail.GoodsID = [dic safeObjectForKey:@"value"];
+        [self.navigationController pushViewController:detail animated:YES];
+    }else if ([type isEqualToString:@"promotion"]){//促销详情
+        UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PromotionViewController * promotion = [sb instantiateViewControllerWithIdentifier:@"PromotionViewController"];
+        promotion.ID = [dic safeObjectForKey:@"value"];;
+        promotion.imageurl = [dic safeObjectForKey:@"path"];
+        [self.navigationController pushViewController:promotion animated:YES];
+    }else if ([type isEqualToString:@"productCategory"]){//分类界面
+        UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        CategoryViewController * category = [sb instantiateViewControllerWithIdentifier:@"CategoryViewController"];
+        [self.navigationController pushViewController:category animated:YES];
+    }else if ([type isEqualToString:@"weburl"]){//h5
+        WebViewController * web = [[WebViewController alloc]init];
+        web.Titlestr = [dic safeObjectForKey:@"title"];
+        web.HtmlUrl = [dic safeObjectForKey:@"value"];
+        web.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:web animated:YES];
+    }else if ([type isEqualToString:@"search"]){//搜索界面
+        UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        SearchViewController * search = [sb instantiateViewControllerWithIdentifier:@"SearchViewController"];
+        [self.navigationController pushViewController:search animated:YES];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -189,7 +254,6 @@
     if (self.promotionSourse.count > 0 && section == 0) {
         int number = (int)self.promotionSourse.count;
         int num = number%3 > 0 ? number/3 + 1 : number/3;
-        NSLog(@"%d,%d",number,num);
         return num;
     }
     if (self.promotionSourse.count > 0 && section > 0) {
@@ -201,9 +265,9 @@
         return products.count;
     }
     NSInteger coun = products.count;
-//    if (coun % 2 == 1) {
-//        return coun/2 + 1;
-//    }
+    if (coun % 2 == 1) {
+        return coun/2 + 1;
+    }
     return coun/2;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -245,7 +309,10 @@
         return cell;
     }
     HomeTableViewCell2 * cell = [tableView dequeueReusableCellWithIdentifier:@"HomeTableViewCell2" forIndexPath:indexPath];
-    cell.array = [produceModel subarrayWithRange:NSMakeRange(indexPath.row * 2, 2)];
+    if (indexPath.row * 2 + 2 > produceModel.count) {
+        cell.array = [produceModel subarrayWithRange:NSMakeRange(indexPath.row * 2, 1)];
+    }else
+        cell.array = [produceModel subarrayWithRange:NSMakeRange(indexPath.row * 2, 2)];
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

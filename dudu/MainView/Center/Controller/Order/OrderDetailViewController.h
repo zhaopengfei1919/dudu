@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface OrderDetailViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITableView *table;
 
+@property (strong,nonatomic) NSMutableArray * dataSourse;
+@property (strong,nonatomic) NSString * orderid;
+
+@property (strong,nonatomic) NSDictionary * data;
 @end

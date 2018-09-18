@@ -118,6 +118,15 @@
     return cell;
 }
 -(void)addcart:(UIButton *)btn{
+    if ([FYUser userInfo].token.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
+        UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        LoginViewController * login = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        [self presentViewController:login animated:YES completion:^{
+            
+        }];
+        return;
+    }
     HomeModel * model = self.dataSourse[btn.tag];
     if (model.specificationNumber == 0) {//没有规格，直接加入购物车
         NSMutableDictionary *paraDic = @{}.mutableCopy;

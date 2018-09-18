@@ -44,6 +44,24 @@
         
     }];
 }
+//购物车数量
+-(void)cartcount{
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    [paraDic setObject:[FYUser userInfo].token forKey:@"token"];
+    [NetWorkManager requestWithMethod:POST Url:CartCount Parameters:paraDic success:^(id responseObject) {
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code intValue] == 0) {
+            int data = [[responseObject safeObjectForKey:@"data"] intValue];
+            if (data > 0) {
+                AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                BaseTableBarControllerView *tabbar = (BaseTableBarControllerView *)delegate.window.rootViewController;
+                [tabbar.tabBar showBadgeOnItemIndex:2 Withnum:data];
+            }
+        }
+    } requestRrror:^(id requestRrror) {
+        
+    }];
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if ([FYUser userInfo].token.length > 0) {
@@ -132,6 +150,7 @@
                     [weakself checkinallchosen];
                 }
                 [weakself cartlist];
+                [weakself cartcount];
             }else
                 [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
         } requestRrror:^(id requestRrror) {
@@ -250,18 +269,25 @@
         money = money + model.price * quantity;
         yajin = yajin + model.boxPrice * quantity;
     }
-    NSString * boxAmount = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"boxAmount"]];
+//    NSString * boxAmount = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"boxAmount"]];
     NSString * freeFreight = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"freeFreight"]];
     if (money < [freeFreight floatValue]) {
-        self.tishiLabel.text = [NSString stringWithFormat:@"还差%.2f元起送",[freeFreight floatValue] - money];
+        self.tishiLabel.text = [NSString stringWithFormat:@"还差%.2f元免运费",[freeFreight floatValue] - money];
         self.tishiHeight.constant = 26;
         self.tishi.hidden = NO;
         self.yaJinLabel.text = [NSString stringWithFormat:@"另需筐押金%.0f元，运费%@",yajin,[self.data safeObjectForKey:@"freight"]];
-        
     }else{
         self.tishiHeight.constant = 0;
         self.tishi.hidden = YES;
         self.yaJinLabel.text = [NSString stringWithFormat:@"另需筐押金%.0f元",yajin];
+    }
+    NSString * minPrice = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"minPrice"]];
+    if (money < [minPrice floatValue]) {
+        self.sureBtn.backgroundColor = UIColorFromRGB(0xcccccc);
+        self.sureBtn.enabled = NO;
+    }else{
+        self.sureBtn.backgroundColor = UIColorFromRGB(0x20d994);
+        self.sureBtn.enabled = YES;
     }
     
     NSString * str = [NSString stringWithFormat:@"合计￥%.1f",money];
@@ -283,10 +309,10 @@
     [self.table reloadData];
 }
 - (IBAction)sure:(id)sender {
-    if (!self.tishi.hidden) {
-        [SVProgressHUD showErrorWithStatus:@"尚未达到起送价"];
-        return;
-    }
+//    if (!self.tishi.hidden) {
+//        [SVProgressHUD showErrorWithStatus:@"尚未达到起送价"];
+//        return;
+//    }
     UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     AddOrderViewController * addorder = [sb instantiateViewControllerWithIdentifier:@"AddOrderViewController"];
     NSMutableArray * array = [[NSMutableArray alloc]init];
@@ -301,6 +327,7 @@
         [paraDic setObject:count forKey:@"quantity"];
         [array addObject:paraDic];
     }
+    [self.selectSourse removeAllObjects];
     addorder.listArray = array;
     [self.navigationController pushViewController:addorder animated:YES];
 }

@@ -74,12 +74,16 @@
 
 //取消订单
 #define OrderCancel @"order.cancel"
+//订单评价
+#define OrderComment @"order.getComment"
 //订单列表
 #define Orderlist @"order.list"
 //根据订单编号付款
 #define OrderPay @"order.pay"
 //保存订单
 #define OrderSave @"order.save"
+//保存订单评价
+#define OrderSaveComment @"order.saveComment"
 //订单详情
 #define Orderdetail @"order.view"
 

@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "CategoryViewController.h"
 #import "OrderListViewController.h"
+#import "BoxViewController.h"
 
 @interface CenterViewController ()
 
@@ -40,6 +41,10 @@
         self.LevelLabel.hidden = NO;
         self.LevelLabel.layer.cornerRadius = 3;
     }
+    if (usermodel.isHasSalesman) {
+        self.SalesManLabel.text = [NSString stringWithFormat:@"%@",usermodel.salesmanName];
+    }else
+        self.SalesManLabel.text = @"请添加您的业务员";
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -58,18 +63,11 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.ScrollTop.constant = - StatusHeight;
+//    self.ScrollTop.constant = - StatusHeight;
     self.backImage.layer.cornerRadius = 33;
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpTocategoryController) name:@"pushcategory" object:nil];
-
+    adjustsScrollViewInsets_NO(self.scroll, self);
     // Do any additional setup after loading the view.
-}
-- (void)jumpTocategoryController{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"pushcategory" object:nil];
-    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    CategoryViewController * category = [sb instantiateViewControllerWithIdentifier:@"CategoryViewController"];
-    [self.navigationController pushViewController:category animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -87,12 +85,18 @@
 */
 
 - (IBAction)ChosenSalesman:(id)sender {
-    if ([FYUser userInfo].token.length > 0) {
-        [self performSegueWithIdentifier:@"mysalesman" sender:nil];
-    }else{
+    if ([FYUser userInfo].token.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"请先登录"];
-        [self loginclick];
+        return;
     }
+    [self performSegueWithIdentifier:@"mysalesman" sender:nil];
+    
+//    if ([FYUser userInfo].token.length > 0) {
+//        [self performSegueWithIdentifier:@"mysalesman" sender:nil];
+//    }else{
+//        [SVProgressHUD showErrorWithStatus:@"请先登录"];
+//        [self loginclick];
+//    }
 }
 
 - (IBAction)OrderClick:(id)sender {
@@ -103,18 +107,19 @@
     UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     OrderListViewController * order = [sb instantiateViewControllerWithIdentifier:@"OrderListViewController"];
     UIButton * btn = (UIButton *)sender;
-    if (btn.tag == 0) {
-        
+    if (btn.tag == 0) {//all=全部,unpaid=待付款,unshipped=待发货,shipped=配送中,complete=已完成,cancel=已取消
+        order.status = @"0";
     }else if (btn.tag == 1){
-        
+        order.status = @"1";
     }else if (btn.tag == 2){
-        
+        order.status = @"2";
     }else if (btn.tag == 3){
-        
+        order.status = @"3";
     }else if (btn.tag == 4){
-        
+        order.status = @"4";
     }else if (btn.tag == 5){
-        
+        order.status = @"5";
+
     }
     [self.navigationController pushViewController:order animated:YES];
 }
@@ -124,24 +129,31 @@
         [SVProgressHUD showErrorWithStatus:@"请先登录"];    
         return;
     }
-//    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    AddressEditViewController * edit = [sb instantiateViewControllerWithIdentifier:@"AddressEditViewController"];
-//    [self.navigationController pushViewController:edit animated:YES];
     [self performSegueWithIdentifier:@"gotocoupon" sender:nil];
 }
 
 - (IBAction)myaddress:(id)sender {
     if ([FYUser userInfo].token.length == 0) {
-        
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
         return;
     }
     [self performSegueWithIdentifier:@"gotoaddress" sender:nil];
 }
 
 - (IBAction)myTuikuan:(id)sender {
+    if ([FYUser userInfo].token.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
+        return;
+    }
+    [self performSegueWithIdentifier:@"tuikuang" sender:nil];
 }
 
 - (IBAction)myTuikuang:(id)sender {
+    if ([FYUser userInfo].token.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
+        return;
+    }
+    [self performSegueWithIdentifier:@"tuikuangList" sender:nil];
 }
 
 - (IBAction)login:(id)sender {

@@ -24,10 +24,13 @@
 -(void)setArray:(NSArray *)array{
     _array = array;
     HomeModel * model1 = array[0];
-    HomeModel * model2 = array[1];
-    
+    HomeModel * model2 = [[HomeModel alloc]init];;
+    if (array.count == 2) {
+        model2 = array[1];
+        self.CartBtn2.dic = @{@"ID":model2.ID};
+    }
+
     self.CartBtn1.dic = @{@"ID":model1.ID};
-    self.CartBtn2.dic = @{@"ID":model2.ID};
     
     [self.Image1 sd_setImageWithURL:[NSURL URLWithString:model1.image] placeholderImage:[UIImage imageNamed:@"logo拷贝"]];
     self.TitleLabel1.text = model1.name;
@@ -61,50 +64,53 @@
         self.GuigeLabel1.hidden = YES;
     
     if (model1.cartNumber > 0) {
-        [self.CartBtn1 setBackgroundImage:[UIImage imageNamed:@""] forState:0];
+        [self.CartBtn1 setBackgroundImage:[UIImage imageNamed:@"加入购物车"] forState:0];
     }else
         [self.CartBtn1 setBackgroundImage:[UIImage imageNamed:@"加入购物车"] forState:0];
     
+    self.View2.hidden = YES;
+    if (array.count == 2) {
+        self.View2.hidden = NO;
+        [self.image2 sd_setImageWithURL:[NSURL URLWithString:model2.image] placeholderImage:[UIImage imageNamed:@"logo拷贝"]];
+        self.TitleLabel2.text = model2.name;
+        if (model2.memo.length > 0) {
+            self.ContentLabel2.text = model2.memo;
+        }else
+            self.ContentLabel2.text = @"";
+        if (model2.tag.length > 0) {
+            self.isCoupon2.hidden = NO;
+            [self.isCoupon2 setTitle:model2.tag forState:0];
+        }else
+            self.isCoupon2.hidden = YES;
+        
+        self.unitPriceLabel2.text = [NSString stringWithFormat:@"￥%.1f/%@",model2.unitPrice,model2.unit];
+        
+        NSString * str1 = [NSString stringWithFormat:@"总价￥%.1f",model2.price];
+        NSMutableAttributedString * string1 = [[NSMutableAttributedString alloc]initWithString:str1];
+        [string1 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 3)];
+        [string1 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string1.length - 3)];
+        self.PriceLabel2.attributedText = string1;
+        
+        if (model2.packaging.length > 0) {
+            self.GuigeLabel2.text = model2.packaging;
+            self.GuigeLabel2.hidden = NO;
+            self.GuigeLabel2.layer.cornerRadius = 3;
+            self.GuigeLabel2.layer.borderWidth = 0.5;
+            self.GuigeLabel2.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
+            CGSize size = [[FYUser userInfo] sizeForString:model2.packaging withFontSize:10 withWidth:200];
+            self.GuigeLabelWidth2.constant = size.width + 8;
+        }else
+            self.GuigeLabel2.hidden = YES;
+        
+        if (model2.cartNumber > 0) {
+            [self.CartBtn2 setBackgroundImage:[UIImage imageNamed:@"加入购物车"] forState:0];
+        }else
+            [self.CartBtn2 setBackgroundImage:[UIImage imageNamed:@"加入购物车"] forState:0];
+    }
     
-    
-    [self.image2 sd_setImageWithURL:[NSURL URLWithString:model2.image] placeholderImage:[UIImage imageNamed:@"logo拷贝"]];
-    self.TitleLabel2.text = model2.name;
-    if (model2.memo.length > 0) {
-        self.ContentLabel2.text = model2.memo;
-    }else
-        self.ContentLabel2.text = @"";
-    if (model2.tag.length > 0) {
-        self.isCoupon2.hidden = NO;
-        [self.isCoupon2 setTitle:model2.tag forState:0];
-    }else
-        self.isCoupon2.hidden = YES;
-    
-    self.unitPriceLabel2.text = [NSString stringWithFormat:@"￥%.1f/%@",model2.unitPrice,model2.unit];
-    
-    NSString * str1 = [NSString stringWithFormat:@"总价￥%.1f",model2.price];
-    NSMutableAttributedString * string1 = [[NSMutableAttributedString alloc]initWithString:str1];
-    [string1 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 3)];
-    [string1 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string1.length - 3)];
-    self.PriceLabel2.attributedText = string1;
-    
-    if (model2.packaging.length > 0) {
-        self.GuigeLabel2.text = model2.packaging;
-        self.GuigeLabel2.hidden = NO;
-        self.GuigeLabel2.layer.cornerRadius = 3;
-        self.GuigeLabel2.layer.borderWidth = 0.5;
-        self.GuigeLabel2.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
-        CGSize size = [[FYUser userInfo] sizeForString:model2.packaging withFontSize:10 withWidth:200];
-        self.GuigeLabelWidth2.constant = size.width + 8;
-    }else
-        self.GuigeLabel2.hidden = YES;
-    
-    if (model2.cartNumber > 0) {
-        [self.CartBtn2 setBackgroundImage:[UIImage imageNamed:@""] forState:0];
-    }else
-        [self.CartBtn2 setBackgroundImage:[UIImage imageNamed:@"加入购物车"] forState:0];
 }
 - (IBAction)gotodetail:(id)sender {
-    DDButton * btn = (DDButton *)sender;
+    UIButton * btn = (UIButton *)sender;
     id object = [self nextResponder];
     while (![object isKindOfClass:[UIViewController class]] && object != nil) {
         object = [object nextResponder];
@@ -113,11 +119,23 @@
     
     UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     GoodsDetailViewController * detail = [sb instantiateViewControllerWithIdentifier:@"GoodsDetailViewController"];
-    HomeModel * model = [btn.dic safeObjectForKey:@"ID"];
+    HomeModel * model = self.array[btn.tag - 1];
     detail.GoodsID = model.ID;
     [superController.navigationController pushViewController:detail animated:YES];
 }
-
+-(void)login{
+    id object = [self nextResponder];
+    while (![object isKindOfClass:[UIViewController class]] && object != nil) {
+        object = [object nextResponder];
+    }
+    UIViewController *superController = (UIViewController*)object;
+    
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController * login = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    [superController presentViewController:login animated:YES completion:^{
+        
+    }];
+}
 - (IBAction)addcart:(id)sender {
     DDButton * btn = (DDButton *)sender;
     HomeModel * model = [[HomeModel alloc]init];
@@ -125,6 +143,11 @@
         model = self.array[0];
     }else
         model = self.array[1];
+    if ([FYUser userInfo].token.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
+        [self login];
+        return;
+    }
     if (model.specificationNumber == 0) {//没有规格，直接加入购物车
         NSMutableDictionary *paraDic = @{}.mutableCopy;
         [paraDic setObject:[NSNumber numberWithInt:1] forKey:@"quantity"];

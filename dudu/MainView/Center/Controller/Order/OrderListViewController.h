@@ -13,10 +13,15 @@
     UIView * tishiView;
     UIButton * remberBtn;
 }
+@property (weak, nonatomic) IBOutlet UIButton *AllBtn;
 @property (weak, nonatomic) IBOutlet UITableView *table;
 @property (strong,nonatomic) NSMutableArray * dataSourse;
 
-@property (assign) NSInteger status;
+- (IBAction)statusClick:(id)sender;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *LingLeft;
+
+@property (assign) NSString * status;
 
 
 @end

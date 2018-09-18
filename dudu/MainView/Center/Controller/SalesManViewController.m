@@ -19,7 +19,7 @@
     WS(weakself);
     NSMutableDictionary *paraDic = @{}.mutableCopy;
     
-    [NetWorkManager requestWithMethod:POST Url:MyCoupon Parameters:paraDic success:^(id responseObject) {
+    [NetWorkManager requestWithMethod:POST Url:MySalesMan Parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         NSString * code = [responseObject safeObjectForKey:@"code"];
         NSDictionary * data = [responseObject safeObjectForKey:@"data"];

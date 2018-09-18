@@ -76,7 +76,7 @@
     UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
     
     self.chosenView = [[[NSBundle mainBundle] loadNibNamed:@"ChosenTimeAndStyle" owner:self options:nil] objectAtIndex:0];
-    self.chosenView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    self.chosenView.frame = window.bounds;
     self.chosenView.tyle = @"time";
     self.chosenView.array = self.timeArray;
     [window addSubview:self.chosenView];

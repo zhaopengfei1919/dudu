@@ -10,8 +10,12 @@
 #import "OrderHeaderView.h"
 #import "OrderFooterView.h"
 
-@interface AddOrderViewController : UIViewController
+@interface AddOrderViewController : UIViewController{
+    CGFloat _currentKeyboardH;
+    CGFloat _transformY;
+}
 @property (weak, nonatomic) IBOutlet UITableView *table;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableBottom;
 
 @property (strong,nonatomic) NSDictionary * data;
 @property (strong,nonatomic) NSMutableArray * dataSourse;

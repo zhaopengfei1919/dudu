@@ -8,8 +8,9 @@
 
 #import "AddOrderViewController.h"
 #import "OrderTableViewCell.h"
+#import "OrderListViewController.h"
 
-@interface AddOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface AddOrderViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 @end
 
@@ -35,6 +36,70 @@
         
     }];
 }
+//购物车数量
+-(void)cartcount{
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    [paraDic setObject:[FYUser userInfo].token forKey:@"token"];
+    [NetWorkManager requestWithMethod:POST Url:CartCount Parameters:paraDic success:^(id responseObject) {
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code intValue] == 0) {
+            int data = [[responseObject safeObjectForKey:@"data"] intValue];
+            if (data > 0) {
+                AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                BaseTableBarControllerView *tabbar = (BaseTableBarControllerView *)delegate.window.rootViewController;
+                [tabbar.tabBar showBadgeOnItemIndex:2 Withnum:data];
+            }
+        }
+    } requestRrror:^(id requestRrror) {
+        
+    }];
+}
+#pragma mark --键盘的显示隐藏--
+-(void)keyboardWillShow:(NSNotification *)notification{
+    //键盘最后的frame
+    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat height = keyboardFrame.size.height;
+    //需要移动的距离
+    if (height > 0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.tableBottom.constant = height - 77;
+        }];
+    }
+}
+-(void)keyboardWillHide:(NSNotification *)notification{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.tableBottom.constant = 0;
+    }];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chewkPrice) name:@"chosenCoupon" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySuccess:) name:@"PAY_SUCCESS" object:nil];
+    ;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payFaile:) name:@"PAY_FAILE" object:nil];
+    ;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"chosenCoupon" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PAY_SUCCESS" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PAY_FAILE" object:nil];
+}
+
+- (void)paySuccess:(NSNotification *)notification{
+    [self cartcount];
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    OrderListViewController * order = [sb instantiateViewControllerWithIdentifier:@"OrderListViewController"];
+    order.status = @"1";
+    [self.navigationController pushViewController:order animated:YES];
+}
+- (void)payFaile:(NSNotification *)notification{
+    [SVProgressHUD showErrorWithStatus:@"支付失败"];
+}
+
 -(void)chewkPrice{
     NSDictionary * addressdic = [self.data safeObjectForKey:@"receiverInfo"];
     if (addressdic.count > 0) {
@@ -47,46 +112,59 @@
         self.headerView.areaLabel.text = [NSString stringWithFormat:@"上海市%@%@",[areaInfo safeObjectForKey:@"name"],model.address];
     }
     
-    self.footerView.AllPriceLabel.text = [NSString stringWithFormat:@"￥%@",[self.data safeObjectForKey:@"productAmount"]];
     float productAmount = [[NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"productAmount"]] floatValue];
+    self.footerView.AllPriceLabel.text = [NSString stringWithFormat:@"￥%.2f",productAmount];
     
-    self.footerView.yajinLabel.text = [NSString stringWithFormat:@"+￥%@",[self.data safeObjectForKey:@"boxAmount"]];
-    self.footerView.yunfeiLabel.text = [NSString stringWithFormat:@"+￥%@",[self.data safeObjectForKey:@"freight"]];
-    self.footerView.payMoney.text = [NSString stringWithFormat:@"-￥%@",[self.data safeObjectForKey:@"onlineDiscount"]];
+    float boxAmount = [[NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"boxAmount"]] floatValue];
+    float freight = [[NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"freight"]] floatValue];
+    float onlineDiscount = [[NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"onlineDiscount"]] floatValue];
+    productAmount = productAmount + boxAmount + freight - onlineDiscount;
+    self.footerView.yajinLabel.text = [NSString stringWithFormat:@"+￥%.2f",boxAmount];
+    self.footerView.yunfeiLabel.text = [NSString stringWithFormat:@"+￥%.2f",freight];
+    self.footerView.payMoney.text = [NSString stringWithFormat:@"-￥%.2f",onlineDiscount];
+    
+    NSArray * giftItemInfos = [self.data safeObjectForKey:@"giftItemInfos"];
+    if (giftItemInfos.count == 0) {
+        self.footerView.GiftLabel.text = @"无可用";
+        self.footerView.giftBtn.enabled = NO;
+    }else{
+        self.footerView.giftBtn.enabled = YES;
+        self.footerView.GiftLabel.text = @"点击选择";
+        self.footerView.giftArray = giftItemInfos;
+    }
     
     NSArray * anHaos = [self.data safeObjectForKey:@"anHaos"];
     if (anHaos.count == 0) {
         self.footerView.couponLabel.text = @"无可用";
         self.footerView.CouponBtn.enabled = NO;
-        self.footerView.couponMoney.text = @"￥0";
+        self.footerView.couponMoney.text = @"￥0.0";
     }else{
-        self.footerView.couponLabel.text = @"点击选择";
         self.footerView.CouponBtn.enabled = YES;
         if (![self.footerView.couponLabel.text isEqualToString:@"点击选择"]) {
-            NSInteger amount = self.footerView.coumodel.amount;
+            float amount = self.footerView.coumodel.amount;
             productAmount = productAmount - amount;
-            self.footerView.couponMoney.text = [NSString stringWithFormat:@"-￥%ld",amount];
+            self.footerView.couponMoney.text = [NSString stringWithFormat:@"-￥%.2f",amount];
         }else
-            self.footerView.couponMoney.text = @"￥0";
+            self.footerView.couponMoney.text = @"￥0.0";
     }
     
     NSInteger userPoint = [[NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"userPoint"]] integerValue];
     if (userPoint == 0) {
-        self.footerView.jifenLabel.text = @"无可用";
+        self.footerView.jifenLabel.text = @"无可用积分";
         self.footerView.jifenBtn.enabled = NO;
-        self.footerView.jifenMoney.text = @"￥0";
+        self.footerView.jifenMoney.text = @"￥0.0";
     }else{
-        self.footerView.couponLabel.text = @"点击选择";
-        self.footerView.CouponBtn.enabled = YES;
-        if (![self.footerView.jifenMoney.text isEqualToString:@"点击选择"]) {
-            NSInteger amount = self.footerView.coumodel.amount;
-            productAmount = productAmount - amount;
-            self.footerView.jifenMoney.text = [NSString stringWithFormat:@"-￥%ld",amount];
+        float jifenprice = (float)userPoint/100;
+        self.footerView.jifenLabel.text = [NSString stringWithFormat:@"积分抵扣%.2f元",jifenprice];
+        self.footerView.jifenBtn.enabled = YES;
+        if (self.footerView.jifenBtn.selected) {
+            self.footerView.jifenMoney.text = [NSString stringWithFormat:@"-￥%.2f元",jifenprice];
+            productAmount -= jifenprice;
         }else
-            self.footerView.jifenMoney.text = @"￥0";
+            self.footerView.jifenMoney.text = @"￥0.0";
     }
     
-    NSString * str = [NSString stringWithFormat:@"实付金额：￥%.1f",productAmount];
+    NSString * str = [NSString stringWithFormat:@"实付金额：￥%.2f",productAmount];
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 6)];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(6, string.length - 6)];
@@ -176,7 +254,6 @@
         return;
     }
     
-    
     WS(weakself);
     NSMutableDictionary *paraDic = @{}.mutableCopy;
     [paraDic setObject:_headerView.addressID forKey:@"receiverId"];
@@ -187,8 +264,15 @@
     if (self.footerView.coumodel.no.length > 0) {
         [paraDic setObject:@[self.footerView.coumodel.no] forKey:@"anHaos"];
     }
-    [paraDic setObject:self.footerView.RemarkTF.text forKey:@"memo"];
-    
+    if (self.footerView.RemarkTF.text.length > 0) {
+        [paraDic setObject:self.footerView.RemarkTF.text forKey:@"memo"];
+    }
+    if (self.footerView.giftid.length > 0) {
+        [paraDic setObject:self.footerView.giftid forKey:@"giftId"];
+    }
+    if (self.footerView.jifenBtn.selected) {
+        [paraDic setObject:[self.data safeObjectForKey:@"userPoint"] forKey:@"usePoint"];
+    }
     
     [NetWorkManager requestWithMethod:POST Url:OrderSave Parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
@@ -212,14 +296,37 @@
         NSString * code = [responseObject safeObjectForKey:@"code"];
         if ([code isEqualToString:@"0"]) {
             NSDictionary * data = [responseObject safeObjectForKey:@"data"];
-            [weakself paywithtyle:data];
+            NSString * paymentMethonCode = [data safeObjectForKey:@"paymentMethonCode"];//付款code，alipay:支付宝 wxpay:微信支付 cash:货到付款
+            if ([paymentMethonCode isEqualToString:@"alipay"]) {//duoduoAlipay
+                NSDictionary * aliPayResult = [data safeObjectForKey:@"aliPayResult"];
+                [weakself alipay:aliPayResult];
+            }else if ([paymentMethonCode isEqualToString:@"wxpay"]){
+                NSDictionary * wxPayResult = [data safeObjectForKey:@"wxPayResult"];
+                [weakself wxpay:wxPayResult];
+            }
         }else
             [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
     } requestRrror:^(id requestRrror) {
         
     }];
 }
--(void)paywithtyle:(NSDictionary *)dic{
-    
+-(void)alipay:(NSDictionary *)dic{
+    NSString *appScheme = @"duoduoAlipay";
+    NSString * orderInfo = [dic safeObjectForKey:@"orderInfo"];
+    // NOTE: 调用支付结果开始支付
+    [[AlipaySDK defaultService] payOrder:orderInfo fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+        NSLog(@"reslut = %@",resultDic);
+    }];
+}
+-(void)wxpay:(NSDictionary *)dic{
+    PayReq *request = [[PayReq alloc] init];
+    request.partnerId = [dic safeObjectForKey:@"partnerId"];
+    request.prepayId= [dic safeObjectForKey:@"prepayId"];
+    request.package = [dic safeObjectForKey:@"packageValue"];
+    request.nonceStr= [dic safeObjectForKey:@"nonceStr"];
+    NSMutableString *stamp  = [dic objectForKey:@"timeStamp"];
+    request.timeStamp= stamp.intValue;
+    request.sign= [dic safeObjectForKey:@"sign"];
+    [WXApi sendReq:request];
 }
 @end

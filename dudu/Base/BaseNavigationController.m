@@ -75,7 +75,17 @@
     viewController.title = viewController.title;
     
 }
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+    }
+}
 
+- (BOOL)prefersStatusBarHidden{
+    return NO;
+}
 - (void)backLastViewController {
     [self popViewControllerAnimated:YES];
 }

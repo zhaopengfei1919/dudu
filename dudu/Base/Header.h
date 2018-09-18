@@ -48,7 +48,7 @@ self.automaticallyAdjustsScrollViewInsets = NO;\
 }\
 _Pragma("clang diagnostic pop") \
 
-#define iPhoneX (([[UIScreen mainScreen] bounds].size.height - 812) ? NO : YES)
+#define iPhoneX (([[UIScreen mainScreen] bounds].size.height - 812)<0 ? NO : YES)
 //-------------------打印日志-------------------------
 //DEBUG  模式下打印日志,当前行
 #ifdef DEBUG

@@ -23,6 +23,10 @@
 #import "GCPlaceholderTextView.h"
 #import "NSDictionary+VASafeObjectForKey.h"
 
+#import "AppDelegate.h"
+#import "BaseTableBarControllerView.h"
+#import "LoginViewController.h"
+
 #import "FYUser.h"
 #import "DDButton.h"
 #import "UITabBar+badge.h"
@@ -32,6 +36,8 @@
 #import "addressModel.h"
 #import "CouponModel.h"
 
+#import "WXApi.h"
+#import <AlipaySDK/AlipaySDK.h>
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

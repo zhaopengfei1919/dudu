@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface TuiKuanTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *orderLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet UIScrollView *kuangScroll;
 
+@property (strong,nonatomic) NSDictionary * dic;
 @end

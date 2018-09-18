@@ -15,6 +15,7 @@
 #import "GoodsDetailViewController.h"
 #import "AppDelegate.h"
 #import "BaseTableBarControllerView.h"
+#import "AddOrderViewController.h"
 
 @interface CategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -75,8 +76,7 @@
             self->cartView.dic = [responseObject safeObjectForKey:@"data"];
             [weakself cartcount];
             [weakself checklist:[responseObject safeObjectForKey:@"data"]];
-        }else
-            [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
+        }
     } requestRrror:^(id requestRrror) {
     }];
 }
@@ -93,18 +93,25 @@
         money = money + model.price * quantity;
         yajin = yajin + model.boxPrice * quantity;
     }
-    NSString * boxAmount = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"boxAmount"]];
+//    NSString * boxAmount = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"boxAmount"]];
     NSString * freeFreight = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"freeFreight"]];
     if (money < [freeFreight floatValue]) {
-        self.tishiLabel.text = [NSString stringWithFormat:@"还差%.2f元起送",[freeFreight floatValue] - money];
+        self.tishiLabel.text = [NSString stringWithFormat:@"还差%.2f元免运费",[freeFreight floatValue] - money];
         self.tishiHeight.constant = 26;
         self.tishi.hidden = NO;
         self.PriceLabel.text = [NSString stringWithFormat:@"另需筐押金%.0f元，运费%@",yajin,[dic safeObjectForKey:@"freight"]];
-        
     }else{
         self.tishiHeight.constant = 0;
         self.tishi.hidden = YES;
         self.PriceLabel.text = [NSString stringWithFormat:@"另需筐押金%.0f元",yajin];
+    }
+    NSString * minPrice = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"minPrice"]];
+    if (money < [minPrice floatValue]) {
+        self.SureBtn.backgroundColor = UIColorFromRGB(0xcccccc);
+        self.SureBtn.enabled = NO;
+    }else{
+        self.SureBtn.backgroundColor = UIColorFromRGB(0x20d994);
+        self.SureBtn.enabled = YES;
     }
     
     NSString * str = [NSString stringWithFormat:@"合计￥%.1f",money];
@@ -284,6 +291,15 @@
     return cell;
 }
 -(void)addcart:(UIButton *)btn{
+    if ([FYUser userInfo].token.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
+        UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        LoginViewController * login = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        [self presentViewController:login animated:YES completion:^{
+            
+        }];
+        return;
+    }
     HomeModel * model = self.dataSourse2[btn.tag];
     if (model.specificationNumber == 0) {//没有规格，直接加入购物车
         NSMutableDictionary *paraDic = @{}.mutableCopy;
@@ -368,6 +384,10 @@
     }
 }
 - (IBAction)cartClick:(id)sender {
+    if ([FYUser userInfo].token.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
+        return;
+    }
     BOOL ishidden = cartView.hidden;
     if (ishidden) {
         [self cartlist];
@@ -379,5 +399,25 @@
     }
 }
 - (IBAction)sure:(id)sender {
+//    if (!self.tishi.hidden) {
+//        [SVProgressHUD showErrorWithStatus:@"尚未达到起送价"];
+//        return;
+//    }
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    AddOrderViewController * addorder = [sb instantiateViewControllerWithIdentifier:@"AddOrderViewController"];
+    NSMutableArray * array = [[NSMutableArray alloc]init];
+    for (NSDictionary * dic in cartView.array) {
+        NSDictionary * data = [dic safeObjectForKey:@"productInfo"];
+        HomeModel * model = [HomeModel mj_objectWithKeyValues:data];
+        NSMutableDictionary * paraDic = @{}.mutableCopy;
+        NSMutableDictionary * modeldic = @{}.mutableCopy;
+        [modeldic setObject:model.ID forKey:@"id"];
+        [paraDic setObject:modeldic forKey:@"productParam"];
+        NSString * count = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"quantity"]];
+        [paraDic setObject:count forKey:@"quantity"];
+        [array addObject:paraDic];
+    }
+    addorder.listArray = array;
+    [self.navigationController pushViewController:addorder animated:YES];
 }
 @end

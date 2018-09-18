@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChosenTimeAndStyle.h"
 
 @interface OrderFooterView : UIView
 
@@ -17,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *couponLabel;
 - (IBAction)chosenCoupon:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *CouponBtn;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *jifenLabel;
 - (IBAction)chosenJifen:(id)sender;
@@ -32,4 +34,7 @@
 
 @property (strong,nonatomic) CouponModel * coumodel;
 
+@property (strong,nonatomic) ChosenTimeAndStyle * chosenView;
+@property (strong,nonatomic) NSArray * giftArray;
+@property (strong,nonatomic) NSString * giftid;
 @end

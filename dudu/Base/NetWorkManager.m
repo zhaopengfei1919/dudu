@@ -38,9 +38,9 @@
     if ([FYUser userInfo].token.length > 0) {
         [Para setObject:[FYUser userInfo].token forKey:@"token"];
     }
-    NSMutableDictionary * dic = [[NSMutableDictionary alloc]initWithDictionary:parameters];
+//    NSMutableDictionary * dic = [[NSMutableDictionary alloc]initWithDictionary:parameters];
 //    [dic removeObjectForKey:@"token"];
-    [Para setObject:[dic mj_JSONString] forKey:@"data"];
+    [Para setObject:[parameters mj_JSONString] forKey:@"data"];
     [Para setObject:@"1.0" forKey:@"version"];
     [Para setObject:[[NetWorkManager sharedManager] getTimeNow] forKey:@"timestamp"];
     //获取UUID

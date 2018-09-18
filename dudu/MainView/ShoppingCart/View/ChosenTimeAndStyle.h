@@ -13,6 +13,7 @@ typedef void(^chosentyle)(NSDictionary * dic);
 @interface ChosenTimeAndStyle : UIView
 @property (weak, nonatomic) IBOutlet UIView *payView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scroll;
+@property (weak, nonatomic) IBOutlet UILabel *TitleLabel;
 
 
 @property (weak, nonatomic) IBOutlet UIView *timeView;

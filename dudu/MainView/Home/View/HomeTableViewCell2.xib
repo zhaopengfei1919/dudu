@@ -86,7 +86,7 @@
                                 <color key="textColor" red="0.95294117649999999" green="0.59215686270000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6V-Zd-di7" customClass="DDButton">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6V-Zd-di7" customClass="DDButton">
                                 <rect key="frame" x="137.5" y="210" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="MUY-8g-YNc"/>
@@ -199,7 +199,7 @@
                                 <color key="textColor" red="0.95294117649999999" green="0.59215686270000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLX-Nk-vle" customClass="DDButton">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLX-Nk-vle" customClass="DDButton">
                                 <rect key="frame" x="137.5" y="210" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="RZj-9q-zP6"/>
