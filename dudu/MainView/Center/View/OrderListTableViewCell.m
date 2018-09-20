@@ -10,6 +10,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 #import "pingjiaViewController.h"
+#import "AddOrderViewController.h"
 
 @interface OrderListTableViewCell()
 
@@ -47,7 +48,7 @@
     if ([orderStatus isEqualToString:@"待付款"]) {
         self.btn1.hidden = NO;
         [self.btn1 setTitle:@"取消订单" forState:0];
-        [self.btn1 addTarget:self action:@selector(ordercancel) forControlEvents:UIControlEventTouchUpInside];
+        [self.btn1 addTarget:self action:@selector(orderAgain) forControlEvents:UIControlEventTouchUpInside];
         
         [self.btn2 setTitle:@"马上付款" forState:0];
         [self.btn2 setBackgroundColor:UIColorFromRGB(0xf4b43a)];
@@ -200,7 +201,29 @@
     }];
 }
 -(void)orderAgain{
+    id object = [self nextResponder];
+    while (![object isKindOfClass:[UIViewController class]] && object != nil) {
+        object = [object nextResponder];
+    }
+    UIViewController *superController = (UIViewController*)object;
     
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    AddOrderViewController * addorder = [sb instantiateViewControllerWithIdentifier:@"AddOrderViewController"];
+    NSMutableArray * array = [[NSMutableArray alloc]init];
+    NSArray * orderItems = [self.dic safeObjectForKey:@"orderItems"];
+    for (NSDictionary * dic in orderItems) {
+        NSDictionary * data = [dic safeObjectForKey:@"productInfo"];
+        HomeModel * model = [HomeModel mj_objectWithKeyValues:data];
+        NSMutableDictionary * paraDic = @{}.mutableCopy;
+        NSMutableDictionary * modeldic = @{}.mutableCopy;
+        [modeldic setObject:model.ID forKey:@"id"];
+        [paraDic setObject:modeldic forKey:@"productParam"];
+        NSString * count = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"qty"]];
+        [paraDic setObject:count forKey:@"quantity"];
+        [array addObject:paraDic];
+    }
+    addorder.listArray = array;
+    [superController.navigationController pushViewController:addorder animated:YES];
 }
 -(void)orderpingjia{
     id object = [self nextResponder];

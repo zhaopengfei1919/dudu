@@ -99,6 +99,9 @@
     [self.chosenView setChosenBlock:^(NSDictionary *dic) {
         weakself.payLabel.text = [dic safeObjectForKey:@"name"];
         weakself.payID = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"id"]];
+        weakself.methons = [[NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"methons"]] intValue];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"chosenCoupon" object:nil];
     }];
 }
 @end

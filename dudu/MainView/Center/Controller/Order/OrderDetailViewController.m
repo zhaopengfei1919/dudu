@@ -90,7 +90,7 @@
     NSDictionary * dic = [data safeObjectForKey:@"productInfo"];
     cell.model = [HomeModel mj_objectWithKeyValues:dic];
     cell.CountLabel.text = [NSString stringWithFormat:@"x%@",[data safeObjectForKey:@"qty"]];
-    cell.ActuallyLabel.text = [NSString stringWithFormat:@"应发货%ld斤，实发货%ld斤，应收%.1f元，实收%.1f元",cell.model.weight,cell.model.weight,cell.model.weight*cell.model.unitPrice,cell.model.price];
+    cell.ActuallyLabel.text = [NSString stringWithFormat:@"应发货%ld斤，实发货%ld斤，应收%.2f元，实收%.2f元",cell.model.weight,cell.model.weight,cell.model.weight*cell.model.unitPrice,cell.model.price];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

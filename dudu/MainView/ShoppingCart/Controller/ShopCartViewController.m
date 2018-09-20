@@ -22,7 +22,6 @@
     NSMutableDictionary *paraDic = @{}.mutableCopy;
     
     [NetWorkManager requestWithMethod:POST Url:CartList Parameters:paraDic success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
         NSString * code = [responseObject safeObjectForKey:@"code"];
         if ([code isEqualToString:@"0"]) {
             NSDictionary * dic = [responseObject safeObjectForKey:@"data"];
@@ -290,7 +289,7 @@
         self.sureBtn.enabled = YES;
     }
     
-    NSString * str = [NSString stringWithFormat:@"合计￥%.1f",money];
+    NSString * str = [NSString stringWithFormat:@"合计￥%.2f",money];
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 3)];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string.length - 3)];

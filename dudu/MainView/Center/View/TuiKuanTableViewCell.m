@@ -44,7 +44,7 @@
         label2.textColor = UIColorFromRGB(0x333333);
         label2.font = [UIFont systemFontOfSize:15];
         float price = [[NSString stringWithFormat:@"%@",[dic1 safeObjectForKey:@"totalPrice"]] floatValue];
-        label2.text = [NSString stringWithFormat:@"￥%.1f",price];
+        label2.text = [NSString stringWithFormat:@"￥%.2f",price];
         [self.kuangScroll addSubview:label2];
     }
 }

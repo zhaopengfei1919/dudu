@@ -41,10 +41,10 @@
     [self.Jia addTarget:self action:@selector(jia:) forControlEvents:UIControlEventTouchUpInside];
     
     float unitPrice = [[MyData safeObjectForKey:@"unitPrice"] floatValue];
-    self.unitPriceLabel.text = [NSString stringWithFormat:@"￥%.1f/%@",unitPrice,[MyData safeObjectForKey:@"unit"]];
+    self.unitPriceLabel.text = [NSString stringWithFormat:@"￥%.2f/%@",unitPrice,[MyData safeObjectForKey:@"unit"]];
     
     float price = [[MyData safeObjectForKey:@"price"] floatValue];
-    NSString * str = [NSString stringWithFormat:@"总价￥%.1f",price];
+    NSString * str = [NSString stringWithFormat:@"总价￥%.2f",price];
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 3)];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string.length - 3)];

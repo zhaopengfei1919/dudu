@@ -36,8 +36,12 @@
             }
             [weakself.dataSourse addObjectsFromArray:data];
             [weakself.table reloadData];
-        }else
+        }else{
             [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
+            [weakself.dataSourse removeAllObjects];
+            [weakself.table reloadData];
+            self->tishiView.hidden = NO;
+        }
     } requestRrror:^(id requestRrror) {
         
     }];
@@ -102,7 +106,18 @@
     self.table.estimatedSectionFooterHeight = 0;
     adjustsScrollViewInsets_NO(self.table, self);
     [self.table registerNib:[UINib nibWithNibName:@"OrderListTableViewCell" bundle:nil] forCellReuseIdentifier:@"OrderListTableViewCell"];
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame = CGRectMake(0, 0, 50, 22);
+    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -13, 0, 28);
+    [backButton addTarget:self action:@selector(backLastViewController) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setImage:[UIImage imageNamed:@"返回"] forState:0];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    self.navigationItem.leftBarButtonItem = backItem;
     // Do any additional setup after loading the view.
+}
+-(void)backLastViewController{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 -(void)refreshUI{
     WS(weakself);

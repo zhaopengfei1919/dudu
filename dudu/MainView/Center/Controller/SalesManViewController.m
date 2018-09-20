@@ -34,7 +34,7 @@
 -(void)bingsalesman{
     WS(weakself);
     NSMutableDictionary *paraDic = @{}.mutableCopy;
-    [paraDic setObject:self.salesLabel.text forKey:@"id"];
+    [paraDic setObject:self.salesLabel.text forKey:@"code"];
     
     [NetWorkManager requestWithMethod:POST Url:BingSalesMan Parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);

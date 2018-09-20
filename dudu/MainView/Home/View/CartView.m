@@ -32,7 +32,7 @@
         yajin = yajin + model.boxPrice * quantity;
     }
     
-    NSString * str = [NSString stringWithFormat:@"￥%.1f",yajin];
+    NSString * str = [NSString stringWithFormat:@"￥%.2f",yajin];
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 1)];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(1, string.length - 1)];
@@ -78,7 +78,7 @@
         [view addSubview:pricelabel];
         NSString * price = [NSString stringWithFormat:@"%@",[productInfo safeObjectForKey:@"price"]];
         float money = [price floatValue];
-        NSString * str = [NSString stringWithFormat:@"￥%.1f",money];
+        NSString * str = [NSString stringWithFormat:@"￥%.2f",money];
         NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
         [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 1)];
         [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(1, string.length - 1)];

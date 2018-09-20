@@ -24,9 +24,9 @@
     [self.Image sd_setImageWithURL:[NSURL URLWithString:model.image] placeholderImage:[UIImage imageNamed:@"logo拷贝"]];
     self.TitleLabel.text = model.name;
     
-    self.unitPriceLabel.text = [NSString stringWithFormat:@"￥%.1f/%@",model.unitPrice,model.unit];
+    self.unitPriceLabel.text = [NSString stringWithFormat:@"￥%.2f/%@",model.unitPrice,model.unit];
     
-    NSString * str = [NSString stringWithFormat:@"总价￥%.1f",model.price];
+    NSString * str = [NSString stringWithFormat:@"总价￥%.2f",model.price];
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 3)];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string.length - 3)];

@@ -44,9 +44,9 @@
     }else
         self.isCoupon1.hidden = YES;
     
-    self.unitPrice1.text = [NSString stringWithFormat:@"￥%.1f/%@",model1.unitPrice,model1.unit];
+    self.unitPrice1.text = [NSString stringWithFormat:@"￥%.2f/%@",model1.unitPrice,model1.unit];
     
-    NSString * str = [NSString stringWithFormat:@"总价￥%.1f",model1.price];
+    NSString * str = [NSString stringWithFormat:@"总价￥%.2f",model1.price];
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 3)];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string.length - 3)];
@@ -83,9 +83,9 @@
         }else
             self.isCoupon2.hidden = YES;
         
-        self.unitPriceLabel2.text = [NSString stringWithFormat:@"￥%.1f/%@",model2.unitPrice,model2.unit];
+        self.unitPriceLabel2.text = [NSString stringWithFormat:@"￥%.2f/%@",model2.unitPrice,model2.unit];
         
-        NSString * str1 = [NSString stringWithFormat:@"总价￥%.1f",model2.price];
+        NSString * str1 = [NSString stringWithFormat:@"总价￥%.2f",model2.price];
         NSMutableAttributedString * string1 = [[NSMutableAttributedString alloc]initWithString:str1];
         [string1 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 3)];
         [string1 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string1.length - 3)];

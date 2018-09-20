@@ -1418,8 +1418,8 @@
                         <outlet property="AllBtn" destination="6gM-Gs-Iff" id="NI0-XY-buK"/>
                         <outlet property="LingLeft" destination="AJ6-Er-5Cr" id="0WO-Dn-6dQ"/>
                         <outlet property="table" destination="bNZ-f2-uTP" id="6VR-7h-9d8"/>
-                        <segue destination="qCw-cf-3MY" kind="show" id="YCw-RX-6Wy"/>
-                        <segue destination="96W-ef-irC" kind="show" id="QqC-9v-JiD"/>
+                        <segue destination="qCw-cf-3MY" kind="show" identifier="orderdetail" id="YCw-RX-6Wy"/>
+                        <segue destination="96W-ef-irC" kind="show" identifier="pingjia" id="QqC-9v-JiD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="32a-mG-6Ex" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1715,7 +1715,7 @@
                     </view>
                     <connections>
                         <outlet property="table" destination="wtv-ON-vbU" id="fU4-7Y-IQq"/>
-                        <segue destination="VH5-yE-L9q" kind="show" id="RWW-wJ-IGV"/>
+                        <segue destination="VH5-yE-L9q" kind="show" identifier="addressdetail" id="RWW-wJ-IGV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bys-l2-9Dz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2339,7 +2339,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGE-lH-DAC">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
                                         <connections>
-                                            <segue destination="aNZ-Kv-vxR" kind="show" id="S94-UN-doK"/>
+                                            <segue destination="aNZ-Kv-vxR" kind="show" identifier="search" id="S94-UN-doK"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2627,7 +2627,7 @@
                         <outlet property="table" destination="pXx-eg-SGf" id="36g-IU-cy2"/>
                         <outlet property="tableTop" destination="A9J-uw-KYv" id="Osc-T2-Kl9"/>
                         <segue destination="DPC-HG-jsv" kind="show" identifier="gotodetail" id="1v6-A0-clt"/>
-                        <segue destination="4ye-xb-gBU" kind="show" id="nhy-Ht-Ywg"/>
+                        <segue destination="4ye-xb-gBU" kind="show" identifier="hotgoods" id="nhy-Ht-Ywg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9fC-BN-dZk" userLabel="First Responder" sceneMemberID="firstResponder"/>

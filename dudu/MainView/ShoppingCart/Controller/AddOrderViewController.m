@@ -21,7 +21,6 @@
     [paraDic setObject:self.listArray forKey:@"cartItemParamList"];
     
     [NetWorkManager requestWithMethod:POST Url:CheckOrder Parameters:paraDic success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
         NSString * code = [responseObject safeObjectForKey:@"code"];
         if ([code isEqualToString:@"0"]) {
             self.data = [responseObject safeObjectForKey:@"data"];
@@ -29,7 +28,7 @@
             [weakself.dataSourse removeAllObjects];
             [weakself.dataSourse addObjectsFromArray:data];
             [weakself.table reloadData];
-            [weakself chewkPrice];
+            [weakself checkPrice];
         }else
             [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
     } requestRrror:^(id requestRrror) {
@@ -73,7 +72,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chewkPrice) name:@"chosenCoupon" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkPrice) name:@"chosenCoupon" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySuccess:) name:@"PAY_SUCCESS" object:nil];
     ;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payFaile:) name:@"PAY_FAILE" object:nil];
@@ -93,14 +92,19 @@
     [self cartcount];
     UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     OrderListViewController * order = [sb instantiateViewControllerWithIdentifier:@"OrderListViewController"];
-    order.status = @"1";
+    order.status = @"2";
     [self.navigationController pushViewController:order animated:YES];
 }
 - (void)payFaile:(NSNotification *)notification{
     [SVProgressHUD showErrorWithStatus:@"支付失败"];
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    OrderListViewController * order = [sb instantiateViewControllerWithIdentifier:@"OrderListViewController"];
+    order.status = @"1";
+    [self.navigationController pushViewController:order animated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)chewkPrice{
+-(void)checkPrice{
     NSDictionary * addressdic = [self.data safeObjectForKey:@"receiverInfo"];
     if (addressdic.count > 0) {
         addressModel * model = [addressModel mj_objectWithKeyValues:addressdic];
@@ -117,11 +121,20 @@
     
     float boxAmount = [[NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"boxAmount"]] floatValue];
     float freight = [[NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"freight"]] floatValue];
-    float onlineDiscount = [[NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"onlineDiscount"]] floatValue];
-    productAmount = productAmount + boxAmount + freight - onlineDiscount;
+    productAmount = productAmount + boxAmount + freight;
+    if (![self.headerView.payLabel.text isEqualToString:@"点击选择"]) {
+        if (self.headerView.methons == 0) {
+            float onlineDiscount = [[NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"onlineDiscount"]] floatValue];
+            self.footerView.payMoney.text = [NSString stringWithFormat:@"-￥%.2f",onlineDiscount];
+            productAmount -= onlineDiscount;
+        }else{
+            self.footerView.payMoney.text = @"￥0.0";
+        }
+    }else{
+        self.footerView.payMoney.text = @"￥0.0";
+    }
     self.footerView.yajinLabel.text = [NSString stringWithFormat:@"+￥%.2f",boxAmount];
     self.footerView.yunfeiLabel.text = [NSString stringWithFormat:@"+￥%.2f",freight];
-    self.footerView.payMoney.text = [NSString stringWithFormat:@"-￥%.2f",onlineDiscount];
     
     NSArray * giftItemInfos = [self.data safeObjectForKey:@"giftItemInfos"];
     if (giftItemInfos.count == 0) {
@@ -303,6 +316,12 @@
             }else if ([paymentMethonCode isEqualToString:@"wxpay"]){
                 NSDictionary * wxPayResult = [data safeObjectForKey:@"wxPayResult"];
                 [weakself wxpay:wxPayResult];
+            }else if ([paymentMethonCode isEqualToString:@"cash"]){
+                [self cartcount];
+                UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                OrderListViewController * order = [sb instantiateViewControllerWithIdentifier:@"OrderListViewController"];
+                order.status = @"2";
+                [self.navigationController pushViewController:order animated:YES];
             }
         }else
             [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];

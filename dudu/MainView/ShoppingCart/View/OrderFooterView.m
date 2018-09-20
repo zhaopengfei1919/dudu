@@ -54,9 +54,9 @@
     coupon.chosencou = ^(CouponModel *model) {
         weakself.coumodel = model;
         if (![model.anHaoType isEqualToString:@"ALL_SHOP"]) {//代金券
-            weakself.couponLabel.text = [NSString stringWithFormat:@"%lu元代金券",model.amount];
+            weakself.couponLabel.text = [NSString stringWithFormat:@"%lu元代金券",(unsigned long)model.amount];
         }else{//全场满减
-            weakself.couponLabel.text = [NSString stringWithFormat:@"满%lu元减%lu",model.lowLimit,model.amount];
+            weakself.couponLabel.text = [NSString stringWithFormat:@"满%lu元减%lu",(unsigned long)model.lowLimit,(unsigned long)model.amount];
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"chosenCoupon" object:nil];
     };

@@ -107,7 +107,7 @@
     UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     OrderListViewController * order = [sb instantiateViewControllerWithIdentifier:@"OrderListViewController"];
     UIButton * btn = (UIButton *)sender;
-    if (btn.tag == 0) {//all=全部,unpaid=待付款,unshipped=待发货,shipped=配送中,complete=已完成,cancel=已取消
+    if (btn.tag == 0) {//0=全部,1=待付款,2=待发货,3=配送中,4=已完成,5=已取消
         order.status = @"0";
     }else if (btn.tag == 1){
         order.status = @"1";

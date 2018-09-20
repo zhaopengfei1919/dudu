@@ -114,7 +114,7 @@
         self.SureBtn.enabled = YES;
     }
     
-    NSString * str = [NSString stringWithFormat:@"合计￥%.1f",money];
+    NSString * str = [NSString stringWithFormat:@"合计￥%.2f",money];
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 3)];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string.length - 3)];
@@ -301,6 +301,10 @@
         return;
     }
     HomeModel * model = self.dataSourse2[btn.tag];
+    if (model.stock == 0) {
+        [SVProgressHUD showErrorWithStatus:@"当前商品库存为0"];
+        return;
+    }
     if (model.specificationNumber == 0) {//没有规格，直接加入购物车
         NSMutableDictionary *paraDic = @{}.mutableCopy;
         [paraDic setObject:[NSNumber numberWithInt:1] forKey:@"quantity"];
