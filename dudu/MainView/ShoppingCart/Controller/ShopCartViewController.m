@@ -35,6 +35,13 @@
                 self->tishilabel.text = @"您还没有添加商品到购物车呦";
             }
             [weakself.dataSourse addObjectsFromArray:data];
+            if (self.listarray.count > 0) {
+                NSMutableSet *set1 = [NSMutableSet setWithArray:self.dataSourse];
+                NSMutableSet *set2 = [NSMutableSet setWithArray:self.listarray];
+                [set1 intersectSet:set2];
+                NSArray * arr = [set1 allObjects];
+                [self.selectSourse addObjectsFromArray:arr];
+            }
             [weakself.table reloadData];
             [weakself checkinallchosen];
         }else

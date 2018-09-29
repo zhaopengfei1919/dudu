@@ -128,10 +128,10 @@
             self.footerView.payMoney.text = [NSString stringWithFormat:@"-￥%.2f",onlineDiscount];
             productAmount -= onlineDiscount;
         }else{
-            self.footerView.payMoney.text = @"￥0.0";
+            self.footerView.payMoney.text = @"￥0.00";
         }
     }else{
-        self.footerView.payMoney.text = @"￥0.0";
+        self.footerView.payMoney.text = @"￥0.00";
     }
     self.footerView.yajinLabel.text = [NSString stringWithFormat:@"+￥%.2f",boxAmount];
     self.footerView.yunfeiLabel.text = [NSString stringWithFormat:@"+￥%.2f",freight];
@@ -150,7 +150,7 @@
     if (anHaos.count == 0) {
         self.footerView.couponLabel.text = @"无可用";
         self.footerView.CouponBtn.enabled = NO;
-        self.footerView.couponMoney.text = @"￥0.0";
+        self.footerView.couponMoney.text = @"￥0.00";
     }else{
         self.footerView.CouponBtn.enabled = YES;
         if (![self.footerView.couponLabel.text isEqualToString:@"点击选择"]) {
@@ -158,14 +158,14 @@
             productAmount = productAmount - amount;
             self.footerView.couponMoney.text = [NSString stringWithFormat:@"-￥%.2f",amount];
         }else
-            self.footerView.couponMoney.text = @"￥0.0";
+            self.footerView.couponMoney.text = @"￥0.00";
     }
     
     NSInteger userPoint = [[NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"userPoint"]] integerValue];
     if (userPoint == 0) {
         self.footerView.jifenLabel.text = @"无可用积分";
         self.footerView.jifenBtn.enabled = NO;
-        self.footerView.jifenMoney.text = @"￥0.0";
+        self.footerView.jifenMoney.text = @"￥0.00";
     }else{
         float jifenprice = (float)userPoint/100;
         self.footerView.jifenLabel.text = [NSString stringWithFormat:@"积分抵扣%.2f元",jifenprice];

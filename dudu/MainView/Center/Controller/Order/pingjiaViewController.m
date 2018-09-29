@@ -23,7 +23,11 @@
         NSString * code = [responseObject safeObjectForKey:@"code"];
         if ([code isEqualToString:@"0"]) {
             weakself.data = [responseObject safeObjectForKey:@"data"];
-            [weakself createViewwithCompleted];
+            NSArray * orderItemComments = [weakself.data safeObjectForKey:@"orderItemComments"];
+            if (orderItemComments.count == 0) {
+                [weakself createview];
+            }else
+                [weakself createViewwithCompleted];
         }else
             [weakself createview];
     } requestRrror:^(id requestRrror) {
@@ -89,7 +93,7 @@
     self.RemarkTV.editable = NO;
     
     NSArray * orderItemComments = [self.data safeObjectForKey:@"orderItemComments"];
-    for (int i = 0; i<self.goodsArray.count; i++) {
+    for (int i = 0; i<orderItemComments.count; i++) {
         NSDictionary * productInfo = orderItemComments[i];
         UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(15, 15 + 30 * i, SCREEN_WIDTH - 75, 15)];
         label.textColor = UIColorFromRGB(0x333333);

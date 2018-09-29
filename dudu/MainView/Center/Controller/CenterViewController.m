@@ -67,7 +67,15 @@
     self.backImage.layer.cornerRadius = 33;
     
     adjustsScrollViewInsets_NO(self.scroll, self);
+    
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(taptologin:)];
+    [self.headImage addGestureRecognizer:tap];
     // Do any additional setup after loading the view.
+}
+-(void)taptologin:(UITapGestureRecognizer *)tap{
+    if ([FYUser userInfo].token.length == 0) {
+        [self loginclick];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -119,7 +127,6 @@
         order.status = @"4";
     }else if (btn.tag == 5){
         order.status = @"5";
-
     }
     [self.navigationController pushViewController:order animated:YES];
 }

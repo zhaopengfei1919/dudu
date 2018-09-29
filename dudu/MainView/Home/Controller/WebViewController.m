@@ -7,6 +7,7 @@
 //
 
 #import "WebViewController.h"
+#import <WebKit/WebKit.h>
 
 @interface WebViewController ()
 
@@ -17,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    UIWebView * web = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 44 - StatusHeight - BarBottomHeight)];
+    WKWebView * web = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 44 - StatusHeight - BarBottomHeight)];
     NSURL * url = [NSURL URLWithString:self.HtmlUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     [web loadRequest:request];

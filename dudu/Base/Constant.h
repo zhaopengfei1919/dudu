@@ -89,6 +89,8 @@
 
 //加入购物车
 #define CartAdd @"cart.addProduct"
+//批量加入购物车
+#define CartAdds @"cart.addProducts"
 //购物车清空
 #define CartClear @"cart.clear"
 //购物车数量

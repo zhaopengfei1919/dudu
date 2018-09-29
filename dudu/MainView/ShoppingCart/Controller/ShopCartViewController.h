@@ -31,4 +31,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 - (IBAction)sure:(id)sender;
 
+
+@property (strong,nonatomic) NSArray * listarray;
 @end

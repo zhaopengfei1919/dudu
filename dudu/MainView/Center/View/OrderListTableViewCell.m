@@ -11,6 +11,7 @@
 #import "WXApi.h"
 #import "pingjiaViewController.h"
 #import "AddOrderViewController.h"
+#import "ShopCartViewController.h"
 
 @interface OrderListTableViewCell()
 
@@ -48,7 +49,7 @@
     if ([orderStatus isEqualToString:@"待付款"]) {
         self.btn1.hidden = NO;
         [self.btn1 setTitle:@"取消订单" forState:0];
-        [self.btn1 addTarget:self action:@selector(orderAgain) forControlEvents:UIControlEventTouchUpInside];
+        [self.btn1 addTarget:self action:@selector(ordercancel) forControlEvents:UIControlEventTouchUpInside];
         
         [self.btn2 setTitle:@"马上付款" forState:0];
         [self.btn2 setBackgroundColor:UIColorFromRGB(0xf4b43a)];
@@ -88,7 +89,7 @@
         [self.btn2 setBackgroundColor:UIColorFromRGB(0xffffff)];
         [self.btn2 setTitleColor:UIColorFromRGB(0x666666) forState:0];
         self.btn2.layer.borderColor = UIColorFromRGB(0x888888).CGColor;
-        [self.btn2 addTarget:self action:@selector(orderpingjia) forControlEvents:UIControlEventTouchUpInside];
+        [self.btn2 addTarget:self action:@selector(orderAgain) forControlEvents:UIControlEventTouchUpInside];
     }
     
     NSString * str = @"";
@@ -207,9 +208,9 @@
     }
     UIViewController *superController = (UIViewController*)object;
     
-    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    AddOrderViewController * addorder = [sb instantiateViewControllerWithIdentifier:@"AddOrderViewController"];
+    //    WS(weakself);
     NSMutableArray * array = [[NSMutableArray alloc]init];
+    NSMutableArray * selectarray = [[NSMutableArray alloc]init];
     NSArray * orderItems = [self.dic safeObjectForKey:@"orderItems"];
     for (NSDictionary * dic in orderItems) {
         NSDictionary * data = [dic safeObjectForKey:@"productInfo"];
@@ -221,9 +222,32 @@
         NSString * count = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"qty"]];
         [paraDic setObject:count forKey:@"quantity"];
         [array addObject:paraDic];
+        
+        NSMutableDictionary * product = [[NSMutableDictionary alloc]initWithDictionary:dic];
+        [product removeObjectForKey:@"orderPrice"];
+        [product removeObjectForKey:@"orderWeight"];
+        [product removeObjectForKey:@"realPrice"];
+        [product removeObjectForKey:@"realWeight"];
+        [product setObject:[product safeObjectForKey:@"qty"] forKey:@"quantity"];
+        [product removeObjectForKey:@"qty"];
+        [selectarray addObject:product];
     }
-    addorder.listArray = array;
-    [superController.navigationController pushViewController:addorder animated:YES];
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    [paraDic setObject:array forKey:@"cartItemParams"];
+    
+    [NetWorkManager requestWithMethod:POST Url:CartAdds Parameters:paraDic success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code isEqualToString:@"0"]) {
+            UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            ShopCartViewController * shopcart = [sb instantiateViewControllerWithIdentifier:@"ShopCartViewController"];
+            shopcart.listarray = selectarray;
+            [superController.navigationController pushViewController:shopcart animated:YES];
+        }else
+            [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
+    } requestRrror:^(id requestRrror) {
+        
+    }];
 }
 -(void)orderpingjia{
     id object = [self nextResponder];

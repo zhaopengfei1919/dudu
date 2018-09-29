@@ -9,6 +9,7 @@
 #import "OrderDetailViewController.h"
 #import "OrderTableViewCell.h"
 #import "pingjiaViewController.h"
+#import "ShopCartViewController.h"
 
 @interface OrderDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -90,7 +91,7 @@
     NSDictionary * dic = [data safeObjectForKey:@"productInfo"];
     cell.model = [HomeModel mj_objectWithKeyValues:dic];
     cell.CountLabel.text = [NSString stringWithFormat:@"x%@",[data safeObjectForKey:@"qty"]];
-    cell.ActuallyLabel.text = [NSString stringWithFormat:@"应发货%ld斤，实发货%ld斤，应收%.2f元，实收%.2f元",cell.model.weight,cell.model.weight,cell.model.weight*cell.model.unitPrice,cell.model.price];
+    cell.ActuallyLabel.text = [NSString stringWithFormat:@"应发货%@斤，实发货%@斤，应收%@元，实收%@元",[data safeObjectForKey:@"orderWeight"],[data safeObjectForKey:@"realWeight"],[data safeObjectForKey:@"orderPrice"],[data safeObjectForKey:@"realPrice"]];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -131,6 +132,10 @@
     return view;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    NSString * orderStatus = [self.data safeObjectForKey:@"orderStatus"];
+    if ([orderStatus isEqualToString:@"已完成"]){
+        return 120;
+    }
     return 65;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
@@ -222,11 +227,10 @@
         [btn2 setTitle:@"再来一单" forState:0];
         [btn2 setTitleColor:UIColorFromRGB(0x20d994) forState:0];
         btn2.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
+        btn2.layer.borderWidth = 0.5;
         [btn2 addTarget:self action:@selector(orderAgain) forControlEvents:UIControlEventTouchUpInside];
-        btn2.layer.borderWidth = 0;
-        
+
         view.frame = CGRectMake(0, 0, SCREEN_WIDTH, 120);
-        
         UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 10)];
         line.backgroundColor = UIColorFromRGB(0xf5f5f9);
         [view addSubview:line];
@@ -317,19 +321,52 @@
     }];
 }
 -(void)orderAgain{
+    //    WS(weakself);
+    NSMutableArray * array = [[NSMutableArray alloc]init];
+    NSMutableArray * selectarray = [[NSMutableArray alloc]init];
+    NSArray * orderItems = [self.data safeObjectForKey:@"orderItems"];
+    for (NSDictionary * dic in orderItems) {
+        NSDictionary * data = [dic safeObjectForKey:@"productInfo"];
+        HomeModel * model = [HomeModel mj_objectWithKeyValues:data];
+        NSMutableDictionary * paraDic = @{}.mutableCopy;
+        NSMutableDictionary * modeldic = @{}.mutableCopy;
+        [modeldic setObject:model.ID forKey:@"id"];
+        [paraDic setObject:modeldic forKey:@"productParam"];
+        NSString * count = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"qty"]];
+        [paraDic setObject:count forKey:@"quantity"];
+        [array addObject:paraDic];
+        
+        NSMutableDictionary * product = [[NSMutableDictionary alloc]initWithDictionary:dic];
+        [product removeObjectForKey:@"orderPrice"];
+        [product removeObjectForKey:@"orderWeight"];
+        [product removeObjectForKey:@"realPrice"];
+        [product removeObjectForKey:@"realWeight"];
+        [product setObject:[product safeObjectForKey:@"qty"] forKey:@"quantity"];
+        [product removeObjectForKey:@"qty"];
+        [selectarray addObject:product];
+    }
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    [paraDic setObject:array forKey:@"cartItemParams"];
     
+    [NetWorkManager requestWithMethod:POST Url:CartAdds Parameters:paraDic success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code isEqualToString:@"0"]) {
+            UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            ShopCartViewController * shopcart = [sb instantiateViewControllerWithIdentifier:@"ShopCartViewController"];
+            shopcart.listarray = selectarray;
+            [self.navigationController pushViewController:shopcart animated:YES];
+        }else
+            [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
+    } requestRrror:^(id requestRrror) {
+        
+    }];
 }
 -(void)orderpingjia{
-    id object = [self nextResponder];
-    while (![object isKindOfClass:[UIViewController class]] && object != nil) {
-        object = [object nextResponder];
-    }
-    UIViewController *superController = (UIViewController*)object;
-    
     UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     pingjiaViewController * pingjia = [sb instantiateViewControllerWithIdentifier:@"pingjiaViewController"];
     pingjia.orderid = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"id"]];
     pingjia.goodsArray = [self.data safeObjectForKey:@"orderItems"];
-    [superController.navigationController pushViewController:pingjia animated:YES];
+    [self.navigationController pushViewController:pingjia animated:YES];
 }
 @end

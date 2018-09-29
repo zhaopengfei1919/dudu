@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -60,14 +60,15 @@
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zMw-sM-UFe">
-                                <rect key="frame" x="20" y="58" width="245" height="98"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zMw-sM-UFe">
+                                <rect key="frame" x="20" y="58" width="245" height="98.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="delegate" destination="KGk-i7-Jjw" id="afS-DT-5EE"/>
                                 </connections>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1d-EZ-fWG">
-                                <rect key="frame" x="0.0" y="166" width="320" height="65"/>
+                                <rect key="frame" x="0.0" y="166.5" width="320" height="65"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKx-Wi-iYd">
                                         <rect key="frame" x="0.0" y="0.0" width="305" height="0.5"/>
@@ -77,7 +78,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rsx-wA-NRR">
-                                        <rect key="frame" x="215" y="16" width="90" height="34"/>
+                                        <rect key="frame" x="215" y="15.5" width="90" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="ILZ-bg-mkD"/>
                                             <constraint firstAttribute="height" constant="34" id="N2K-ua-bIk"/>
@@ -88,7 +89,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43y-cr-AcZ">
-                                        <rect key="frame" x="115" y="16" width="90" height="34"/>
+                                        <rect key="frame" x="115" y="15.5" width="90" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="6vR-II-bh4"/>
                                             <constraint firstAttribute="width" constant="90" id="wv6-as-NGs"/>
