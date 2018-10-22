@@ -68,8 +68,8 @@
         [weakself.chosenBtn setTitle:@"" forState:0];
         [weakself.chosenBtn setBackgroundColor:[UIColor clearColor]];
         weakself.nameLabel.text = [NSString stringWithFormat:@"%@ %@",model.consignee,model.phone];
-        NSDictionary * areaInfo =model.areaInfo;
-        weakself.areaLabel.text = [NSString stringWithFormat:@"上海市%@%@",[areaInfo safeObjectForKey:@"name"],model.address];
+//        NSDictionary * areaInfo =model.areaInfo;
+        weakself.areaLabel.text = [NSString stringWithFormat:@"%@%@%@%@",model.province,model.city,model.district,model.address];
     };
 }
 - (IBAction)chosenTime:(id)sender {

@@ -43,7 +43,7 @@
                 [self.selectSourse addObjectsFromArray:arr];
             }
             [weakself.table reloadData];
-            [weakself checkinallchosen];
+            [weakself checkorderprice];
         }else
             [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
     } requestRrror:^(id requestRrror) {
@@ -72,6 +72,7 @@
     [super viewWillAppear:animated];
     if ([FYUser userInfo].token.length > 0) {
         [self cartlist];
+        [self cartcount];
         tishiView.hidden = YES;
         self.tishi.hidden = NO;
         self.bottomView.hidden = NO;
@@ -153,7 +154,7 @@
             if ([code isEqualToString:@"0"]) {
                 if ([weakself.selectSourse containsObject:data]) {
                     [weakself.selectSourse removeObject:data];
-                    [weakself checkinallchosen];
+//                    [weakself checkinallchosen];
                 }
                 [weakself cartlist];
                 [weakself cartcount];
@@ -168,7 +169,7 @@
     return self.dataSourse.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 126;
+    return 130;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ShopCartTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ShopCartTableViewCell" forIndexPath:indexPath];
@@ -187,6 +188,13 @@
     }else{
         cell.selectImage.image = [UIImage imageNamed:@"购物车商品未选中"];
     }
+    NSString * promotionName = self.dataSourse[indexPath.row][@"promotionName"];
+    if (promotionName.length > 0) {
+        cell.promotionLabel.text = [NSString stringWithFormat:@"%@",promotionName];
+        cell.signLabel.hidden = NO;
+    }else
+        cell.signLabel.hidden = YES;
+    
     return cell;
 }
 -(void)jian:(UIButton *)sender{
@@ -253,11 +261,38 @@
     }else{
         [self.selectSourse addObject:dic];
     }
-
-    [self checkinallchosen];
+    [self checkorderprice];
+    
     [self.table reloadData];
 }
--(void)checkinallchosen{
+-(void)checkorderprice{
+    WS(weakself);
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    NSMutableArray * array = [[NSMutableArray alloc]init];
+    for (NSDictionary * dic in self.selectSourse) {
+        NSDictionary * data = [dic safeObjectForKey:@"productInfo"];
+        HomeModel * model = [HomeModel mj_objectWithKeyValues:data];
+        NSMutableDictionary * paraDic = @{}.mutableCopy;
+        NSMutableDictionary * modeldic = @{}.mutableCopy;
+        [modeldic setObject:model.ID forKey:@"id"];
+        [paraDic setObject:modeldic forKey:@"productParam"];
+        NSString * count = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"quantity"]];
+        [paraDic setObject:count forKey:@"quantity"];
+        [array addObject:paraDic];
+    }
+    [paraDic setObject:array forKey:@"cartItemParamList"];
+    
+    [NetWorkManager requestWithMethod:POST Url:CheckOrder Parameters:paraDic success:^(id responseObject) {
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code isEqualToString:@"0"]) {
+            NSDictionary * data = [responseObject safeObjectForKey:@"data"];
+            [weakself checkinallchosenwith:data];
+        }
+    } requestRrror:^(id requestRrror) {
+        
+    }];
+}
+-(void)checkinallchosenwith:(NSDictionary *)dic{
     if (self.selectSourse.count == self.dataSourse.count) {
         self.allchosenImage.image = [UIImage imageNamed:@"购物车商品选中"];
     }else{
@@ -275,17 +310,17 @@
         money = money + model.price * quantity;
         yajin = yajin + model.boxPrice * quantity;
     }
-//    NSString * boxAmount = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"boxAmount"]];
+    NSString * boxAmount = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"boxAmount"]];
     NSString * freeFreight = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"freeFreight"]];
     if (money < [freeFreight floatValue]) {
         self.tishiLabel.text = [NSString stringWithFormat:@"还差%.2f元免运费",[freeFreight floatValue] - money];
         self.tishiHeight.constant = 26;
         self.tishi.hidden = NO;
-        self.yaJinLabel.text = [NSString stringWithFormat:@"另需筐押金%.0f元，运费%@",yajin,[self.data safeObjectForKey:@"freight"]];
+        self.yaJinLabel.text = [NSString stringWithFormat:@"另需筐押金%@元，运费%@",boxAmount,[self.data safeObjectForKey:@"freight"]];
     }else{
         self.tishiHeight.constant = 0;
         self.tishi.hidden = YES;
-        self.yaJinLabel.text = [NSString stringWithFormat:@"另需筐押金%.0f元",yajin];
+        self.yaJinLabel.text = [NSString stringWithFormat:@"另需筐押金%@元",boxAmount];
     }
     NSString * minPrice = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"minPrice"]];
     if (money < [minPrice floatValue]) {
@@ -296,10 +331,14 @@
         self.sureBtn.enabled = YES;
     }
     
-    NSString * str = [NSString stringWithFormat:@"合计￥%.2f",money];
-    NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
+    float afterDiscountAmount = [[NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"afterDiscountAmount"]] floatValue];
+    float productAmount = [[NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"productAmount"]] floatValue];
+    NSString * str = [NSString stringWithFormat:@"合计￥%.2f",afterDiscountAmount];
+    NSString * str1 = [NSString stringWithFormat:@"%@(%.2f)",str,productAmount];
+    NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str1];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 3)];
-    [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string.length - 3)];
+    [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, str.length - 3)];
+    [string addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(str.length, str1.length - str.length)];
     self.PriceLabel.attributedText = string;
 }
 - (IBAction)allchosen:(id)sender {
@@ -311,7 +350,7 @@
         [self.selectSourse removeAllObjects];
         self.allchosenImage.image = [UIImage imageNamed:@"购物车商品未选中"];
     }
-    [self checkinallchosen];
+    [self checkorderprice];
     [self.table reloadData];
 }
 - (IBAction)sure:(id)sender {

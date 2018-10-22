@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *CartBtn;
 
+@property (weak, nonatomic) IBOutlet UILabel *KucunLabel;
 
 
 

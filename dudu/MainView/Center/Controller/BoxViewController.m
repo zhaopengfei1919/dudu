@@ -22,6 +22,7 @@
     [NetWorkManager requestWithMethod:POST Url:OrderBox Parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         NSString * code = [responseObject safeObjectForKey:@"code"];
+        [self.table.mj_footer endRefreshing];
         if ([code isEqualToString:@"0"]) {
             [weakself.table.mj_footer endRefreshing];
             NSArray * array = [responseObject objectForKey:@"data"];
@@ -91,11 +92,11 @@
     // Do any additional setup after loading the view.
 }
 -(void)refreshUI{
-//    WS(weakself);
-//    self.table.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-//        self->page_number += 1;
-//        [weakself BoxList];
-//    }];
+    WS(weakself);
+    self.table.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self->page_number += 1;
+        [weakself BoxList];
+    }];
 }
 -(void)createView{
     tishiView = [[UIView alloc]initWithFrame:CGRectMake(0, 80, SCREEN_WIDTH, 150)];

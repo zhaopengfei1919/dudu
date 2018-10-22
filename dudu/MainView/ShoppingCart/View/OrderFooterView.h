@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *couponMoney;
 @property (weak, nonatomic) IBOutlet UILabel *jifenMoney;
 @property (weak, nonatomic) IBOutlet UILabel *payMoney;
+@property (weak, nonatomic) IBOutlet UILabel *promotionMoney;
 @property (weak, nonatomic) IBOutlet UITextField *RemarkTF;
 
 @property (strong,nonatomic) CouponModel * coumodel;

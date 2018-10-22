@@ -9,7 +9,7 @@
 #import "GoodsDetailViewController.h"
 #import "ShopCartViewController.h"
 
-@interface GoodsDetailViewController ()
+@interface GoodsDetailViewController ()<UIWebViewDelegate>
 
 @end
 
@@ -22,6 +22,7 @@
     [NetWorkManager requestWithMethod:POST Url:GoodsDetail Parameters:paraDic success:^(id responseObject) {
         NSString * code = [responseObject safeObjectForKey:@"code"];
         if ([code isEqualToString:@"0"]) {
+            self.data = [responseObject safeObjectForKey:@"data"];
             weakself.model = [GoodsModel mj_objectWithKeyValues:[responseObject safeObjectForKey:@"data"]];
             [weakself createUI];
         }else
@@ -57,8 +58,26 @@
     self.TitleLabel.text = self.model.name;
     self.contentLabel.text = self.model.memo;
     self.descTextView.text = self.model.introduction;
+//    [self.introduceWeb loadHTMLString:self.model.introduction baseURL:nil];
     GoodsCount = 1;
     self.count.text = [NSString stringWithFormat:@"%d",GoodsCount];
+    
+    NSString *detailTextString = [NSString stringWithFormat:@"%@",self.model.introduction];
+    NSString *str1 = [NSString stringWithFormat:@"<head><style>img{width:%f !important;height:auto}</style></head>%@",SCREEN_WIDTH,detailTextString];
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithData:[str1 dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+    self.introduceLabel.attributedText = attributeString;
+    CGFloat labelheight =  [self.introduceLabel.attributedText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
+    self.MainViewHeight.constant = self.MainViewHeight.constant - 97 + labelheight;
+    
+    self.unitpriceLabel.text = [NSString stringWithFormat:@"￥%.2f/%@",self.model.unitPrice,self.model.unit];
+    
+    NSString * stock = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"stock"]];
+    NSLog(@"%@",stock);
+    if ([stock isEqualToString:@"(null)"]) {
+        self.KucunLabel.text = @"库存：9999";
+    }else{
+        self.KucunLabel.text = [NSString stringWithFormat:@"库存：%@",stock];
+    }
     
     NSString * str = [NSString stringWithFormat:@"￥%.0f",self.model.price];
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
@@ -119,7 +138,7 @@
         height += 44 * (y + 1);
     }
     self.GuigeViewHeight.constant = height+50;
-    self.MainViewHeight.constant = 600 - 100 + height;
+    self.MainViewHeight.constant = self.MainViewHeight.constant - 100 + height;
 }
 -(void)chosenguige:(DDButton *)btn{
     if (btn.tag == 0) {
@@ -152,7 +171,7 @@
         NSString * code = [responseObject safeObjectForKey:@"code"];
         if ([code isEqualToString:@"0"]) {
             weakself.model = [GoodsModel mj_objectWithKeyValues:[responseObject safeObjectForKey:@"data"]];
-            NSLog(@"%@",_model.ID);
+//            NSLog(@"%@",_model.ID);
             [weakself createUI];
         }else
             [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
@@ -174,6 +193,7 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 - (IBAction)AddCart:(id)sender {
     NSArray * specifications = self.model.specifications;

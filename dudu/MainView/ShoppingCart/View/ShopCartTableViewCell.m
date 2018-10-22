@@ -42,6 +42,10 @@
         self.GuigeLabelWidth.constant = size.width + 8;
     }else
         self.GuigeLabel.hidden = YES;
+    
+    self.signLabel.layer.borderWidth = 0.5;
+    self.signLabel.layer.borderColor = UIColorFromRGB(0xf39700).CGColor;
+    self.signLabel.layer.cornerRadius = 2;
 }
 
 @end

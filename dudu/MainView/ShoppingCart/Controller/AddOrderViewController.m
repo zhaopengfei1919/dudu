@@ -112,8 +112,8 @@
         [self.headerView.chosenBtn setTitle:@"" forState:0];
         [self.headerView.chosenBtn setBackgroundColor:[UIColor clearColor]];
         self.headerView.nameLabel.text = [NSString stringWithFormat:@"%@ %@",model.consignee,model.phone];
-        NSDictionary * areaInfo =model.areaInfo;
-        self.headerView.areaLabel.text = [NSString stringWithFormat:@"上海市%@%@",[areaInfo safeObjectForKey:@"name"],model.address];
+//        NSDictionary * areaInfo =model.areaInfo;
+        self.headerView.areaLabel.text = [NSString stringWithFormat:@"%@%@%@%@",model.province,model.city,model.district,model.address];
     }
     
     float productAmount = [[NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"productAmount"]] floatValue];
@@ -142,8 +142,11 @@
         self.footerView.giftBtn.enabled = NO;
     }else{
         self.footerView.giftBtn.enabled = YES;
-        self.footerView.GiftLabel.text = @"点击选择";
         self.footerView.giftArray = giftItemInfos;
+//        self.footerView.CouponBtn.enabled = YES;
+        if (![self.footerView.GiftLabel.text isEqualToString:@"点击选择"]) {
+        }else
+            self.footerView.GiftLabel.text = @"点击选择";
     }
     
     NSArray * anHaos = [self.data safeObjectForKey:@"anHaos"];
@@ -167,15 +170,19 @@
         self.footerView.jifenBtn.enabled = NO;
         self.footerView.jifenMoney.text = @"￥0.00";
     }else{
-        float jifenprice = (float)userPoint/100;
+        NSInteger pointRmb = [[NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"pointRmb"]] integerValue];
+        float jifenprice = (float)userPoint/pointRmb;
         self.footerView.jifenLabel.text = [NSString stringWithFormat:@"积分抵扣%.2f元",jifenprice];
         self.footerView.jifenBtn.enabled = YES;
         if (self.footerView.jifenBtn.selected) {
             self.footerView.jifenMoney.text = [NSString stringWithFormat:@"-￥%.2f元",jifenprice];
             productAmount -= jifenprice;
         }else
-            self.footerView.jifenMoney.text = @"￥0.0";
+            self.footerView.jifenMoney.text = @"￥0.00";
     }
+    
+    float discountAmount = [[NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"discountAmount"]] floatValue];
+    self.footerView.promotionMoney.text = [NSString stringWithFormat:@"-￥%.2f",discountAmount];
     
     NSString * str = [NSString stringWithFormat:@"实付金额：￥%.2f",productAmount];
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];

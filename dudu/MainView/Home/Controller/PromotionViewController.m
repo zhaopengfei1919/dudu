@@ -36,11 +36,26 @@
 
             [weakself.dataSourse addObjectsFromArray:array];
             [weakself.table reloadData];
+            
+            NSString * introduction = [data safeObjectForKey:@"introduction"];
+            [weakself createheader:introduction];
         }else
             [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
     } requestRrror:^(id requestRrror) {
         
     }];
+}
+-(void)createheader:(NSString *)str{
+    UILabel * label = [[UILabel alloc]init];
+    label.backgroundColor = [UIColor whiteColor];
+    label.numberOfLines = 0;
+    NSString *detailTextString = [NSString stringWithFormat:@"%@",str];
+    NSString *str1 = [NSString stringWithFormat:@"<head><style>img{width:%f !important;height:auto}</style></head>%@",SCREEN_WIDTH,detailTextString];
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithData:[str1 dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+    label.attributedText = attributeString;
+    CGFloat labelheight =  [label.attributedText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
+    label.frame = CGRectMake(0, 0, SCREEN_WIDTH, labelheight);
+    self.table.tableHeaderView = label;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -83,26 +98,25 @@
     // Pass the selected object to the new view controller.
 }
 */
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (self.dataSourse.count > 0) {
-        return 100;
-    }
-    return 0.01;
-}
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (self.dataSourse.count > 0) {
-        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100)];
-        view.backgroundColor = [UIColor whiteColor];
-        
-        UIImageView * image = [[UIImageView alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, 100)];
-        [image sd_setImageWithURL:[NSURL URLWithString:self.imageurl]];
-        [view addSubview:image];
-        
-        return view;
-    }
-    return nil;
-
-}
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    if (self.dataSourse.count > 0) {
+//        return 100;
+//    }
+//    return 0.01;
+//}
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    if (self.dataSourse.count > 0) {
+//        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100)];
+//        view.backgroundColor = [UIColor whiteColor];
+//
+//        UIImageView * image = [[UIImageView alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, 100)];
+//        [image sd_setImageWithURL:[NSURL URLWithString:self.imageurl]];
+//        [view addSubview:image];
+//
+//        return view;
+//    }
+//    return nil;
+//}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataSourse.count;

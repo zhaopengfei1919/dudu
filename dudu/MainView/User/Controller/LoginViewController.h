@@ -19,6 +19,9 @@
 
 - (IBAction)returnView:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UITextView *textview;
+
+
 @property (assign) int daojishu;
 @property (nonatomic, strong) NSTimer *timer;
 @end

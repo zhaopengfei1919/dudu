@@ -23,7 +23,7 @@
     // Configure the view for the selected state
 }
 -(void)setModel:(CouponModel *)model{
-    NSString * str1 = [NSString stringWithFormat:@"￥%lu",model.amount];
+    NSString * str1 = [NSString stringWithFormat:@"￥%lu",(unsigned long)model.amount];
     NSMutableAttributedString * string1 = [[NSMutableAttributedString alloc]initWithString:str1];
     [string1 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(0, 1)];
     [string1 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:44] range:NSMakeRange(1, string1.length - 1)];
@@ -32,10 +32,10 @@
 //    self.moneyLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)model.amount];
     if (![model.anHaoType isEqualToString:@"ALL_SHOP"]) {//代金券
         self.descLabel.text = @"代金券";
-        self.titleLabel.text = [NSString stringWithFormat:@"%lu元代金券",model.amount];
+        self.titleLabel.text = [NSString stringWithFormat:@"%lu元代金券",(unsigned long)model.amount];
     }else{//全场满减
-        self.descLabel.text = [NSString stringWithFormat:@"满%lu元可用",model.lowLimit];
-        self.titleLabel.text = [NSString stringWithFormat:@"满%lu元减%lu",model.lowLimit,model.amount];
+        self.descLabel.text = [NSString stringWithFormat:@"满%lu元可用",(unsigned long)model.lowLimit];
+        self.titleLabel.text = [NSString stringWithFormat:@"满%lu元减%lu",(unsigned long)model.lowLimit,(unsigned long)model.amount];
     }
     
     self.DateLabel.text = [NSString stringWithFormat:@"%@ - %@",model.startDate,model.endDate];

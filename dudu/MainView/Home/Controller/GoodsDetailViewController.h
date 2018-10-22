@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *TitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *PriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *unitpriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *KucunLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *GuiGeView;
 - (IBAction)jian:(id)sender;
@@ -25,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *count;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *GuigeViewHeight;
 
+@property (weak, nonatomic) IBOutlet UILabel *introduceLabel;
 
 @property (weak, nonatomic) IBOutlet UITextView *descTextView;
 
@@ -34,6 +37,8 @@
 
 @property (assign) NSNumber * GoodsID;
 @property (strong,nonatomic) GoodsModel * model;
+
+@property (strong,nonatomic) NSDictionary * data;
 
 @property (assign) NSString * firstID;
 @property (assign) NSString * secondID;

@@ -24,6 +24,8 @@
 
 //获取该区域的子区域
 #define areaList @"area.listChildArea"
+//获取所有一级区域
+#define Allarea @"area.listroots"
 //用户信息
 #define userinfo @"member.get"
 //我的优惠券

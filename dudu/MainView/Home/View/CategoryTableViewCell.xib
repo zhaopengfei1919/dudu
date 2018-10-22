@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,9 +46,10 @@
                         <color key="textColor" red="0.12549019610000001" green="0.85098039219999999" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STU-iX-OIU">
-                        <rect key="frame" x="111" y="69" width="199" height="12"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥2.88/斤" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STU-iX-OIU">
+                        <rect key="frame" x="111" y="69" width="60" height="12"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="60" id="WZ2-xt-e4L"/>
                             <constraint firstAttribute="height" constant="12" id="vLL-un-Mtm"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -87,26 +88,37 @@
                             <constraint firstAttribute="height" constant="86" id="shp-k5-RZA"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ffl-RE-5Fu">
+                        <rect key="frame" x="181" y="69" width="129" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="Hae-ut-dHk"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Ffl-RE-5Fu" firstAttribute="top" secondItem="nn3-NJ-ev6" secondAttribute="bottom" constant="33" id="1OH-vz-pIc"/>
                     <constraint firstItem="cVU-79-rwI" firstAttribute="top" secondItem="STU-iX-OIU" secondAttribute="bottom" constant="7" id="2ER-Be-z3p"/>
                     <constraint firstItem="3wk-wy-hSK" firstAttribute="top" secondItem="41K-ex-ar1" secondAttribute="bottom" constant="22" id="Asg-qz-LBB"/>
                     <constraint firstItem="vxO-gd-aEj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="HXg-04-bik"/>
                     <constraint firstAttribute="trailing" secondItem="nn3-NJ-ev6" secondAttribute="trailing" constant="10" id="MYv-xw-iwb"/>
                     <constraint firstAttribute="trailing" secondItem="mhk-y9-6G1" secondAttribute="trailing" constant="19" id="N1W-6Y-rNT"/>
                     <constraint firstItem="mhk-y9-6G1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="19" id="OjJ-wa-zaM"/>
+                    <constraint firstItem="Ffl-RE-5Fu" firstAttribute="leading" secondItem="STU-iX-OIU" secondAttribute="trailing" constant="10" id="PkM-VX-OUM"/>
                     <constraint firstItem="cVU-79-rwI" firstAttribute="top" secondItem="STU-iX-OIU" secondAttribute="bottom" constant="7" id="TJM-fz-rMg"/>
                     <constraint firstItem="41K-ex-ar1" firstAttribute="leading" secondItem="BOz-vE-5Fj" secondAttribute="trailing" constant="10" id="UnR-qz-giI"/>
                     <constraint firstItem="vxO-gd-aEj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="X1I-cO-rcB"/>
                     <constraint firstItem="BOz-vE-5Fj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="b59-ST-Not"/>
                     <constraint firstItem="nn3-NJ-ev6" firstAttribute="leading" secondItem="BOz-vE-5Fj" secondAttribute="trailing" constant="10" id="cDV-Fx-hxU"/>
                     <constraint firstItem="cVU-79-rwI" firstAttribute="leading" secondItem="BOz-vE-5Fj" secondAttribute="trailing" constant="10" id="ctz-kH-xKz"/>
+                    <constraint firstAttribute="trailing" secondItem="Ffl-RE-5Fu" secondAttribute="trailing" constant="10" id="dwX-ce-Enh"/>
                     <constraint firstItem="STU-iX-OIU" firstAttribute="top" secondItem="41K-ex-ar1" secondAttribute="bottom" constant="14" id="ec1-0t-9hm"/>
                     <constraint firstItem="BOz-vE-5Fj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="gTA-cv-V4A"/>
                     <constraint firstAttribute="trailing" secondItem="3wk-wy-hSK" secondAttribute="trailing" constant="15" id="kCj-1F-AwC"/>
                     <constraint firstItem="STU-iX-OIU" firstAttribute="leading" secondItem="BOz-vE-5Fj" secondAttribute="trailing" constant="10" id="lAp-Kh-SVU"/>
                     <constraint firstItem="cVU-79-rwI" firstAttribute="leading" secondItem="BOz-vE-5Fj" secondAttribute="trailing" constant="10" id="nBk-cn-R3M"/>
-                    <constraint firstAttribute="trailing" secondItem="STU-iX-OIU" secondAttribute="trailing" constant="10" id="qU1-AA-XdW"/>
                     <constraint firstItem="nn3-NJ-ev6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="rrJ-1i-EB6"/>
                     <constraint firstAttribute="bottom" secondItem="mhk-y9-6G1" secondAttribute="bottom" id="sNr-bV-gsE"/>
                     <constraint firstItem="nn3-NJ-ev6" firstAttribute="leading" secondItem="BOz-vE-5Fj" secondAttribute="trailing" constant="10" id="vXx-Ne-yvO"/>
@@ -120,11 +132,13 @@
                 <outlet property="GuiGeLabelWidth" destination="XuV-Sd-MJe" id="Bis-Dz-1tB"/>
                 <outlet property="GuigeLabel" destination="41K-ex-ar1" id="o6Y-xY-3Qk"/>
                 <outlet property="Image" destination="BOz-vE-5Fj" id="n4M-EX-PNs"/>
+                <outlet property="KucunLabel" destination="Ffl-RE-5Fu" id="TJ0-XC-515"/>
                 <outlet property="PriceLabel" destination="cVU-79-rwI" id="mPd-1m-dSM"/>
                 <outlet property="SalesOutImage" destination="vxO-gd-aEj" id="chG-dc-1fR"/>
                 <outlet property="TitleLabel" destination="nn3-NJ-ev6" id="dsg-Hq-fDF"/>
                 <outlet property="unitPriceLabel" destination="STU-iX-OIU" id="dyW-QQ-xk7"/>
             </connections>
+            <point key="canvasLocation" x="52.799999999999997" y="64.767616191904054"/>
         </tableViewCell>
     </objects>
     <resources>

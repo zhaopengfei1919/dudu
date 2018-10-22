@@ -22,7 +22,7 @@
 }
 -(void)setModel:(addressModel *)model{
     self.titleLabel.text = [NSString stringWithFormat:@"%@ %@",model.consignee,model.phone];
-    NSDictionary * areaInfo =model.areaInfo;
-    self.areaLabel.text = [NSString stringWithFormat:@"上海市%@%@",[areaInfo safeObjectForKey:@"name"],model.address];
+//    NSDictionary * areaInfo =model.areaInfo;
+    self.areaLabel.text = [NSString stringWithFormat:@"%@%@%@%@",model.province,model.city,model.district,model.address];
 }
 @end

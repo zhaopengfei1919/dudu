@@ -11,14 +11,21 @@
 @interface HZCityViewController : UIViewController
 {
     int type;
-    NSString *province;
-    NSString *city;
-    NSString *area;
-    
-    NSString *provinceid;
-    NSString *cityid;
-    NSString *areaid;
+//    NSString *province;
+//    NSString *city;
+//    NSString *area;
+//
+//    NSString *provinceid;
+//    NSString *cityid;
+//    NSString *areaid;
 }
-@property (nonatomic, strong) NSArray *array;
+@property (nonatomic, strong) NSMutableArray *array;
 @property (strong, nonatomic) UITableView *table;
+
+@property (nonatomic, strong) NSString *province;
+@property (nonatomic, strong) NSString *provinceid;
+@property (nonatomic, strong) NSString *city;
+@property (nonatomic, strong) NSString *cityid;
+@property (nonatomic, strong) NSString *area;
+@property (nonatomic, strong) NSString *areaid;
 @end

@@ -31,7 +31,7 @@
 }
 -(void)setDic:(NSDictionary *)dic{
     _dic = dic;
-    self.orderIdLabel.text = [NSString stringWithFormat:@"订单号：%@",[dic safeObjectForKey:@"id"]];
+    self.orderIdLabel.text = [NSString stringWithFormat:@"订单号：%@",[dic safeObjectForKey:@"sn"]];
     self.dateLabel.text = [NSString stringWithFormat:@"下单时间：%@",[dic safeObjectForKey:@"createDate"]];
     NSString * orderStatus = [dic safeObjectForKey:@"orderStatus"];
     self.status.text = [NSString stringWithFormat:@"%@",orderStatus];
@@ -100,7 +100,7 @@
     }else{
         self.priceTop.constant = 15;
         self.Price2Label.hidden = NO;
-        str = [NSString stringWithFormat:@"实付:￥%@",[dic safeObjectForKey:@"amount"]];
+        str = [NSString stringWithFormat:@"合计:￥%@",[dic safeObjectForKey:@"amount"]];
     }
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
     [string addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x333333) range:NSMakeRange(0, 3)];

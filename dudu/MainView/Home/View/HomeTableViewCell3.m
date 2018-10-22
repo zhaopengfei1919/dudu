@@ -88,7 +88,7 @@
     UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PromotionViewController * promotion = [sb instantiateViewControllerWithIdentifier:@"PromotionViewController"];
     promotion.ID = model1.ID;
-    promotion.imageurl = model1.mobileImage;
+    promotion.imageurl = model1.introduction;
     [superController.navigationController pushViewController:promotion animated:YES];
 }
 @end

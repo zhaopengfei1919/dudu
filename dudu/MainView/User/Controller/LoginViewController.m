@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "WebViewController.h"
 
 @interface LoginViewController ()
 
@@ -17,7 +18,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.LoginBtn.layer.cornerRadius = 3;
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"登录即表示您同意《哆哆生鲜服务协议》"];
+    [attributedString addAttribute:NSLinkAttributeName
+                             value:@"xieyi://"
+                             range:[[attributedString string] rangeOfString:@"《哆哆生鲜服务协议》"]];
+    self.textview.attributedText = attributedString;
+    self.textview.linkTextAttributes = @{NSForegroundColorAttributeName: UIColorFromRGB(0x20d994),
+                                     NSUnderlineColorAttributeName: [UIColor lightGrayColor],
+                                     NSUnderlineStyleAttributeName: @(NSUnderlinePatternSolid)};
+    
+    self.textview.editable = NO;        //必须禁止输入，否则点击将弹出输入键盘
+    self.textview.scrollEnabled = NO;
     // Do any additional setup after loading the view.
+}
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
+    if ([[URL scheme] isEqualToString:@"xieyi"]) {
+        WebViewController * web = [[WebViewController alloc]init];
+        web.Titlestr = @"用户协议";
+        web.HtmlUrl = @"http://www.baidu.com";
+        web.hidesBottomBarWhenPushed = YES;
+        [self presentViewController:web animated:YES completion:^{
+            
+        }];
+        return NO;
+    }
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,7 +115,7 @@
         [self.timer invalidate];
         self.timer = nil;
     }else{
-        [self.sendBtn setTitle:[NSString stringWithFormat:@"%dS/重新发送",self.daojishu] forState:0];
+        [self.sendBtn setTitle:[NSString stringWithFormat:@"%dS后重新发送",self.daojishu] forState:0];
     }
 }
 - (IBAction)login:(id)sender {

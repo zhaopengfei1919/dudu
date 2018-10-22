@@ -60,8 +60,6 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>哆哆想要使用您的摄像头，以便获取业务员二维码</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

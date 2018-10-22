@@ -116,7 +116,7 @@
     [view addSubview:label1];
     
     UILabel * label2 = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, SCREEN_WIDTH - 100, 15)];
-    NSString * name = [self.data safeObjectForKey:@"id"];
+    NSString * name = [self.data safeObjectForKey:@"sn"];
     label2.text = [NSString stringWithFormat:@"订单号：%@",name];
     label2.font = [UIFont systemFontOfSize:15];
     label2.textColor = UIColorFromRGB(0x333333);
@@ -161,7 +161,7 @@
     }else{
         label2.frame = CGRectMake(15, 15, SCREEN_WIDTH - 220, 15);
         label3.hidden = NO;
-        str = [NSString stringWithFormat:@"实付:￥%@",[self.data safeObjectForKey:@"amount"]];
+        str = [NSString stringWithFormat:@"合计:￥%@",[self.data safeObjectForKey:@"amount"]];
     }
     
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
@@ -169,7 +169,7 @@
     [string addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0xf4b43a) range:NSMakeRange(3, string.length - 3)];
     label2.attributedText = string;
     
-    NSString * offsetAmount = str = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"offsetAmount"]];
+    NSString * offsetAmount = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"offsetAmount"]];
     if ([offsetAmount intValue] < 0) {
         offsetAmount = [offsetAmount substringFromIndex:1];
         label3.text = [NSString stringWithFormat:@"实收:￥%@，应找:￥%@",[self.data safeObjectForKey:@"payAmount"],offsetAmount];

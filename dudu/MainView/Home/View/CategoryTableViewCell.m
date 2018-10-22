@@ -43,9 +43,5 @@
     }else
         self.GuigeLabel.hidden = YES;
     
-    if (model.stock == 0) {
-        self.SalesOutImage.hidden = NO;
-    }else
-        self.SalesOutImage.hidden = YES;
 }
 @end

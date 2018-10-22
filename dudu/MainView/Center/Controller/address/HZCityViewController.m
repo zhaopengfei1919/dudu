@@ -24,16 +24,35 @@
     }
     return self;
 }
--(void)area{
+-(void)allarea{
     WS(weakself);
     NSMutableDictionary *paraDic = @{}.mutableCopy;
-    [paraDic setObject:[NSNumber numberWithInt:792] forKey:@"id"];
+    
+    [NetWorkManager requestWithMethod:POST Url:Allarea Parameters:paraDic success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        if ([code isEqualToString:@"0"]) {
+            NSArray * data = [responseObject safeObjectForKey:@"data"];
+            [weakself.array removeAllObjects];
+            [weakself.array addObjectsFromArray:data];
+            [weakself.table reloadData];
+        }
+    } requestRrror:^(id requestRrror) {
+        
+    }];
+}
+-(void)areawith:(NSString *)ID{
+    WS(weakself);
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    [paraDic setObject:ID forKey:@"id"];
     
     [NetWorkManager requestWithMethod:POST Url:areaList Parameters:paraDic success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         NSString * code = [responseObject safeObjectForKey:@"code"];
         if ([code isEqualToString:@"0"]) {
-            weakself.array = [responseObject safeObjectForKey:@"data"];
+            NSArray * data = [responseObject safeObjectForKey:@"data"];
+            [weakself.array removeAllObjects];
+            [weakself.array addObjectsFromArray:data];
             [weakself.table reloadData];
         }
     } requestRrror:^(id requestRrror) {
@@ -45,7 +64,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"区域选择";
-    [self area];
+    self.array = [[NSMutableArray alloc]init];
+    [self allarea];
     
     self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 44 - StatusHeight - BarBottomHeight) style:UITableViewStylePlain];
     self.table.delegate = self;
@@ -94,11 +114,27 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary * dic = self.array[indexPath.row];
-    
-    NSArray *array = self.navigationController.viewControllers;
-    AddressEditViewController *address = [array objectAtIndex:array.count - 2];
-    address.area = [dic safeObjectForKey:@"name"];
-    address.areaid = [dic safeObjectForKey:@"id"];
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.province.length == 0) {
+        self.province = [dic safeObjectForKey:@"name"];
+        self.provinceid = [dic safeObjectForKey:@"id"];
+        [self areawith:self.provinceid];
+    }else if (self.city.length == 0){
+        self.city = [dic safeObjectForKey:@"name"];
+        self.cityid = [dic safeObjectForKey:@"id"];
+        [self areawith:self.cityid];
+    }else{
+        self.area = [dic safeObjectForKey:@"name"];
+        self.areaid = [dic safeObjectForKey:@"id"];
+        
+        NSArray *array = self.navigationController.viewControllers;
+        AddressEditViewController *address = [array objectAtIndex:array.count - 2];
+        address.province = self.province;
+        address.provinceid = self.provinceid;
+        address.city = self.city;
+        address.cityid = self.cityid;
+        address.area = self.area;
+        address.areaid = self.areaid;
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 @end

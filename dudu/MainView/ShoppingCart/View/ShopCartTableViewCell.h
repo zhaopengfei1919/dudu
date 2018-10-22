@@ -24,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *jian;
 
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
+@property (weak, nonatomic) IBOutlet UILabel *signLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *promotionLabel;
 
 @property (strong,nonatomic) HomeModel * model;
 @end

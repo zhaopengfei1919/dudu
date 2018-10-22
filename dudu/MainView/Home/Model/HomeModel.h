@@ -16,7 +16,7 @@
 @property (assign) float price;//价格
 @property (assign) float unitPrice;//单价
 @property (strong,nonatomic) NSString * unit;//单位
-@property (assign) NSInteger weight;//重量
+@property (assign) float weight;//重量
 @property (strong,nonatomic) NSString * packaging;//包装
 @property (assign) NSInteger stock;//库存
 @property (assign) NSInteger cartNumber;//购物车中数量

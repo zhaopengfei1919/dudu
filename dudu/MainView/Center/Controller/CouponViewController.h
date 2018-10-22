@@ -13,6 +13,8 @@ typedef void(^chosenCoupon)(CouponModel * model);
 @interface CouponViewController : UIViewController{
     NSInteger status;
     UIView * tishiView;
+    
+    BOOL isgotocart;
 }
 @property (weak, nonatomic) IBOutlet UIButton *btn2;
 @property (weak, nonatomic) IBOutlet UIButton *btn1;

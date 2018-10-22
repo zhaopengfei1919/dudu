@@ -39,6 +39,12 @@
         
     }];
 }
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if (isgotocart) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataSourse = [[NSMutableArray alloc] init];
@@ -89,7 +95,14 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CouponTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CouponTableViewCell" forIndexPath:indexPath];
     cell.model = self.dataSourse[indexPath.row];
+    [cell.btn addTarget:self action:@selector(couponuse) forControlEvents:UIControlEventTouchUpInside];
     return cell;
+}
+-(void)couponuse{
+    isgotocart = YES;
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    BaseTableBarControllerView *tabbar = (BaseTableBarControllerView *)delegate.window.rootViewController;
+    tabbar.selectedIndex = 2;
 }
 - (IBAction)btnclick:(id)sender {
     UIButton * btn = (UIButton *)sender;

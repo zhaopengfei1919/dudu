@@ -15,8 +15,13 @@
 @property (strong,nonatomic) NSString * image;//图片
 @property (strong,nonatomic) NSString * introduction;//介绍
 @property (strong,nonatomic) NSString * memo;//备注
-@property (assign) float price;//id
+@property (assign) float price;//价格
 @property (assign) NSInteger stock;
 @property (strong,nonatomic) NSArray * productImages;
 @property (strong,nonatomic) NSArray * specifications;//规格数组
+@property (assign) float unitPrice;//单价
+@property (strong,nonatomic) NSString * unit;//单位
+@property (assign) float weight;//重量
+@property (strong,nonatomic) NSString * packaging;//包装
+@property (assign) NSInteger cartNumber;//购物车中数量
 @end

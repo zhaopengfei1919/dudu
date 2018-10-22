@@ -17,7 +17,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (self.area.length > 0) {
-        self.AddressLabel.text = [NSString stringWithFormat:@"上海市 %@",self.area];
+        self.AddressLabel.text = [NSString stringWithFormat:@"%@ %@ %@",self.province,self.city,self.area];
     }
 }
 - (void)viewDidLoad {
@@ -27,9 +27,11 @@
         self.NameTF.text = self.model.consignee;
         self.PhoneTF.text = self.model.phone;
         self.AreaTF.text = self.model.address;
-        NSDictionary * areaInfo = self.model.areaInfo;
-        self.areaid = [areaInfo safeObjectForKey:@"id"];
-        self.area = [areaInfo safeObjectForKey:@"name"];
+//        NSDictionary * areaInfo = self.model.areaInfo;
+        self.province = self.model.province;
+        self.city = self.model.city;
+//        self.areaid = [areaInfo safeObjectForKey:@"id"];
+        self.area = self.model.district;
         
         self.deleteBtn.hidden = NO;
         self.deleteBtn.layer.cornerRadius = 3;
@@ -97,10 +99,12 @@
     }
     [paraDic setObject:self.NameTF.text forKey:@"consignee"];
     [paraDic setObject:self.PhoneTF.text forKey:@"phone"];
-    [paraDic setObject:[NSNumber numberWithInt:792] forKey:@"province"];
+    [paraDic setObject:self.province forKey:@"province"];
+    [paraDic setObject:self.city forKey:@"city"];
+    [paraDic setObject:self.area forKey:@"district"];
     [paraDic setObject:self.AreaTF.text forKey:@"address"];
-    [paraDic setObject:[NSNumber numberWithBool:YES] forKey:@"default"];
-    [paraDic setObject:@{@"id":self.areaid} forKey:@"areaParam"];
+    [paraDic setObject:[NSNumber numberWithBool:YES] forKey:@"isDefault"];
+//    [paraDic setObject:@{@"id":self.areaid} forKey:@"areaParam"];
     
     [NetWorkManager requestWithMethod:POST Url:urlStr Parameters:paraDic success:^(id responseObject) {
         NSString * code = [responseObject objectForKey:@"code"];

@@ -37,6 +37,7 @@
             [weakself.dataSourse1 addObjectsFromArray:array];
             [weakself.hotProduce addObjectsFromArray:arr];
             [weakself.table1 reloadData];
+            self->produceud = model.ID;
             [self produceWith:model.ID];
         }else
             [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
@@ -49,18 +50,27 @@
     WS(weakself);
     NSMutableDictionary *paraDic = @{}.mutableCopy;
     [paraDic setObject:ID forKey:@"id"];
+    [paraDic setObject:[NSNumber numberWithInteger:Page] forKey:@"pageNumber"];
+    [paraDic setObject:@"10" forKey:@"pageSize"];
     
     [NetWorkManager requestWithMethod:POST Url:GETProduce Parameters:paraDic success:^(id responseObject) {
-        NSArray * array = [HomeModel mj_objectArrayWithKeyValuesArray:[responseObject objectForKey:@"data"]];
-        if (array.count == 0) {
-            self->tishiView.hidden = NO;
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        [self.table2.mj_footer endRefreshing];
+        if ([code isEqualToString:@"0"]) {
+//            NSArray * array = [HomeModel mj_objectArrayWithKeyValuesArray:[responseObject objectForKey:@"data"]];
+            NSArray * array = [responseObject safeObjectForKey:@"data"];
+            if (array.count == 0) {
+                self->tishiView.hidden = NO;
+            }else
+                self->tishiView.hidden = YES;
+            if (self->Page == 1) {
+                [weakself.dataSourse2 removeAllObjects];
+            }
+            [weakself.dataSourse2 addObjectsFromArray:array];
+            [weakself.table2 reloadData];
         }else
-            self->tishiView.hidden = YES;
-        if (self->Page == 0) {
-            [weakself.dataSourse2 removeAllObjects];
-        }
-        [weakself.dataSourse2 addObjectsFromArray:array];
-        [weakself.table2 reloadData];
+            [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
+
     } requestRrror:^(id requestRrror) {
         
     }];
@@ -114,10 +124,12 @@
         self.SureBtn.enabled = YES;
     }
     
-    NSString * str = [NSString stringWithFormat:@"合计￥%.2f",money];
-    NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
+    NSString * str = [NSString stringWithFormat:@"合计￥%@",[dic safeObjectForKey:@"afterDiscountAmount"]];
+    NSString * str1 = [NSString stringWithFormat:@"%@(%@)",str,[dic safeObjectForKey:@"productAmount"]];
+    NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str1];
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 3)];
-    [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, string.length - 3)];
+    [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(3, str.length - 3)];
+    [string addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(str.length, str1.length - str.length)];
     self.TitleLabel.attributedText = string;
 }
 //购物车数量
@@ -147,7 +159,7 @@
     self.dataSourse1 = [[NSMutableArray alloc]init];
     self.dataSourse2 = [[NSMutableArray alloc]init];
     self.hotProduce = [[NSMutableArray alloc]init];
-    Page = 0;
+    Page = 1;
     [self rootproduce];
     [self cartcount];
     [self cartlist];
@@ -172,7 +184,16 @@
     [cartView setCartBlock:^{
         [weakself cartlist];
     }];
+    
+    [self refreshUI];
     // Do any additional setup after loading the view.
+}
+-(void)refreshUI{
+    WS(weakself);
+    self.table2.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self->Page += 1;
+        [weakself produceWith:self->produceud];
+    }];
 }
 -(void)createView{
     tishiView = [[UIView alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - 75)/2 - 100, 80, 200, 150)];
@@ -248,6 +269,8 @@
     [self.hotProduce addObjectsFromArray:arr];
     [self.table1 reloadData];
     [self produceWith:model.ID];
+    Page = 1;
+    produceud = model.ID;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (tableView == self.table1) {
@@ -285,9 +308,21 @@
         return cell;
     }
     CategoryTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell" forIndexPath:indexPath];
-    cell.model = self.dataSourse2[indexPath.row];
+    NSDictionary * dic = self.dataSourse2[indexPath.row];
+    cell.model = [HomeModel mj_objectWithKeyValues:dic];
     cell.CartBtn.tag = indexPath.row;
     [cell.CartBtn addTarget:self action:@selector(addcart:) forControlEvents:UIControlEventTouchUpInside];
+    NSString * stock = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"stock"]];
+    NSLog(@"%@",stock);
+    if ([stock isEqualToString:@"(null)"]) {
+        cell.KucunLabel.text = @"库存：9999";
+    }else{
+        if ([stock intValue] == 0) {
+            cell.SalesOutImage.hidden = NO;
+        }else
+            cell.SalesOutImage.hidden = YES;
+        cell.KucunLabel.text = [NSString stringWithFormat:@"库存：%@",stock];
+    }
     return cell;
 }
 -(void)addcart:(UIButton *)btn{
@@ -300,10 +335,17 @@
         }];
         return;
     }
-    HomeModel * model = self.dataSourse2[btn.tag];
-    if (model.stock == 0) {
-        [SVProgressHUD showErrorWithStatus:@"当前商品库存为0"];
-        return;
+    NSDictionary * dic = self.dataSourse2[btn.tag];
+    HomeModel * model = [HomeModel mj_objectWithKeyValues:dic];
+
+    NSString * stock = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"stock"]];
+    NSLog(@"%@",stock);
+    if ([stock isEqualToString:@"(null)"]) {
+    }else{
+        if ([stock intValue] == 0) {
+            [SVProgressHUD showErrorWithStatus:@"当前商品库存为0"];
+            return;
+        }
     }
     if (model.specificationNumber == 0) {//没有规格，直接加入购物车
         NSMutableDictionary *paraDic = @{}.mutableCopy;
@@ -376,13 +418,16 @@
     if (tableView == self.table1) {
         CategoryModel * model = self.hotProduce[indexPath.row];
         [self.dataSourse2 removeAllObjects];
+        Page = 1;
+        produceud = model.ID;
         [self produceWith:model.ID];
         Rownum = indexPath.row + 1;
         [self.table1 reloadData];
     }else{
         UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         GoodsDetailViewController * detail = [sb instantiateViewControllerWithIdentifier:@"GoodsDetailViewController"];
-        HomeModel * model = self.dataSourse2[indexPath.row];
+        NSDictionary * dic = self.dataSourse2[indexPath.row];
+        HomeModel * model = [HomeModel mj_objectWithKeyValues:dic];
         detail.GoodsID = model.ID;
         [self.navigationController pushViewController:detail animated:YES];
     }
