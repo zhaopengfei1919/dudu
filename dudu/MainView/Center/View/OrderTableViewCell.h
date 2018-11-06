@@ -17,6 +17,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *GuigeLabelWidth;
 @property (weak, nonatomic) IBOutlet UILabel *GiftLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *weightLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *weightLabelWidth;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *UnitPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *PriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *CountLabel;

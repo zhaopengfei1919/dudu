@@ -18,6 +18,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *PriceLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *GuiGeLabelWidth;
 
+@property (weak, nonatomic) IBOutlet UILabel *weightLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *weightLabelWidth;
+
+
 @property (weak, nonatomic) IBOutlet UIButton *CartBtn;
 
 @property (weak, nonatomic) IBOutlet UILabel *KucunLabel;

@@ -23,8 +23,13 @@
         NSString * code = [responseObject safeObjectForKey:@"code"];
         if ([code isEqualToString:@"0"]) {
             self.data = [responseObject safeObjectForKey:@"data"];
-            weakself.model = [GoodsModel mj_objectWithKeyValues:[responseObject safeObjectForKey:@"data"]];
-            [weakself createUI];
+            if (self.data.count > 0) {
+                self->tishiView.hidden = YES;
+                weakself.model = [GoodsModel mj_objectWithKeyValues:[responseObject safeObjectForKey:@"data"]];
+                [weakself createUI];
+            }else{
+                self->tishiView.hidden = NO;
+            }
         }else
             [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
     } requestRrror:^(id requestRrror) {
@@ -48,10 +53,28 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self createView];
     [self goodsdetail];
     [self cartcount];
     self.CountLabel.layer.cornerRadius = 7.5;
     // Do any additional setup after loading the view.
+}
+-(void)createView{
+    tishiView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 44 - StatusHeight)];
+    tishiView.backgroundColor = [UIColor whiteColor];
+    tishiView.hidden = YES;
+    [self.view addSubview:tishiView];
+    
+    UIImageView * image = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 90, 100, 100)];
+    image.image = [UIImage imageNamed:@"3"];
+    [tishiView addSubview:image];
+    
+    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 150, 225, 300, 15)];
+    label.font = [UIFont systemFontOfSize:14];
+    label.textColor = UIColorFromRGB(0x666666);
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"商品暂时失联了，请选择其他商品哦";
+    [tishiView addSubview:label];
 }
 -(void)createUI{
     [self.MainImage sd_setImageWithURL:[NSURL URLWithString:self.model.image]];
@@ -62,12 +85,36 @@
     GoodsCount = 1;
     self.count.text = [NSString stringWithFormat:@"%d",GoodsCount];
     
+    if (self.model.packaging.length > 0) {
+        self.GuigeLabel.text = self.model.packaging;
+        self.GuigeLabel.hidden = NO;
+        self.GuigeLabel.layer.cornerRadius = 3;
+        self.GuigeLabel.layer.borderWidth = 0.5;
+        self.GuigeLabel.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
+        CGSize size = [[FYUser userInfo] sizeForString:self.model.packaging withFontSize:10 withWidth:200];
+        self.GuigeLabelWidth.constant = size.width + 8;
+    }else{
+        self.GuigeLabelWidth.constant = 0;
+        self.GuigeLabel.hidden = YES;
+    }
+    
+    if (self.model.weight > 0) {
+        self.WeightLabel.text = [NSString stringWithFormat:@"约%.1f斤",self.model.weight];
+        self.WeightLabel.hidden = NO;
+        self.WeightLabel.layer.cornerRadius = 3;
+        self.WeightLabel.layer.borderWidth = 0.5;
+        self.WeightLabel.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
+        CGSize size = [[FYUser userInfo] sizeForString:self.WeightLabel.text withFontSize:10 withWidth:200];
+        self.WeightLabelWidth.constant = size.width + 8;
+    }else
+        self.WeightLabel.hidden = YES;
+    
     NSString *detailTextString = [NSString stringWithFormat:@"%@",self.model.introduction];
     NSString *str1 = [NSString stringWithFormat:@"<head><style>img{width:%f !important;height:auto}</style></head>%@",SCREEN_WIDTH,detailTextString];
     NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithData:[str1 dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
     self.introduceLabel.attributedText = attributeString;
     CGFloat labelheight =  [self.introduceLabel.attributedText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
-    self.MainViewHeight.constant = self.MainViewHeight.constant - 97 + labelheight;
+    self.MainViewHeight.constant = self.MainViewHeight.constant - 72 + labelheight;
     
     self.unitpriceLabel.text = [NSString stringWithFormat:@"￥%.2f/%@",self.model.unitPrice,self.model.unit];
     
@@ -237,10 +284,15 @@
 }
 
 - (IBAction)jia:(id)sender {
-    if (GoodsCount >= self.model.stock) {
-        [SVProgressHUD showErrorWithStatus:@"已到最大数量"];
-        return;
+    NSString * stock = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"stock"]];
+    if ([stock isEqualToString:@"(null)"]) {
+    }else{
+        if (GoodsCount >= self.model.stock) {
+            [SVProgressHUD showErrorWithStatus:@"已到最大数量"];
+            return;
+        }
     }
+    
     GoodsCount += 1;
     self.count.text = [NSString stringWithFormat:@"%d",GoodsCount];
 }

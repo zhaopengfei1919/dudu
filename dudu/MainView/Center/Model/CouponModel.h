@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface CouponModel : NSObject
+@property (assign) NSNumber * ID;
 @property (strong,nonatomic) NSString * anHaoType;//分类
 @property (assign) NSUInteger lowLimit;//最低下单金额，即满x减y中的x
 @property (assign) NSUInteger amount;//面额，即满x减y中的y

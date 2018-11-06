@@ -29,19 +29,27 @@
             NSLog(@"%@",responseObject);
             [weakself.table.mj_footer endRefreshing];
             NSArray * data = [responseObject objectForKey:@"data"];
-            NSArray * array = [HomeModel mj_objectArrayWithKeyValuesArray:data];
-            if (array.count == 0 && self->page_number == 1) {
+//            NSArray * array = [HomeModel mj_objectArrayWithKeyValuesArray:data];
+            if (data.count == 0 && self->page_number == 1) {
                 self->tishiView.hidden = NO;
             }else
                 self->tishiView.hidden = YES;
             
-            [weakself.dataSourse addObjectsFromArray:array];
+            [weakself.dataSourse addObjectsFromArray:data];
             [weakself.table reloadData];
         }else
             [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
     } requestRrror:^(id requestRrror) {
         
     }];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.SearchStr.length > 0) {
+        self.SearchTF.text = self.SearchStr;
+        [self seacchstr];
+        self.SearchStr = @"";
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -115,9 +123,22 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CategoryTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell" forIndexPath:indexPath];
-    cell.model = self.dataSourse[indexPath.row];
+    NSDictionary * dic = self.dataSourse[indexPath.row];
+    cell.model = [HomeModel mj_objectWithKeyValues:dic];
     cell.CartBtn.tag = indexPath.row;
     [cell.CartBtn addTarget:self action:@selector(addcart:) forControlEvents:UIControlEventTouchUpInside];
+    
+    NSString * stock = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"stock"]];
+    NSLog(@"%@",stock);
+    if ([stock isEqualToString:@"(null)"]) {
+        cell.KucunLabel.text = @"库存：9999";
+    }else{
+//        if ([stock intValue] == 0) {
+//            cell.SalesOutImage.hidden = NO;
+//        }else
+//            cell.SalesOutImage.hidden = YES;
+        cell.KucunLabel.text = [NSString stringWithFormat:@"库存：%@",stock];
+    }
     return cell;
 }
 -(void)addcart:(UIButton *)btn{

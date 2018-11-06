@@ -13,6 +13,7 @@
     NSInteger page_number;
     HZSubmitView * submitView;
 }
+@property (strong, nonatomic) NSString *SearchStr;
 @property (weak, nonatomic) IBOutlet UITextField *SearchTF;
 @property (weak, nonatomic) IBOutlet UITableView *table;
 @property (strong,nonatomic) NSMutableArray * dataSourse;

@@ -11,6 +11,7 @@
 
 @interface GoodsDetailViewController : UIViewController{
     int GoodsCount;
+    UIView * tishiView;
 }
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *MainViewHeight;
 
@@ -20,6 +21,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *PriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *unitpriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *KucunLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *GuigeLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *GuigeLabelWidth;
+@property (weak, nonatomic) IBOutlet UILabel *WeightLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *WeightLabelWidth;
+
 
 @property (weak, nonatomic) IBOutlet UIView *GuiGeView;
 - (IBAction)jian:(id)sender;

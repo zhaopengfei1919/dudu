@@ -19,6 +19,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *ContentLabel1;
 @property (weak, nonatomic) IBOutlet UILabel *GuigeLabel1;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *GuiGeLabelWidth1;
+@property (weak, nonatomic) IBOutlet UILabel *weightLabel1;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *weightLabelWidth1;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *unitPrice1;
 @property (weak, nonatomic) IBOutlet UILabel *PriceLabel1;
 @property (weak, nonatomic) IBOutlet DDButton *CartBtn1;
@@ -34,6 +38,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *ContentLabel2;
 @property (weak, nonatomic) IBOutlet UILabel *GuigeLabel2;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *GuigeLabelWidth2;
+@property (weak, nonatomic) IBOutlet UILabel *weightLabel2;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *weightLabelWidth2;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *unitPriceLabel2;
 @property (weak, nonatomic) IBOutlet UILabel *PriceLabel2;
 @property (weak, nonatomic) IBOutlet DDButton *CartBtn2;

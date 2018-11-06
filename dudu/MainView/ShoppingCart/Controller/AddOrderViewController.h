@@ -13,6 +13,7 @@
 @interface AddOrderViewController : UIViewController{
     CGFloat _currentKeyboardH;
     CGFloat _transformY;
+    NSInteger usedpoint;
 }
 @property (weak, nonatomic) IBOutlet UITableView *table;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableBottom;

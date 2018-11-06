@@ -37,5 +37,6 @@
 
 @property (strong,nonatomic) ChosenTimeAndStyle * chosenView;
 @property (strong,nonatomic) NSArray * giftArray;
+@property (strong,nonatomic) NSArray * couponArray;
 @property (strong,nonatomic) NSString * giftid;
 @end

@@ -156,6 +156,7 @@
         self.footerView.couponMoney.text = @"￥0.00";
     }else{
         self.footerView.CouponBtn.enabled = YES;
+        self.footerView.couponArray = anHaos;
         if (![self.footerView.couponLabel.text isEqualToString:@"点击选择"]) {
             float amount = self.footerView.coumodel.amount;
             productAmount = productAmount - amount;
@@ -175,7 +176,12 @@
         self.footerView.jifenLabel.text = [NSString stringWithFormat:@"积分抵扣%.2f元",jifenprice];
         self.footerView.jifenBtn.enabled = YES;
         if (self.footerView.jifenBtn.selected) {
+            usedpoint = userPoint;
             self.footerView.jifenMoney.text = [NSString stringWithFormat:@"-￥%.2f元",jifenprice];
+            if (productAmount < jifenprice) {
+                jifenprice = productAmount;
+                usedpoint = jifenprice * pointRmb;
+            }
             productAmount -= jifenprice;
         }else
             self.footerView.jifenMoney.text = @"￥0.00";
@@ -281,8 +287,8 @@
     [paraDic setObject:_headerView.timeLabel.text forKey:@"receiverDate"];
     [paraDic setObject:_headerView.payID forKey:@"paymentMethodId"];
     [paraDic setObject:@"ios" forKey:@"orderType"];
-    if (self.footerView.coumodel.no.length > 0) {
-        [paraDic setObject:@[self.footerView.coumodel.no] forKey:@"anHaos"];
+    if (self.footerView.coumodel.anhao.length > 0) {
+        [paraDic setObject:@[self.footerView.coumodel.anhao] forKey:@"anHaos"];
     }
     if (self.footerView.RemarkTF.text.length > 0) {
         [paraDic setObject:self.footerView.RemarkTF.text forKey:@"memo"];
@@ -291,7 +297,7 @@
         [paraDic setObject:self.footerView.giftid forKey:@"giftId"];
     }
     if (self.footerView.jifenBtn.selected) {
-        [paraDic setObject:[self.data safeObjectForKey:@"userPoint"] forKey:@"usePoint"];
+        [paraDic setObject:[NSNumber numberWithInteger:usedpoint] forKey:@"usePoint"];
     }
     
     [NetWorkManager requestWithMethod:POST Url:OrderSave Parameters:paraDic success:^(id responseObject) {

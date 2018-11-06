@@ -17,7 +17,7 @@
     HZSubmitView * submitView;
     CartView * cartView;
     
-    NSNumber * produceud;
+    NSNumber * produceid;
 }
 @property (weak, nonatomic) IBOutlet UIView *SearchView;
 

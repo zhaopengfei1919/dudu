@@ -83,7 +83,11 @@
     return self.dataSourse.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 142;
+    NSString * orderStatus = [self.data safeObjectForKey:@"orderStatus"];
+    if ([orderStatus isEqualToString:@"已完成"] || [orderStatus isEqualToString:@"配送中"]) {
+        return 142;
+    }
+    return 112;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OrderTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"OrderTableViewCell" forIndexPath:indexPath];
@@ -91,7 +95,11 @@
     NSDictionary * dic = [data safeObjectForKey:@"productInfo"];
     cell.model = [HomeModel mj_objectWithKeyValues:dic];
     cell.CountLabel.text = [NSString stringWithFormat:@"x%@",[data safeObjectForKey:@"qty"]];
-    cell.ActuallyLabel.text = [NSString stringWithFormat:@"应发货%@斤，实发货%@斤，应收%@元，实收%@元",[data safeObjectForKey:@"orderWeight"],[data safeObjectForKey:@"realWeight"],[data safeObjectForKey:@"orderPrice"],[data safeObjectForKey:@"realPrice"]];
+    NSString * orderStatus = [self.data safeObjectForKey:@"orderStatus"];
+    if ([orderStatus isEqualToString:@"已完成"] || [orderStatus isEqualToString:@"配送中"]) {
+        cell.ActuallyLabel.text = [NSString stringWithFormat:@"应发货%@斤，实发货%@斤，应收%@元，实收%@元",[data safeObjectForKey:@"orderWeight"],[data safeObjectForKey:@"realWeight"],[data safeObjectForKey:@"orderPrice"],[data safeObjectForKey:@"realPrice"]];
+    }
+
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -215,12 +223,12 @@
         [btn2 addTarget:self action:@selector(ordercancel) forControlEvents:UIControlEventTouchUpInside];
     }else if ([orderStatus isEqualToString:@"配送中"]){
         btn1.hidden = YES;
-        
-        [btn2 setTitle:@"取消订单" forState:0];
-        [btn2 setBackgroundColor:UIColorFromRGB(0xffffff)];
-        [btn2 setTitleColor:UIColorFromRGB(0x666666) forState:0];
-        btn2.layer.borderColor = UIColorFromRGB(0x888888).CGColor;
-        [btn2 addTarget:self action:@selector(ordercancel) forControlEvents:UIControlEventTouchUpInside];
+        btn2.hidden = YES;
+//        [btn2 setTitle:@"取消订单" forState:0];
+//        [btn2 setBackgroundColor:UIColorFromRGB(0xffffff)];
+//        [btn2 setTitleColor:UIColorFromRGB(0x666666) forState:0];
+//        btn2.layer.borderColor = UIColorFromRGB(0x888888).CGColor;
+//        [btn2 addTarget:self action:@selector(ordercancel) forControlEvents:UIControlEventTouchUpInside];
     }else if ([orderStatus isEqualToString:@"已完成"]){
         btn1.hidden = YES;
         

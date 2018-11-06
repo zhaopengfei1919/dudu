@@ -48,9 +48,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataSourse = [[NSMutableArray alloc] init];
-    status = 1;
-    [self coupon];
-    [self createView];
+    status = 0;
+    if (self.array.count > 0) {
+        NSArray * arr = [CouponModel mj_objectArrayWithKeyValuesArray:self.array];
+        [self.dataSourse addObjectsFromArray:arr];
+        self.btn1.hidden = YES;
+        self.btn2.hidden = YES;
+        self.line.hidden = YES;
+        self.tableTop.constant = -42;
+    }else{
+        [self coupon];
+        [self createView];
+        self.btn1.hidden = NO;
+        self.btn2.hidden = NO;
+        self.line.hidden = NO;
+        self.tableTop.constant = 0;
+    }
     
     adjustsScrollViewInsets_NO(self.table, self);
     [self.table registerNib:[UINib nibWithNibName:@"CouponTableViewCell" bundle:nil] forCellReuseIdentifier:@"CouponTableViewCell"];
@@ -109,11 +122,11 @@
     if (btn.tag == 1) {
         self.btn1.selected = YES;
         self.btn2.selected = NO;
-        status = 1;
+        status = 0;
     }else{
         self.btn1.selected = NO;
         self.btn2.selected = YES;
-        status = 0;
+        status = 1;
     }
     [self coupon];
 }

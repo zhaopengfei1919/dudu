@@ -108,7 +108,7 @@
     [self.table registerNib:[UINib nibWithNibName:@"OrderListTableViewCell" bundle:nil] forCellReuseIdentifier:@"OrderListTableViewCell"];
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame = CGRectMake(0, 0, 50, 22);
+    backButton.frame = CGRectMake(-20, -10, 70, 32);
     backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -13, 0, 28);
     [backButton addTarget:self action:@selector(backLastViewController) forControlEvents:UIControlEventTouchUpInside];
     [backButton setImage:[UIImage imageNamed:@"返回"] forState:0];

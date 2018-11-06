@@ -36,7 +36,7 @@
     if ([[URL scheme] isEqualToString:@"xieyi"]) {
         WebViewController * web = [[WebViewController alloc]init];
         web.Titlestr = @"用户协议";
-        web.HtmlUrl = @"http://www.baidu.com";
+        web.HtmlUrl = @"http://cdn.duoduofresh.com/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96.html";
         web.hidesBottomBarWhenPushed = YES;
         [self presentViewController:web animated:YES completion:^{
             

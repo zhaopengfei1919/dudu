@@ -19,9 +19,12 @@ typedef void(^chosenCoupon)(CouponModel * model);
 @property (weak, nonatomic) IBOutlet UIButton *btn2;
 @property (weak, nonatomic) IBOutlet UIButton *btn1;
 - (IBAction)btnclick:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *line;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableTop;
 
 @property (weak, nonatomic) IBOutlet UITableView *table;
 @property (strong,nonatomic) NSMutableArray * dataSourse;
+@property (strong,nonatomic) NSArray * array;
 
 @property (copy,nonatomic) chosenCoupon chosencou;
 @property (assign) BOOL ischosen;

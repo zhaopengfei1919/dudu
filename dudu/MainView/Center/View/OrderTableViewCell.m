@@ -40,10 +40,26 @@
         self.GuigeLabel.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
         CGSize size = [[FYUser userInfo] sizeForString:model.packaging withFontSize:10 withWidth:200];
         self.GuigeLabelWidth.constant = size.width + 8;
-    }else
+    }else{
+        self.GuigeLabelWidth.constant = 0;
         self.GuigeLabel.hidden = YES;
+    }
+    
+    if (model.weight > 0) {
+        self.weightLabel.text = [NSString stringWithFormat:@"约%.1f斤",model.weight];
+        self.weightLabel.hidden = NO;
+        self.weightLabel.layer.cornerRadius = 3;
+        self.weightLabel.layer.borderWidth = 0.5;
+        self.weightLabel.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
+        CGSize size = [[FYUser userInfo] sizeForString:self.weightLabel.text withFontSize:10 withWidth:200];
+        self.weightLabelWidth.constant = size.width + 8;
+    }else
+        self.weightLabel.hidden = YES;
     
     if (model.isGift) {
+        self.GiftLabel.layer.cornerRadius = 3;
+        self.GiftLabel.layer.borderWidth = 0.5;
+        self.GiftLabel.layer.borderColor = UIColorFromRGB(0xf39700).CGColor;
         self.GiftLabel.hidden = NO;
     }else
         self.GiftLabel.hidden = YES;

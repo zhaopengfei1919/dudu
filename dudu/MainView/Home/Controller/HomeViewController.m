@@ -201,6 +201,7 @@
     }else if ([type isEqualToString:@"search"]){//搜索界面
         UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         SearchViewController * search = [sb instantiateViewControllerWithIdentifier:@"SearchViewController"];
+        search.SearchStr = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"value"]];
         [self.navigationController pushViewController:search animated:YES];
     }
 }
@@ -285,7 +286,7 @@
     if ([model.showType isEqualToString:@"1"]) {
         return 155;
     }
-    return 270;
+    return 140 + SCREEN_WIDTH/2;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger count = indexPath.section;
@@ -306,6 +307,14 @@
     if ([model.showType isEqualToString:@"1"]) {
         HomeTableViewCell1 * cell = [tableView dequeueReusableCellWithIdentifier:@"HomeTableViewCell1" forIndexPath:indexPath];
         cell.model = produceModel[indexPath.row];
+        
+        NSDictionary * dic = products[indexPath.row];
+        NSString * stock = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"stock"]];
+        if ([stock isEqualToString:@"(null)"]) {//stock可能会是（null）转model会变成0
+            cell.unitPriceLabel.text = [NSString stringWithFormat:@"￥%.2f/%@  库存：9999",cell.model.unitPrice,cell.model.unit];
+        }else{
+            cell.unitPriceLabel.text = [NSString stringWithFormat:@"￥%.2f/%@  库存：%@",cell.model.unitPrice,cell.model.unit,stock];
+        }
         return cell;
     }
     HomeTableViewCell2 * cell = [tableView dequeueReusableCellWithIdentifier:@"HomeTableViewCell2" forIndexPath:indexPath];
@@ -313,6 +322,24 @@
         cell.array = [produceModel subarrayWithRange:NSMakeRange(indexPath.row * 2, 1)];
     }else
         cell.array = [produceModel subarrayWithRange:NSMakeRange(indexPath.row * 2, 2)];
+    NSDictionary * dic1 = products[indexPath.row * 2];
+    NSString * stock = [NSString stringWithFormat:@"%@",[dic1 safeObjectForKey:@"stock"]];
+    HomeModel * model1 = cell.array[0];
+    if ([stock isEqualToString:@"(null)"]) {
+        cell.unitPrice1.text = [NSString stringWithFormat:@"￥%.2f/%@  库存：9999",model1.unitPrice,model1.unit];
+    }else{
+        cell.unitPrice1.text = [NSString stringWithFormat:@"￥%.2f/%@  库存：%@",model1.unitPrice,model1.unit,stock];
+    }
+    if (cell.array.count == 2) {
+        NSDictionary * dic2 = products[indexPath.row * 2 + 1];
+        NSString * stock1 = [NSString stringWithFormat:@"%@",[dic2 safeObjectForKey:@"stock"]];
+        HomeModel * model2 = cell.array[1];
+        if ([stock1 isEqualToString:@"(null)"]) {
+            cell.unitPriceLabel2.text = [NSString stringWithFormat:@"￥%.2f/%@  库存：9999",model2.unitPrice,model2.unit];
+        }else{
+            cell.unitPriceLabel2.text = [NSString stringWithFormat:@"￥%.2f/%@  库存：%@",model2.unitPrice,model2.unit,stock1];
+        }
+    }
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

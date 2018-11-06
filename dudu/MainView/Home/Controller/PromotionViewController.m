@@ -28,7 +28,7 @@
         if ([code isEqualToString:@"0"]) {
             NSLog(@"%@",responseObject);
             NSDictionary * data = [responseObject objectForKey:@"data"];
-            NSArray * array = [HomeModel mj_objectArrayWithKeyValuesArray:[data safeObjectForKey:@"productInfoList"]];
+            NSArray * array = [data safeObjectForKey:@"productInfoList"];
             if (array.count == 0) {
                 self->tishiView.hidden = NO;
             }else
@@ -98,26 +98,6 @@
     // Pass the selected object to the new view controller.
 }
 */
-//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    if (self.dataSourse.count > 0) {
-//        return 100;
-//    }
-//    return 0.01;
-//}
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    if (self.dataSourse.count > 0) {
-//        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100)];
-//        view.backgroundColor = [UIColor whiteColor];
-//
-//        UIImageView * image = [[UIImageView alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, 100)];
-//        [image sd_setImageWithURL:[NSURL URLWithString:self.imageurl]];
-//        [view addSubview:image];
-//
-//        return view;
-//    }
-//    return nil;
-//}
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataSourse.count;
 }
@@ -126,9 +106,18 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CategoryTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell" forIndexPath:indexPath];
-    cell.model = self.dataSourse[indexPath.row];
+    NSDictionary * dic = self.dataSourse[indexPath.row];
+    cell.model = [HomeModel mj_objectWithKeyValues:dic];
     cell.CartBtn.tag = indexPath.row;
     [cell.CartBtn addTarget:self action:@selector(addcart:) forControlEvents:UIControlEventTouchUpInside];
+    
+    NSString * stock = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"stock"]];
+    NSLog(@"%@",stock);
+    if ([stock isEqualToString:@"(null)"]) {
+        cell.KucunLabel.text = @"库存：9999";
+    }else{
+        cell.KucunLabel.text = [NSString stringWithFormat:@"库存：%@",stock];
+    }
     return cell;
 }
 -(void)addcart:(UIButton *)btn{

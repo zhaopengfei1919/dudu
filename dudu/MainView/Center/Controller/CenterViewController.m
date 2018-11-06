@@ -45,6 +45,12 @@
         self.SalesManLabel.text = [NSString stringWithFormat:@"%@",usermodel.salesmanName];
     }else
         self.SalesManLabel.text = @"请添加您的业务员";
+    if ([usermodel.noPayOrderNumber intValue] > 0) {
+        self.CountLabel.layer.cornerRadius = 8;
+        self.CountLabel.text = [NSString stringWithFormat:@"%@",usermodel.noPayOrderNumber];
+        self.CountLabel.hidden = NO;
+    }else
+        self.CountLabel.hidden = YES;
 }
 - (void)viewWillDisappear:(BOOL)animated
 {

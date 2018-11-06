@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -73,6 +73,16 @@
                         <color key="textColor" red="0.12549019610000001" green="0.85098039219999999" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHs-3B-LKu">
+                        <rect key="frame" x="205" y="65" width="40" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="olB-cJ-AVP"/>
+                            <constraint firstAttribute="width" constant="40" id="vNz-MQ-U6c"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" red="0.12549019610000001" green="0.85098039219999999" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ouN-B0-oYh">
                         <rect key="frame" x="155" y="95" width="210" height="12"/>
                         <constraints>
@@ -121,9 +131,11 @@
                     <constraint firstItem="ymM-vR-1Ps" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Q1Q-Q5-OfM"/>
                     <constraint firstAttribute="trailing" secondItem="DeZ-jO-d1H" secondAttribute="trailing" constant="10" id="RsW-P0-1r7"/>
                     <constraint firstItem="xIG-fo-S98" firstAttribute="top" secondItem="HlG-9K-78T" secondAttribute="bottom" constant="14" id="UDu-QY-Qfw"/>
+                    <constraint firstItem="LHs-3B-LKu" firstAttribute="leading" secondItem="HlG-9K-78T" secondAttribute="trailing" constant="10" id="UV5-9a-SLg"/>
                     <constraint firstAttribute="trailing" secondItem="1ud-ph-3YW" secondAttribute="trailing" id="VLg-39-yIH"/>
                     <constraint firstItem="GVK-Yl-gfd" firstAttribute="top" secondItem="ouN-B0-oYh" secondAttribute="bottom" constant="6" id="W65-XU-5ls"/>
                     <constraint firstAttribute="bottom" secondItem="1ud-ph-3YW" secondAttribute="bottom" id="cYk-N2-Idq"/>
+                    <constraint firstItem="LHs-3B-LKu" firstAttribute="top" secondItem="DeZ-jO-d1H" secondAttribute="bottom" constant="5" id="ghc-XW-AUg"/>
                     <constraint firstItem="1ud-ph-3YW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="h6S-VT-zgF"/>
                     <constraint firstItem="zTd-OD-VWL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="ipu-la-EGx"/>
                     <constraint firstItem="DeZ-jO-d1H" firstAttribute="top" secondItem="9Pw-jR-ga3" secondAttribute="bottom" constant="5" id="lJU-TM-88v"/>
@@ -150,6 +162,8 @@
                 <outlet property="PriceLabel" destination="GVK-Yl-gfd" id="etV-pQ-XlP"/>
                 <outlet property="TitleLabel" destination="9Pw-jR-ga3" id="9oU-bw-WUl"/>
                 <outlet property="unitPriceLabel" destination="ouN-B0-oYh" id="uHs-9L-N0Z"/>
+                <outlet property="weightLabel" destination="LHs-3B-LKu" id="SP3-bg-78Y"/>
+                <outlet property="weightLabelWidth" destination="vNz-MQ-U6c" id="SE7-O2-dro"/>
             </connections>
             <point key="canvasLocation" x="31.5" y="101.5"/>
         </tableViewCell>

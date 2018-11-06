@@ -49,6 +49,7 @@
     UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CouponViewController * coupon = [sb instantiateViewControllerWithIdentifier:@"CouponViewController"];
     coupon.ischosen = YES;
+    coupon.array = self.couponArray;
     [superController.navigationController pushViewController:coupon animated:YES];
     WS(weakself);
     coupon.chosencou = ^(CouponModel *model) {

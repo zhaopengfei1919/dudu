@@ -35,7 +35,7 @@
                 self->tishilabel.text = @"您还没有添加商品到购物车呦";
             }
             [weakself.dataSourse addObjectsFromArray:data];
-            if (self.listarray.count > 0) {
+            if (self.listarray.count > 0) {//订单界面再来一单，判断购物车列表是否存在从订单带过来的商品
                 NSMutableSet *set1 = [NSMutableSet setWithArray:self.dataSourse];
                 NSMutableSet *set2 = [NSMutableSet setWithArray:self.listarray];
                 [set1 intersectSet:set2];
@@ -293,7 +293,7 @@
     }];
 }
 -(void)checkinallchosenwith:(NSDictionary *)dic{
-    if (self.selectSourse.count == self.dataSourse.count) {
+    if (self.selectSourse.count == self.dataSourse.count && self.dataSourse.count != 0) {
         self.allchosenImage.image = [UIImage imageNamed:@"购物车商品选中"];
     }else{
         self.allchosenImage.image = [UIImage imageNamed:@"购物车商品未选中"];

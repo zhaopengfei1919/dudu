@@ -60,8 +60,21 @@
         self.GuigeLabel1.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
         CGSize size = [[FYUser userInfo] sizeForString:model1.packaging withFontSize:10 withWidth:200];
         self.GuiGeLabelWidth1.constant = size.width + 8;
-    }else
+    }else{
+        self.GuiGeLabelWidth1.constant = 0;
         self.GuigeLabel1.hidden = YES;
+    }
+    
+    if (model1.weight > 0) {
+        self.weightLabel1.text = [NSString stringWithFormat:@"约%.1f斤",model1.weight];
+        self.weightLabel1.hidden = NO;
+        self.weightLabel1.layer.cornerRadius = 3;
+        self.weightLabel1.layer.borderWidth = 0.5;
+        self.weightLabel1.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
+        CGSize size = [[FYUser userInfo] sizeForString:self.weightLabel1.text withFontSize:10 withWidth:200];
+        self.weightLabelWidth1.constant = size.width + 8;
+    }else
+        self.weightLabel1.hidden = YES;
     
     if (model1.cartNumber > 0) {
         [self.CartBtn1 setBackgroundImage:[UIImage imageNamed:@"加入购物车"] forState:0];
@@ -99,8 +112,21 @@
             self.GuigeLabel2.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
             CGSize size = [[FYUser userInfo] sizeForString:model2.packaging withFontSize:10 withWidth:200];
             self.GuigeLabelWidth2.constant = size.width + 8;
-        }else
+        }else{
+            self.GuigeLabelWidth2.constant = 0;
             self.GuigeLabel2.hidden = YES;
+        }
+        
+        if (model2.weight > 0) {
+            self.weightLabel2.text = [NSString stringWithFormat:@"约%.1f斤",model2.weight];
+            self.weightLabel2.hidden = NO;
+            self.weightLabel2.layer.cornerRadius = 3;
+            self.weightLabel2.layer.borderWidth = 0.5;
+            self.weightLabel2.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
+            CGSize size = [[FYUser userInfo] sizeForString:self.weightLabel2.text withFontSize:10 withWidth:200];
+            self.weightLabelWidth2.constant = size.width + 8;
+        }else
+            self.weightLabel2.hidden = YES;
         
         if (model2.cartNumber > 0) {
             [self.CartBtn2 setBackgroundImage:[UIImage imageNamed:@"加入购物车"] forState:0];

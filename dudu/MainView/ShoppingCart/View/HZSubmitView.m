@@ -59,8 +59,10 @@
         self.GuigeLabel.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
         CGSize size = [[FYUser userInfo] sizeForString:packaging withFontSize:10 withWidth:200];
         self.GuigeLabelWidth.constant = size.width + 8;
-    }else
+    }else{
+        self.GuigeLabelWidth.constant = 0;
         self.GuigeLabel.hidden = YES;
+    }
 }
 -(void)createBigviewWith:(NSDictionary *)data{
     NSArray * specifications = [data safeObjectForKey:@"specifications"];
@@ -159,11 +161,20 @@
     }];
 }
 -(void)jia:(DDButton *)btn{
-    int stock =  [[self.data safeObjectForKey:@"stock"] intValue];
-    if (GoodsCount >= stock) {
-        [SVProgressHUD showErrorWithStatus:@"已到最大数量"];
-        return;
+    NSString * stock = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"stock"]];
+    if ([stock isEqualToString:@"(null)"]) {
+    }else{
+        int stocknow =  [[self.data safeObjectForKey:@"stock"] intValue];
+        if (GoodsCount >= stocknow) {
+            [SVProgressHUD showErrorWithStatus:@"已到最大数量"];
+            return;
+        }
     }
+//    int stock =  [[self.data safeObjectForKey:@"stock"] intValue];
+//    if (GoodsCount >= stock) {
+//        [SVProgressHUD showErrorWithStatus:@"已到最大数量"];
+//        return;
+//    }
     GoodsCount += 1;
     self.CountLabel.text = [NSString stringWithFormat:@"%d",GoodsCount];
 }

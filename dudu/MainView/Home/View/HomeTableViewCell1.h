@@ -27,6 +27,8 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *GuigeLabelWidth;
 
+@property (weak, nonatomic) IBOutlet UILabel *weightLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *weightLabelWidth;
 
 
 @property (strong,nonatomic) HomeModel * model;

@@ -46,6 +46,7 @@
     [self.btn1 removeTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
     [self.btn2 removeTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
     self.btn2.layer.borderWidth = 0.5;
+    self.btn2.hidden = NO;
     if ([orderStatus isEqualToString:@"待付款"]) {
         self.btn1.hidden = NO;
         [self.btn1 setTitle:@"取消订单" forState:0];
@@ -66,12 +67,13 @@
         [self.btn2 addTarget:self action:@selector(ordercancel) forControlEvents:UIControlEventTouchUpInside];
     }else if ([orderStatus isEqualToString:@"配送中"]){
         self.btn1.hidden = YES;
+        self.btn2.hidden = YES;
         
-        [self.btn2 setTitle:@"取消订单" forState:0];
-        [self.btn2 setBackgroundColor:UIColorFromRGB(0xffffff)];
-        [self.btn2 setTitleColor:UIColorFromRGB(0x666666) forState:0];
-        self.btn2.layer.borderColor = UIColorFromRGB(0x888888).CGColor;
-        [self.btn2 addTarget:self action:@selector(ordercancel) forControlEvents:UIControlEventTouchUpInside];
+//        [self.btn2 setTitle:@"取消订单" forState:0];
+//        [self.btn2 setBackgroundColor:UIColorFromRGB(0xffffff)];
+//        [self.btn2 setTitleColor:UIColorFromRGB(0x666666) forState:0];
+//        self.btn2.layer.borderColor = UIColorFromRGB(0x888888).CGColor;
+//        [self.btn2 addTarget:self action:@selector(ordercancel) forControlEvents:UIControlEventTouchUpInside];
     }else if ([orderStatus isEqualToString:@"已完成"]){
         self.btn1.hidden = NO;
         [self.btn1 setTitle:@"再来一单" forState:0];

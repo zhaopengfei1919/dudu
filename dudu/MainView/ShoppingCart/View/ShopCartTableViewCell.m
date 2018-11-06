@@ -40,8 +40,10 @@
         self.GuigeLabel.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
         CGSize size = [[FYUser userInfo] sizeForString:model.packaging withFontSize:10 withWidth:200];
         self.GuigeLabelWidth.constant = size.width + 8;
-    }else
+    }else{
+        self.GuigeLabelWidth.constant = 0;
         self.GuigeLabel.hidden = YES;
+    }
     
     self.signLabel.layer.borderWidth = 0.5;
     self.signLabel.layer.borderColor = UIColorFromRGB(0xf39700).CGColor;

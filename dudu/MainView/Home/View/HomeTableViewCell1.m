@@ -34,7 +34,7 @@
     }else
         self.CouponImage.hidden = YES;
         
-    self.unitPriceLabel.text = [NSString stringWithFormat:@"￥%.2f/%@",model.unitPrice,model.unit];
+//    self.unitPriceLabel.text = [NSString stringWithFormat:@"￥%.2f/%@",model.unitPrice,model.unit];
     
     NSString * str = [NSString stringWithFormat:@"总价￥%.2f",model.price];
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:str];
@@ -50,8 +50,21 @@
         self.GuiGeLabel.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
         CGSize size = [[FYUser userInfo] sizeForString:model.packaging withFontSize:10 withWidth:200];
         self.GuigeLabelWidth.constant = size.width + 8;
-    }else
+    }else{
+        self.GuigeLabelWidth.constant = 0;
         self.GuiGeLabel.hidden = YES;
+    }
+    
+    if (model.weight > 0) {
+        self.weightLabel.text = [NSString stringWithFormat:@"约%.1f斤",model.weight];
+        self.weightLabel.hidden = NO;
+        self.weightLabel.layer.cornerRadius = 3;
+        self.weightLabel.layer.borderWidth = 0.5;
+        self.weightLabel.layer.borderColor = UIColorFromRGB(0x20d994).CGColor;
+        CGSize size = [[FYUser userInfo] sizeForString:self.weightLabel.text withFontSize:10 withWidth:200];
+        self.weightLabelWidth.constant = size.width + 8;
+    }else
+        self.weightLabel.hidden = YES;
     
     if (model.cartNumber > 0) {
         [self.CartBtn setBackgroundImage:[UIImage imageNamed:@"加入购物车"] forState:0];

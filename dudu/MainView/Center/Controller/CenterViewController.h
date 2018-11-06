@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *salesPlace;
 
 - (IBAction)OrderClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *CountLabel;
 
 - (IBAction)chosenCoupon:(id)sender;
 - (IBAction)myaddress:(id)sender;

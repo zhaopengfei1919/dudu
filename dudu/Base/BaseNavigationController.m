@@ -64,7 +64,7 @@
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     [super pushViewController:viewController animated:animated];
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame = CGRectMake(0, 0, 50, 22);
+    backButton.frame = CGRectMake(-20, -10, 70, 32);
     backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -13, 0, 28);
     
     [backButton addTarget:self action:@selector(backLastViewController) forControlEvents:UIControlEventTouchUpInside];

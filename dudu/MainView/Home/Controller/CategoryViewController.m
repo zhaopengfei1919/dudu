@@ -37,7 +37,7 @@
             [weakself.dataSourse1 addObjectsFromArray:array];
             [weakself.hotProduce addObjectsFromArray:arr];
             [weakself.table1 reloadData];
-            self->produceud = model.ID;
+            self->produceid = model.ID;
             [self produceWith:model.ID];
         }else
             [SVProgressHUD showErrorWithStatus:[responseObject safeObjectForKey:@"msg"]];
@@ -192,7 +192,7 @@
     WS(weakself);
     self.table2.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         self->Page += 1;
-        [weakself produceWith:self->produceud];
+        [weakself produceWith:self->produceid];
     }];
 }
 -(void)createView{
@@ -270,7 +270,7 @@
     [self.table1 reloadData];
     [self produceWith:model.ID];
     Page = 1;
-    produceud = model.ID;
+    produceid = model.ID;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (tableView == self.table1) {
@@ -313,9 +313,9 @@
     cell.CartBtn.tag = indexPath.row;
     [cell.CartBtn addTarget:self action:@selector(addcart:) forControlEvents:UIControlEventTouchUpInside];
     NSString * stock = [NSString stringWithFormat:@"%@",[dic safeObjectForKey:@"stock"]];
-    NSLog(@"%@",stock);
     if ([stock isEqualToString:@"(null)"]) {
         cell.KucunLabel.text = @"库存：9999";
+        cell.SalesOutImage.hidden = YES;
     }else{
         if ([stock intValue] == 0) {
             cell.SalesOutImage.hidden = NO;
@@ -419,7 +419,7 @@
         CategoryModel * model = self.hotProduce[indexPath.row];
         [self.dataSourse2 removeAllObjects];
         Page = 1;
-        produceud = model.ID;
+        produceid = model.ID;
         [self produceWith:model.ID];
         Rownum = indexPath.row + 1;
         [self.table1 reloadData];
@@ -448,10 +448,10 @@
     }
 }
 - (IBAction)sure:(id)sender {
-//    if (!self.tishi.hidden) {
-//        [SVProgressHUD showErrorWithStatus:@"尚未达到起送价"];
-//        return;
-//    }
+    if ([FYUser userInfo].token.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
+        return;
+    }
     UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     AddOrderViewController * addorder = [sb instantiateViewControllerWithIdentifier:@"AddOrderViewController"];
     NSMutableArray * array = [[NSMutableArray alloc]init];
