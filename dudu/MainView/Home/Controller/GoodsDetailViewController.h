@@ -12,8 +12,10 @@
 @interface GoodsDetailViewController : UIViewController{
     int GoodsCount;
     UIView * tishiView;
+    BOOL bKeyBoardHide;
 }
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *MainViewHeight;
+@property (weak, nonatomic) IBOutlet UIView *MainView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *MainImage;
 @property (weak, nonatomic) IBOutlet UILabel *TitleLabel;
@@ -31,7 +33,8 @@
 @property (weak, nonatomic) IBOutlet UIView *GuiGeView;
 - (IBAction)jian:(id)sender;
 - (IBAction)jia:(id)sender;
-@property (weak, nonatomic) IBOutlet UILabel *count;
+//@property (weak, nonatomic) IBOutlet UILabel *count;
+@property (weak, nonatomic) IBOutlet UITextField *CountTF;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *GuigeViewHeight;
 
 @property (weak, nonatomic) IBOutlet UILabel *introduceLabel;

@@ -9,7 +9,7 @@
 #import "GoodsDetailViewController.h"
 #import "ShopCartViewController.h"
 
-@interface GoodsDetailViewController ()<UIWebViewDelegate>
+@interface GoodsDetailViewController ()<UIWebViewDelegate,UITextFieldDelegate>
 
 @end
 
@@ -57,7 +57,21 @@
     [self goodsdetail];
     [self cartcount];
     self.CountLabel.layer.cornerRadius = 7.5;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     // Do any additional setup after loading the view.
+}
+-(void)keyboardWillHide:(NSNotification *)notification
+{
+    NSLog(@"*-----HideKeyBoard");
+    bKeyBoardHide = YES;
+}
+
+-(void)keyboardWillShow:(NSNotification *)notification
+{
+    NSLog(@"*-----ShowKeyBoard");
+    bKeyBoardHide = NO;
 }
 -(void)createView{
     tishiView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 44 - StatusHeight)];
@@ -77,13 +91,16 @@
     [tishiView addSubview:label];
 }
 -(void)createUI{
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
+    [self.MainView addGestureRecognizer:tap];
+    
     [self.MainImage sd_setImageWithURL:[NSURL URLWithString:self.model.image]];
     self.TitleLabel.text = self.model.name;
     self.contentLabel.text = self.model.memo;
     self.descTextView.text = self.model.introduction;
 //    [self.introduceWeb loadHTMLString:self.model.introduction baseURL:nil];
     GoodsCount = 1;
-    self.count.text = [NSString stringWithFormat:@"%d",GoodsCount];
+    self.CountTF.text = [NSString stringWithFormat:@"%d",GoodsCount];
     
     if (self.model.packaging.length > 0) {
         self.GuigeLabel.text = self.model.packaging;
@@ -274,13 +291,54 @@
         
     }];
 }
+#pragma mark 数量输入框判断事件
+-(void)tap:(UITapGestureRecognizer *)tap{
+    if (!bKeyBoardHide) {
+        GoodsCount = [self.CountTF.text intValue];
+        NSString * stock = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"stock"]];
+        if ([stock isEqualToString:@"(null)"]) {
+        }else{
+            if (GoodsCount > self.model.stock) {
+                [SVProgressHUD showErrorWithStatus:@"超过最大数量"];
+                return;
+            }
+        }
+        [self.CountTF resignFirstResponder];
+    }
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    GoodsCount = [self.CountTF.text intValue];
+    NSString * stock = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"stock"]];
+    if ([stock isEqualToString:@"(null)"]) {
+    }else{
+        if (GoodsCount > self.model.stock) {
+            [SVProgressHUD showErrorWithStatus:@"超过最大数量"];
+            return NO;
+        }
+    }
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    GoodsCount = [self.CountTF.text intValue];
+    NSString * stock = [NSString stringWithFormat:@"%@",[self.data safeObjectForKey:@"stock"]];
+    if ([stock isEqualToString:@"(null)"]) {
+    }else{
+        if (GoodsCount > self.model.stock) {
+            [SVProgressHUD showErrorWithStatus:@"超过最大数量"];
+            return;
+        }
+    }
+    [self.CountTF resignFirstResponder];
+}
 - (IBAction)jian:(id)sender {
     if (GoodsCount <2) {
         [SVProgressHUD showErrorWithStatus:@"已到最小数量"];
         return;
     }
     GoodsCount -= 1;
-    self.count.text = [NSString stringWithFormat:@"%d",GoodsCount];
+    self.CountTF.text = [NSString stringWithFormat:@"%d",GoodsCount];
 }
 
 - (IBAction)jia:(id)sender {
@@ -294,7 +352,7 @@
     }
     
     GoodsCount += 1;
-    self.count.text = [NSString stringWithFormat:@"%d",GoodsCount];
+    self.CountTF.text = [NSString stringWithFormat:@"%d",GoodsCount];
 }
 - (IBAction)gotoCart:(id)sender {
     UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
