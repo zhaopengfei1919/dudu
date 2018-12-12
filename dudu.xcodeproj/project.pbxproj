@@ -179,6 +179,10 @@
 		18464B74211A9E9500D0BD11 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18464AFA211A9E9400D0BD11 /* MJFoundation.m */; };
 		188A495E21353E4200CF1FB3 /* AddressEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A495C21353E4100CF1FB3 /* AddressEditViewController.m */; };
 		188A4961213544CC00CF1FB3 /* BoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A4960213544CC00CF1FB3 /* BoxViewController.m */; };
+		188ABCE821BFABDA00991B01 /* JifenDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188ABCE721BFABDA00991B01 /* JifenDetailViewController.m */; };
+		18AD073921BFB589003395D0 /* JifenDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AD073721BFB589003395D0 /* JifenDetailTableViewCell.m */; };
+		18AD073A21BFB589003395D0 /* JifenDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AD073821BFB589003395D0 /* JifenDetailTableViewCell.xib */; };
+		18AD073D21BFB723003395D0 /* JifenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AD073C21BFB723003395D0 /* JifenModel.m */; };
 		18D8DE59214112600072B58D /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8DE58214112600072B58D /* OrderListViewController.m */; };
 		18D8DE5C214112700072B58D /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8DE5B214112700072B58D /* OrderDetailViewController.m */; };
 		18D8DE6021411C090072B58D /* OrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8DE5E21411C090072B58D /* OrderListTableViewCell.m */; };
@@ -577,6 +581,13 @@
 		188A495D21353E4100CF1FB3 /* AddressEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressEditViewController.h; sourceTree = "<group>"; };
 		188A495F213544CC00CF1FB3 /* BoxViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoxViewController.h; sourceTree = "<group>"; };
 		188A4960213544CC00CF1FB3 /* BoxViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoxViewController.m; sourceTree = "<group>"; };
+		188ABCE621BFABDA00991B01 /* JifenDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JifenDetailViewController.h; sourceTree = "<group>"; };
+		188ABCE721BFABDA00991B01 /* JifenDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JifenDetailViewController.m; sourceTree = "<group>"; };
+		18AD073621BFB589003395D0 /* JifenDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JifenDetailTableViewCell.h; sourceTree = "<group>"; };
+		18AD073721BFB589003395D0 /* JifenDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JifenDetailTableViewCell.m; sourceTree = "<group>"; };
+		18AD073821BFB589003395D0 /* JifenDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JifenDetailTableViewCell.xib; sourceTree = "<group>"; };
+		18AD073B21BFB723003395D0 /* JifenModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JifenModel.h; sourceTree = "<group>"; };
+		18AD073C21BFB723003395D0 /* JifenModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JifenModel.m; sourceTree = "<group>"; };
 		18D8DE57214112600072B58D /* OrderListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderListViewController.h; sourceTree = "<group>"; };
 		18D8DE58214112600072B58D /* OrderListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderListViewController.m; sourceTree = "<group>"; };
 		18D8DE5A214112700072B58D /* OrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
@@ -794,6 +805,7 @@
 			children = (
 				184649FB211A8FA100D0BD11 /* Home */,
 				184649FF211A938900D0BD11 /* ShoppingCart */,
+				188ABCE221B6637200991B01 /* Custom */,
 				18464A03211A938900D0BD11 /* Center */,
 				1825B22F21257E9900B0A4DE /* User */,
 			);
@@ -997,6 +1009,8 @@
 				188A4960213544CC00CF1FB3 /* BoxViewController.m */,
 				18D8DE96214A65550072B58D /* BoxListViewController.h */,
 				18D8DE97214A65550072B58D /* BoxListViewController.m */,
+				188ABCE621BFABDA00991B01 /* JifenDetailViewController.h */,
+				188ABCE721BFABDA00991B01 /* JifenDetailViewController.m */,
 				18D8DE562141123E0072B58D /* Order */,
 				181775A22133E0AF00474BC1 /* address */,
 			);
@@ -1014,6 +1028,8 @@
 				181775B321352D1700474BC1 /* addressModel.m */,
 				18D8DE93214A28E60072B58D /* TuiKuangModel.h */,
 				18D8DE94214A28E60072B58D /* TuiKuangModel.m */,
+				18AD073B21BFB723003395D0 /* JifenModel.h */,
+				18AD073C21BFB723003395D0 /* JifenModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1039,6 +1055,9 @@
 				181775B52135315A00474BC1 /* AddressTableViewCell.h */,
 				181775B62135315A00474BC1 /* AddressTableViewCell.m */,
 				181775B72135315A00474BC1 /* AddressTableViewCell.xib */,
+				18AD073621BFB589003395D0 /* JifenDetailTableViewCell.h */,
+				18AD073721BFB589003395D0 /* JifenDetailTableViewCell.m */,
+				18AD073821BFB589003395D0 /* JifenDetailTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1466,6 +1485,37 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
+		188ABCE221B6637200991B01 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				188ABCE321B6638400991B01 /* Controller */,
+				188ABCE521B663A000991B01 /* View */,
+				188ABCE421B6639900991B01 /* Model */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		188ABCE321B6638400991B01 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		188ABCE421B6639900991B01 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		188ABCE521B663A000991B01 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		18D8DE562141123E0072B58D /* Order */ = {
 			isa = PBXGroup;
 			children = (
@@ -1643,6 +1693,7 @@
 				1825B28A212BB36200B0A4DE /* HomeTableViewCell1.xib in Resources */,
 				18D8DE862148BF800072B58D /* README.txt in Resources */,
 				181775B92135315A00474BC1 /* AddressTableViewCell.xib in Resources */,
+				18AD073A21BFB589003395D0 /* JifenDetailTableViewCell.xib in Resources */,
 				1825B23D21269E1500B0A4DE /* TuiKuangTableViewCell.xib in Resources */,
 				18177588212D11E100474BC1 /* ChosenTimeAndStyle.xib in Resources */,
 				1825B280212A8CB000B0A4DE /* CategoryTableViewCell.xib in Resources */,
@@ -1739,6 +1790,7 @@
 				18464B1D211A9E9500D0BD11 /* SDWebImagePrefetcher.m in Sources */,
 				18464B54211A9E9500D0BD11 /* MJRefreshBackStateFooter.m in Sources */,
 				1817759E2133A26000474BC1 /* CouponViewController.m in Sources */,
+				18AD073921BFB589003395D0 /* JifenDetailTableViewCell.m in Sources */,
 				18464B31211A9E9500D0BD11 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				18464B48211A9E9500D0BD11 /* NSDictionary+VASafeObjectForKey.m in Sources */,
 				181775AE2134ECFC00474BC1 /* GoodsModel.m in Sources */,
@@ -1791,6 +1843,7 @@
 				18464B21211A9E9500D0BD11 /* NSData+ImageContentType.m in Sources */,
 				18464B27211A9E9500D0BD11 /* UIView+WebCache.m in Sources */,
 				1825B27A212A688B00B0A4DE /* ScanViewController.m in Sources */,
+				188ABCE821BFABDA00991B01 /* JifenDetailViewController.m in Sources */,
 				1825B27F212A8CB000B0A4DE /* CategoryTableViewCell.m in Sources */,
 				1825B292212BBE5800B0A4DE /* DDButton.m in Sources */,
 				18464B2E211A9E9500D0BD11 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -1807,6 +1860,7 @@
 				18464B23211A9E9500D0BD11 /* NSImage+WebCache.m in Sources */,
 				18464B1C211A9E9500D0BD11 /* SDWebImageCompat.m in Sources */,
 				18464B59211A9E9500D0BD11 /* MJRefreshNormalHeader.m in Sources */,
+				18AD073D21BFB723003395D0 /* JifenModel.m in Sources */,
 				18464B36211A9E9500D0BD11 /* AFHTTPSessionManager.m in Sources */,
 				184649C821199EB400D0BD11 /* AppDelegate.m in Sources */,
 				18464B70211A9E9500D0BD11 /* NSObject+MJProperty.m in Sources */,

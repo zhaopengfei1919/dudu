@@ -33,6 +33,7 @@
 - (IBAction)myaddress:(id)sender;
 - (IBAction)myTuikuan:(id)sender;
 - (IBAction)myTuikuang:(id)sender;
+- (IBAction)chosenjifen:(id)sender;
 
 
 

@@ -80,6 +80,22 @@
         
     }];
 }
+//首页倒计时
+-(void)gettime{
+    WS(weakself);
+    NSMutableDictionary *paraDic = @{}.mutableCopy;
+    
+    [NetWorkManager requestWithMethod:POST Url:GetCountdownInfo Parameters:paraDic success:^(id responseObject) {
+        NSString * code = [responseObject safeObjectForKey:@"code"];
+        NSLog(@"%@",responseObject);
+        if ([code isEqualToString:@"0"]) {
+            NSDictionary * data = [responseObject safeObjectForKey:@"data"];
+            self->header.GoodsData = data;
+        }
+    } requestRrror:^(id requestRrror) {
+        
+    }];
+}
 //首页促销模块
 -(void)promotion{
     WS(weakself);
@@ -87,7 +103,6 @@
     
     [NetWorkManager requestWithMethod:POST Url:Promotion Parameters:paraDic success:^(id responseObject) {
         NSString * code = [responseObject safeObjectForKey:@"code"];
-        NSLog(@"%@",responseObject);
         if ([code isEqualToString:@"0"]) {
             NSArray * array = [PromotionModel mj_objectArrayWithKeyValuesArray:[responseObject objectForKey:@"data"]];
             [weakself.promotionSourse addObjectsFromArray:array];
@@ -142,6 +157,7 @@
     if ([FYUser userInfo].token.length > 0) {
     }
     [self cartcount];
+    [self gettime];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -159,9 +175,9 @@
     [self.table registerNib:[UINib nibWithNibName:@"HomeTableViewCell2" bundle:nil] forCellReuseIdentifier:@"HomeTableViewCell2"];
     [self.table registerNib:[UINib nibWithNibName:@"HomeTableViewCell3" bundle:nil] forCellReuseIdentifier:@"HomeTableViewCell3"];
     
-    UIView *baseHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , SCREEN_WIDTH/2)];
+    UIView *baseHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , SCREEN_WIDTH/2+151)];
     header = [[[NSBundle mainBundle] loadNibNamed:@"HomeHeader" owner:self options:nil] objectAtIndex:0];
-    header.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH/2);
+    header.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH/2+151);
     header.delegate = self;
     [baseHeaderView addSubview:header];
     self.table.tableHeaderView = baseHeaderView;
@@ -223,20 +239,26 @@
     return 0.01;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if ((self.promotionSourse.count > 0 && section == 1) || (self.promotionSourse.count == 0 && section == 0)) {
+    if ((self.promotionSourse.count > 0 && section >= 1) || (self.promotionSourse.count == 0 && section >= 0)) {
         return 39;
     }
     return 0.01;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if ((self.promotionSourse.count > 0 && section == 1) || (self.promotionSourse.count == 0 && section == 0)) {
+    if ((self.promotionSourse.count > 0 && section >= 1) || (self.promotionSourse.count == 0 && section >= 0)) {
+        NSInteger count = section;
+        if (self.promotionSourse.count > 0 && section > 0) {
+            count = section - 1;
+        }
+        HomeHotProduce * model = self.dataSourse[count];
+        
         UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 39)];
         view.backgroundColor = [UIColor whiteColor];
         
         UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 13, SCREEN_WIDTH, 18)];
         label.textColor = UIColorFromRGB(0xf39700);
         label.font = [UIFont systemFontOfSize:18];
-        label.text = @"—— 热销商品 ——";
+        label.text = [NSString stringWithFormat:@"—— %@ ——",model.name];
         label.textAlignment = NSTextAlignmentCenter;
         [view addSubview:label];
         

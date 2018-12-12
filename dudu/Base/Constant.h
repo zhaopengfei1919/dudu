@@ -44,11 +44,20 @@
 #define UpdetaAddress @"member.updateReceiver"
 //删除地址
 #define DeleteAddress @"member.deleteReceiver"
+//获取会员id获取会员积分流水
+#define JifenDetail @"member.points"
 
 //促销栏位
 #define Promotion @"promotion.getAllPromotion"
 //促销明细
 #define PromotionDetail @"promotion.getPromotionDetail"
+//获取首页倒计时信息
+#define GetCountdownInfo @"promotion.getCountdownInfo"
+
+//列出当前用户的咨询列表
+#define ConsultList @"consult.list"
+//发送一条新的咨询问题
+#define ConsultSend @"consult.send"
 
 //首页热卖
 #define HotProduce @"product.getHotProduct"

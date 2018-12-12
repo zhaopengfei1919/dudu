@@ -169,6 +169,14 @@
     [self performSegueWithIdentifier:@"tuikuangList" sender:nil];
 }
 
+- (IBAction)chosenjifen:(id)sender {
+    if ([FYUser userInfo].token.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
+        return;
+    }
+    [self performSegueWithIdentifier:@"gotojifen" sender:nil];
+}
+
 - (IBAction)login:(id)sender {
     if ([FYUser userInfo].token.length > 0) {
         NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
